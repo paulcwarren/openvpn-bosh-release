@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -e
+set -u
+
+tar -xzf openvpn-blobs/openssl-1.0.1h.tar.gz
+tar -xzf openvpn-blobs/openvpn-2.3.4.tar.gz
+tar -xzf openvpn-blobs/lzo-2.08.tar.gz
+
+
+pushd openssl-1.0.1h
+
+./config \
+  -DSSL_ALLOW_ADH \
+  --shared \
+  --prefix=${BOSH_INSTALL_TARGET}/external/openssl \
+  --openssldir=${BOSH_INSTALL_TARGET}/external/openssldir
+
+make
+make install
+
+popd
+
+
+pushd lzo-2.08
+
+./configure \
+  --prefix=${BOSH_INSTALL_TARGET}/external/lzo \
+
+make
+make install
+
+popd
+
+
+pushd openvpn-2.3.4
+
+export OPENSSL_CRYPTO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+export OPENSSL_CRYPTO_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lcrypto"
+export OPENSSL_SSL_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+export OPENSSL_SSL_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lssl"
+export LZO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/lzo/include"
+export LZO_LIBS="-L${BOSH_INSTALL_TARGET}/external/lzo/lib -llzo2"
+
+./configure \
+  --prefix=${BOSH_INSTALL_TARGET} \
+  --disable-plugin-auth-pam
+
+make
+make install
+
+unset LZO_LIBS
+unset LZO_CFLAGS
+unset OPENSSL_SSL_LIBS
+unset OPENSSL_SSL_CFLAGS
+unset OPENSSL_CRYPTO_LIBS
+unset OPENSSL_CRYPTO_CFLAGS
+
+popd

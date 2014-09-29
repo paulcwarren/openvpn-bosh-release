@@ -1,0 +1,9 @@
+---
+name: "openvpn"
+files:
+  # https://www.openssl.org/source/openssl-1.0.1h.tar.gz
+  - "openvpn-blobs/openssl-1.0.1h.tar.gz"
+  # http://swupdate.openvpn.org/community/releases/openvpn-2.3.4.tar.gz
+  - "openvpn-blobs/openvpn-2.3.4.tar.gz"
+  # http://www.oberhumer.com/opensource/lzo/download/lzo-2.08.tar.gz
+  - "openvpn-blobs/lzo-2.08.tar.gz"

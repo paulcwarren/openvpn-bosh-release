@@ -1,0 +1,47 @@
+---
+name: "openvpn"
+packages:
+  - "openvpn"
+templates:
+  bin/apply-iptables.erb: "bin/apply-iptables"
+  bin/write-ccd.erb: "bin/write-ccd"
+  bin/control: "bin/control"
+  etc/ca.crt.erb: "etc/ca.crt"
+  etc/crl.pem.erb: "etc/crl.pem"
+  etc/dh.pem.erb: "etc/dh.pem"
+  etc/openvpn.conf.erb: "etc/openvpn.conf"
+  etc/server.crt.erb: "etc/server.crt"
+  etc/server.key.erb: "etc/server.key"
+properties:
+  openvpn.port:
+    default: 1194
+    description: "Listening Port for the server"
+  openvpn.extra_config:
+    default: ~
+    description: "Extra OpenVPN configuration statements for the server"
+  openvpn.local:
+    description: "Listening IP for the server"
+  openvpn.server:
+    description: "VPN Server IP and netmask"
+  openvpn.routes:
+    default: []
+    description: "Routes for the server's routing table"
+  openvpn.push_routes:
+    default: []
+    description: "Routes to push to connecting clients"
+  openvpn.ca_crt:
+    description: "CA certificate contents"
+  openvpn.server_crt:
+    description: "Server certificate contents"
+  openvpn.server_key:
+    description: "Server key contents"
+  openvpn.dh_pem:
+    description: "Diffie-Hellmann PEM contents"
+  openvpn.crl_pem:
+    description: "Certificate Revocation List PEM contents"
+  openvpn.ccd:
+    description: "An array of CCD configs (0 = client name, 1 = client config)"
+    default: []
+  openvpn.iptables:
+    description: "A list of iptables rules to manage"
+    default: []

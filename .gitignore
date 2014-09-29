@@ -1,0 +1,11 @@
+/.blobs
+/.bosh_config
+/.dev_builds
+/.ruby-version
+/blobs
+/dev_releases
+
+# not managing public releases right now
+/.final_builds
+/config
+/releases

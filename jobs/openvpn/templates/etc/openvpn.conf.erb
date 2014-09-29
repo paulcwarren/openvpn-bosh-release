@@ -1,0 +1,31 @@
+mode server
+writepid /var/vcap/sys/run/openvpn/openvpn.pid
+client-config-dir /var/vcap/jobs/openvpn/etc/ccd
+ca /var/vcap/jobs/openvpn/etc/ca.crt
+cert /var/vcap/jobs/openvpn/etc/server.crt
+key /var/vcap/jobs/openvpn/etc/server.key
+dh /var/vcap/jobs/openvpn/etc/dh.pem
+crl-verify /var/vcap/jobs/openvpn/etc/crl.pem
+proto tcp
+port <%= p('openvpn.port') %>
+comp-lzo
+group nogroup
+user nobody
+status /var/vcap/sys/log/openvpn/status.log
+dev tun1
+local <%= p('openvpn.local') %>
+server <%= p('openvpn.server') %>
+<% p('openvpn.push_routes').each do | route | %>
+push "route <%= route %>"
+<% end %>
+<% p('openvpn.routes').each do | route | %>
+route <%= route %>
+<% end %>
+push "persist-tun"
+push "ping 15"
+push "ping-restart 60"
+keepalive 15 60
+topology subnet
+persist-key
+persist-tun
+<%= p('openvpn.extra_config') %>

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cd /var/vcap/jobs/openvpn/etc
+
+if [ -d ccd ] ; then
+    rm -fr ccd
+fi
+
+mkdir ccd
+
+<% p('openvpn.ccd').each do | ccd | %>
+cat > ccd/<%= ccd[0] %> << EOF
+<%= ccd[1] %>
+EOF
+<% end %>

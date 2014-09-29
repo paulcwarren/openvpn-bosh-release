@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -u
+
+if [[ "up" == "$1" ]] ; then
+    IPTABLES="iptables -A"
+elif [[ "down" == "$1" ]] ; then
+    IPTABLES="iptables -D"
+else
+    echo "First argument must be up|down"
+    exit 1
+fi
+
+<% p('openvpn.iptables').each do | rule | %>
+$IPTABLES <%= rule %>
+<% end %>

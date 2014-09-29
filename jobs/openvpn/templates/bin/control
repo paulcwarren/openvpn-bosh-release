@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -e
+set -u
+
+PIDFILE=/var/vcap/sys/run/openvpn/openvpn.pid
+LOGDIR=/var/vcap/sys/log/openvpn
+RUNDIR=/var/vcap/sys/run/openvpn
+
+mkdir -p "$LOGDIR"
+chown vcap:vcap "$LOGDIR"
+
+exec >> $LOGDIR/control.log
+exec 2>&1
+
+mkdir -p `dirname "$PIDFILE"`
+chown vcap:vcap `dirname "$PIDFILE"`
+
+mkdir -p "$RUNDIR"
+chown vcap:vcap "$RUNDIR"
+
+
+case $1 in
+
+  start)
+    sysctl -w net.ipv4.ip_forward=1
+    sysctl -w net.ipv4.conf.eth0.send_redirects=0
+
+    /var/vcap/jobs/openvpn/bin/write-ccd
+    /var/vcap/jobs/openvpn/bin/apply-iptables up
+
+    /sbin/start-stop-daemon \
+      --background \
+      --pidfile "$PIDFILE" \
+      --exec /bin/bash \
+      --start \
+      -- -c "/var/vcap/packages/openvpn/sbin/openvpn \
+        --config /var/vcap/jobs/openvpn/etc/openvpn.conf \
+        >> \"$LOGDIR/stdout.log\" \
+        2>> \"$LOGDIR/stderr.log\" \
+      "
+
+    ;;
+
+  stop)
+    /sbin/start-stop-daemon \
+      --pidfile "$PIDFILE" \
+      --signal TERM \
+      --oknodo \
+      --stop \
+      --retry 15
+
+    /var/vcap/jobs/openvpn/bin/apply-iptables down
+
+    ;;
+
+  *)
+    echo "Usage: control {start|stop}" >&2
+
+    exit 1
+
+    ;;
+
+esac
