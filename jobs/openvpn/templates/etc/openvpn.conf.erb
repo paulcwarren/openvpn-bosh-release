@@ -28,4 +28,4 @@ keepalive 15 60
 topology subnet
 persist-key
 persist-tun
-<%= p('openvpn.extra_config') %>
+<% if_p('openvpn.extra_config') do | v | %><%= v %><% end %>

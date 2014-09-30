@@ -11,6 +11,7 @@ Create a directory for your deployment...
 Customize an environment file to store some reusable config values, then load it...
 
     $ cat > .env << EOF
+    export EASYRSA_VARS_FILE="vars"
     export EASYRSA_REQ_COUNTRY="US"
     export EASYRSA_REQ_PROVINCE="California"
     export EASYRSA_REQ_CITY="San Francisco"
@@ -30,13 +31,14 @@ one from scratch and the [easy-rsa](https://github.com/OpenVPN/easy-rsa/) packag
 
 Initialize your PKI and create the authority...
 
-    $ mkdir pki && cd pki
+    $ ( cd easyrsa/ && EASYRSA_PKI=../pki ./easyrsa init-pki )
+    $ cd pki
     $ cat ../easyrsa/vars.example \
-      | sed -E "s/^#?set_var[[:space:]]+EASYRSA[[:space:]]+.*$/set_var EASYRSA \"\$PWD/../easyrsa\"/" \
-      | sed -E "s/^#?set_var[[:space:]]+EASYRSA_PKI[[:space:]]+.*$/set_var EASYRSA_PKI \"\$PWD\"/" \
+      | sed -E "s/^#?set_var[[:space:]]+EASYRSA[[:space:]]+.*\$/set_var EASYRSA \"\$PWD\/..\/easyrsa\"/" \
+      | sed -E "s/^#?set_var[[:space:]]+EASYRSA_PKI[[:space:]]+.*\$/set_var EASYRSA_PKI \"\$PWD\"/" \
       > vars
-    $ ../easyrsa/easyrsa init-pki
     $ ../easyrsa/easyrsa build-ca
+      # password will be used whenever you need to sign new certificates
       # common name = openvpn
     $ ../easyrsa/easyrsa gen-crl
     $ ../easyrsa/easyrsa gen-dh
@@ -89,9 +91,9 @@ an `openvpn.ovpn` file which can be used by an OpenVPN client. Once saved, the t
     $ TMP_CN=$(hostname -s)-$(date +%Y%m%da)
     $ openssl req -new -nodes -days 3650 -newkey rsa:2048 \
       -subj "/C=$EASYRSA_REQ_COUNTRY/ST=$EASYRSA_REQ_PROVINCE/L=$EASYRSA_REQ_CITY/O=$EASYRSA_REQ_ORG/OU=$EASYRSA_REQ_OU/CN=$TMP_CN/emailAddress=`git config user.email`" \
-      -out "reqs/$TMP_CN.req" \
+      -out "../pki/reqs/$TMP_CN.req" \
       -keyout openvpn.key
-    $ ../easyrsa/easyrsa sign client "$TMP_CN"
+    $ ( cd ../pki && ../easyrsa/easyrsa sign client "$TMP_CN" )
     $ (
         cat ../openvpn-client.conf ;
         echo '<ca>' ;
@@ -122,7 +124,7 @@ You might need to manage some `iptables` rules to support the VPN-LAN communicat
       # allow VPN traffic to talk to a specific server
       - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE
 
-You might need to assign a particular IP address to a particular VPN client...
+You might need to assign a specific IP address to a specific VPN client...
 
     properties.openvpn.ccd:
       -
