@@ -12,7 +12,7 @@ comp-lzo
 group nogroup
 user nobody
 status /var/vcap/sys/log/openvpn/status.log
-dev tun1
+dev tun0
 local <%= p('openvpn.local') %>
 server <%= p('openvpn.server') %>
 <% p('openvpn.push_routes').each do | route | %>

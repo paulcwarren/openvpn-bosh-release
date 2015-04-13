@@ -1,0 +1,61 @@
+#!/bin/bash
+
+set -e
+set -u
+
+CLIENTNUM=$2
+PIDFILE=/var/vcap/sys/run/openvpn/openvpn-client$CLIENTNUM.pid
+LOGDIR=/var/vcap/sys/log/openvpn
+RUNDIR=/var/vcap/sys/run/openvpn
+
+mkdir -p "$LOGDIR"
+chown vcap:vcap "$LOGDIR"
+
+exec >> $LOGDIR/control.log
+exec 2>&1
+
+mkdir -p `dirname "$PIDFILE"`
+chown vcap:vcap `dirname "$PIDFILE"`
+
+mkdir -p "$RUNDIR"
+chown vcap:vcap "$RUNDIR"
+
+
+case $1 in
+
+  start)
+    /var/vcap/jobs/openvpn/bin/write-clients
+
+    /sbin/start-stop-daemon \
+      --background \
+      --pidfile "$PIDFILE" \
+      --exec /bin/bash \
+      --start \
+      -- -c "/var/vcap/packages/openvpn/sbin/openvpn \
+        --config /var/vcap/jobs/openvpn/etc/client$CLIENTNUM.conf \
+        --writepid $PIDFILE \
+        --dev tun$CLIENTNUM
+        >> \"$LOGDIR/client$CLIENTNUM-stdout.log\" \
+        2>> \"$LOGDIR/client$CLIENTNUM-stderr.log\" \
+      "
+
+    ;;
+
+  stop)
+    /sbin/start-stop-daemon \
+      --pidfile "$PIDFILE" \
+      --signal TERM \
+      --oknodo \
+      --stop \
+      --retry 15
+
+    ;;
+
+  *)
+    echo "Usage: control {start|stop}" >&2
+
+    exit 1
+
+    ;;
+
+esac

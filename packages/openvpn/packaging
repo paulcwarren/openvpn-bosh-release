@@ -3,12 +3,12 @@
 set -e
 set -u
 
-tar -xzf openvpn-blobs/openssl-1.0.1h.tar.gz
-tar -xzf openvpn-blobs/openvpn-2.3.4.tar.gz
-tar -xzf openvpn-blobs/lzo-2.08.tar.gz
+tar -xzf openvpn-blobs/openssl-1.0.1m.tar.gz
+tar -xzf openvpn-blobs/openvpn-2.3.6.tar.gz
+tar -xzf openvpn-blobs/lzo-2.09.tar.gz
 
 
-pushd openssl-1.0.1h
+pushd openssl-1.0.1m
 
 ./config \
   -DSSL_ALLOW_ADH \
@@ -22,7 +22,7 @@ make install
 popd
 
 
-pushd lzo-2.08
+pushd lzo-2.09
 
 ./configure \
   --prefix=${BOSH_INSTALL_TARGET}/external/lzo \
@@ -33,7 +33,7 @@ make install
 popd
 
 
-pushd openvpn-2.3.4
+pushd openvpn-2.3.6
 
 export OPENSSL_CRYPTO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
 export OPENSSL_CRYPTO_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lcrypto"

@@ -5,7 +5,9 @@ packages:
 templates:
   bin/apply-iptables.erb: "bin/apply-iptables"
   bin/write-ccd.erb: "bin/write-ccd"
+  bin/write-clients.erb: "bin/write-clients"
   bin/control: "bin/control"
+  bin/control-client: "bin/control-client"
   etc/ca.crt.erb: "etc/ca.crt"
   etc/crl.pem.erb: "etc/crl.pem"
   etc/dh.pem.erb: "etc/dh.pem"
@@ -84,3 +86,9 @@ properties:
     example:
       - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.1.0/24 -j MASQUERADE -m comment --comment 'vpn -> private lan'"
       - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE -m comment --comment 'vpn -> internal backup server'"
+  openvpn.client_config:
+    description: "A list of Client Configuration Connections"
+    help: |
+          This value is an array, with each client connection being an item.
+    default: []
+    type: "array[]"
