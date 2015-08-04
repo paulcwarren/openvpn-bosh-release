@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+wget \
+  -q \
+  -O- \
+  http://www.oberhumer.com/opensource/lzo/download/ \
+  | grep -E 'href="lzo-[^"]+.tar.gz"' \
+  | sed -E 's/^.+href="lzo-([^"]+).tar.gz".+$/\1/' \
+  | gsort -rV \
+  | head -n1

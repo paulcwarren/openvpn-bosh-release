@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+wget \
+  -q \
+  -O lzo.tar.gz \
+  "http://www.oberhumer.com/opensource/lzo/download/lzo-${VERSION}.tar.gz"
