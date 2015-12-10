@@ -4,10 +4,10 @@ openvpn-blobs/lzo/lzo.tar.gz:
   sha: e2a60aca818836181e7e6f8c4f2c323aca6ac057
   size: 594855
 openvpn-blobs/openssl/openssl.tar.gz:
-  object_id: 14c4386d-571d-4b9e-ace2-a60cfbc4fc97
-  sha: d01d17b44663e8ffa6a33a5a30053779d9593c3d
-  size: 5295447
+  object_id: 063c8cfe-957e-4d4f-95aa-f6598fe4803d
+  sha: 2c5691496761cb18f98476eefa4d35c835448fb6
+  size: 5256555
 openvpn-blobs/openvpn/openvpn.tar.gz:
-  object_id: e908a8d1-25f6-47a0-b751-de789a23c883
-  sha: 40172800b9ba8fb2f7efc74e3615cfed5feb7672
-  size: 1199706
+  object_id: 62d4497f-bbb6-485a-88b1-fec651005c0e
+  sha: 29698c4e10dfe0f73d39b5f65b96cd66340d828d
+  size: 1214843
