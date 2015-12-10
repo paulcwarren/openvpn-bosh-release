@@ -47,11 +47,12 @@ Initialize your PKI and create the authority...
 Your server will need a server key, so create and sign one...
 
     $ cd pki
+    $ CN=server
     $ openssl req -new -nodes -days 3650 -newkey rsa:2048 \
-      -subj "/C=$EASYRSA_REQ_COUNTRY/ST=$EASYRSA_REQ_PROVINCE/L=$EASYRSA_REQ_CITY/O=$EASYRSA_REQ_ORG/OU=$EASYRSA_REQ_OU/CN=server/emailAddress=$EASYRSA_REQ_EMAIL" \
-      -out "reqs/server.req" \
-      -keyout "private/server.key"
-    $ ../easyrsa/easyrsa sign server "server"
+      -subj "/C=$EASYRSA_REQ_COUNTRY/ST=$EASYRSA_REQ_PROVINCE/L=$EASYRSA_REQ_CITY/O=$EASYRSA_REQ_ORG/OU=$EASYRSA_REQ_OU/CN=$CN/emailAddress=$EASYRSA_REQ_EMAIL" \
+      -out "reqs/$CN.req" \
+      -keyout "private/$CN.key"
+    $ ../easyrsa/easyrsa sign server "$CN"
     $ cd ../
 
 You can now create your BOSH manifest and deploy it...
@@ -120,9 +121,9 @@ You might need to manage some `iptables` rules to support the VPN-LAN communicat
 
     properties.openvpn.iptables:
       # allow VPN traffic to talk to the main network
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.1.0/24 -j MASQUERADE
+      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.1.0/24 -j MASQUERADE"
       # allow VPN traffic to talk to a specific server
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE
+      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE"
 
 You might need to assign a specific IP address to a specific VPN client...
 

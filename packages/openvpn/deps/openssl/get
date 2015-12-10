@@ -4,6 +4,5 @@ set -e
 
 wget \
   -q \
-  --no-check-certificate \
   -O openssl.tar.gz \
-  "https://www.openssl.org/source/openssl-${VERSION}.tar.gz"
+  "ftp://ftp.openssl.org/source/openssl-${VERSION}.tar.gz"
