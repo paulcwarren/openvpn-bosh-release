@@ -1,4 +1,6 @@
 ---
 name: "openvpn"
 files:
-  - "openvpn-blobs/**/*"
+  - "lzo/*"
+  - "openssl/*"
+  - "openvpn/*"
