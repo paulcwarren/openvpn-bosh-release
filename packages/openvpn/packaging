@@ -3,7 +3,7 @@
 set -e
 set -u
 
-( cd openvpn-blobs/openssl
+( cd openssl
 
   tar -xzf openssl.tar.gz
   cd openssl-*
@@ -18,7 +18,7 @@ set -u
   make install
 )
 
-( cd openvpn-blobs/lzo
+( cd lzo
 
   tar -xzf lzo.tar.gz
   cd lzo-*
@@ -30,16 +30,16 @@ set -u
   make install
 )
 
-( cd openvpn-blobs/openvpn
+( cd openvpn
 
   tar -xzf openvpn.tar.gz
   cd openvpn-*
-
-  export OPENSSL_CRYPTO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+  
+  export OPENSSL_CRYPTO_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/openssl/include"
   export OPENSSL_CRYPTO_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lcrypto"
-  export OPENSSL_SSL_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+  export OPENSSL_SSL_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/openssl/include"
   export OPENSSL_SSL_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lssl"
-  export LZO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/lzo/include"
+  export LZO_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/lzo/include"
   export LZO_LIBS="-L${BOSH_INSTALL_TARGET}/external/lzo/lib -llzo2"
 
   ./configure \

@@ -1,0 +1,10 @@
+---
+platform: "linux"
+image: "docker:///dpb587/openvpn-bosh-release#bosh-release"
+inputs:
+  - name: "repo"
+  - name: "version"
+outputs:
+  - name: "create-release"
+run:
+  path: "repo/ci/tasks/create-release/run.sh"

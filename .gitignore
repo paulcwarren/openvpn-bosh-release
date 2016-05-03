@@ -3,6 +3,8 @@
 /.bosh_config
 /.dev_builds
 /blobs
+/ci/config/private
 /config/dev.yml
 /config/private.yml
 /dev_releases
+/tmp

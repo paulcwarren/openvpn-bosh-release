@@ -13,18 +13,27 @@ chown vcap:vcap "$LOGDIR"
 exec >> $LOGDIR/control.log
 exec 2>&1
 
-mkdir -p `dirname "$PIDFILE"`
-chown vcap:vcap `dirname "$PIDFILE"`
+mkdir -p $( dirname "$PIDFILE" )
+chown vcap:vcap $( dirname "$PIDFILE" )
 
 mkdir -p "$RUNDIR"
 chown vcap:vcap "$RUNDIR"
 
+export LD_LIBRARY_PATH="/var/vcap/packages/openvpn/external/openssl/lib:${LD_LIBRARY_PATH:-}"
 
 case $1 in
 
   start)
     sysctl -w net.ipv4.ip_forward=1
-    sysctl -w net.ipv4.conf.eth0.send_redirects=0
+    sysctl -w net.ipv4.conf.eth0.send_redirects=0 || true
+    
+    chmod 600 /var/vcap/jobs/openvpn/etc/{*.conf,*.key,dh.pem}
+    chmod 644 /var/vcap/jobs/openvpn/etc/crl.pem
+    
+    if [ ! -e /dev/net/tun ] ; then
+      mkdir -p /dev/net
+      mknod /dev/net/tun c 10 200
+    fi
 
     /var/vcap/jobs/openvpn/bin/write-ccd
     /var/vcap/jobs/openvpn/bin/apply-iptables up
