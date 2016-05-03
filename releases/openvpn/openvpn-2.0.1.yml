@@ -1,0 +1,20 @@
+---
+packages:
+- name: openvpn
+  version: cc8296407e4bfc205c25d3f9f0cf02a3bb12a5ff
+  fingerprint: cc8296407e4bfc205c25d3f9f0cf02a3bb12a5ff
+  sha1: e2bc82351b24f3644a0f7e539247ca2425ddd2e4
+  dependencies: []
+jobs:
+- name: openvpn
+  version: a40f92b112d62f1139809d85b3df0d50d9a2a3e4
+  fingerprint: a40f92b112d62f1139809d85b3df0d50d9a2a3e4
+  sha1: 64e3521da38bddf5cad9ede493e4d7f53db38417
+license:
+  version: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  fingerprint: e6c4ccc65c76e75e2338d1edabdcf264d37ee663
+  sha1: dd2fe24b7bffdfe480ec43799756bf4df815cff5
+commit_hash: 1d55433c
+uncommitted_changes: false
+name: openvpn
+version: 2.0.1
