@@ -1,0 +1,34 @@
+{
+  "repository": {
+    "uri": "https://github.com/dpb587/openvpn-bosh-release.git",
+    "develop_branch": "develop",
+    "candidate_branch": "release-candidate",
+    "master_branch": "master",
+    "private_key": null
+  },
+  "github": {
+    "user": "dpb587",
+    "repository": "openvpn-bosh-release",
+    "access_token": null
+  },
+  "blobstore": {
+    "bucket": "dpb587-bosh-release-openvpn-us-east-1",
+    "access_key_id": null,
+    "secret_access_key": null
+  },
+  "bosh_lite": {
+    "access_key_id": "",
+    "availability_zone": "",
+    "name": "",
+    "instance_type": "",
+    "key_name": "",
+    "private_ip": "",
+    "secret_key": "",
+    "security_group_id": "",
+    "subnet_id": ""
+  },
+  "user": {
+    "name": "CI Bot",
+    "email": "ci@localhost"
+  }
+}
