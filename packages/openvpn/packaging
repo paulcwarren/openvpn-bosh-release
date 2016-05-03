@@ -34,12 +34,12 @@ set -u
 
   tar -xzf openvpn.tar.gz
   cd openvpn-*
-
-  export OPENSSL_CRYPTO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+  
+  export OPENSSL_CRYPTO_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/openssl/include"
   export OPENSSL_CRYPTO_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lcrypto"
-  export OPENSSL_SSL_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/openssl/include"
+  export OPENSSL_SSL_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/openssl/include"
   export OPENSSL_SSL_LIBS="-L${BOSH_INSTALL_TARGET}/external/openssl/lib -lssl"
-  export LZO_CFLAGS="-I ${BOSH_INSTALL_TARGET}/external/lzo/include"
+  export LZO_CFLAGS="-I${BOSH_INSTALL_TARGET}/external/lzo/include"
   export LZO_LIBS="-L${BOSH_INSTALL_TARGET}/external/lzo/lib -llzo2"
 
   ./configure \
