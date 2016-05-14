@@ -8,4 +8,6 @@ builds:
     version: 2.0.1
   d54635ac-2dbe-4883-a433-dda024027ded:
     version: 2.1.0
+  807a1899-7ccf-44ae-a103-f14268b48082:
+    version: 2.1.2
 format-version: '2'

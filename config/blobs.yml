@@ -4,10 +4,10 @@ lzo/lzo.tar.gz:
   sha: e2a60aca818836181e7e6f8c4f2c323aca6ac057
   size: 594855
 openssl/openssl.tar.gz:
-  object_id: fa7c7a30-217c-4a7b-bed6-35bda9e74124
-  sha: 36af23887402a5ea4ebef91df8e61654906f58f2
-  size: 5266102
+  object_id: 30daf879-3f88-4c9f-96c9-ca4521e67dac
+  sha: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
+  size: 5274412
 openvpn/openvpn.tar.gz:
-  object_id: 486724db-46e2-47e8-a0dc-0737dfadc409
-  sha: 1018c3e59eb39ee8e87197bffb3912d84857ff0c
-  size: 1225636
+  object_id: aaf1b363-6807-498d-87f1-7e588cb37dd2
+  sha: edfc49a83aff50ba2e3aeea3d615289308bce9dc
+  size: 1242816
