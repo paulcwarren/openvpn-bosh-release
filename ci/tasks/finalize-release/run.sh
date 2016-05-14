@@ -95,4 +95,4 @@ git remote add --fetch updated-candidate-repo file://$task_dir/updated-candidate
 develop_branch=$( git rev-parse --abbrev-ref HEAD )
 release_branch=$( basename $( git ls-remote --heads updated-candidate-repo | awk '{ print $2 }' ) )
 
-git merge --no-ff -m "$( echo "Merge branch 'release-$version' into $develop_branch" ; echo ; echo '[ci skip]' )" updated-candidate-repo/$release_branch
+git merge --no-ff -m "Merge branch 'release-$version' into $develop_branch" updated-candidate-repo/$release_branch
