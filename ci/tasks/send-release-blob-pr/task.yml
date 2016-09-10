@@ -1,0 +1,18 @@
+---
+platform: "linux"
+image_resource:
+  type: "docker-image"
+  source:
+    repository: "concourse/git-resource"
+inputs:
+  - name: "repo"
+run:
+  path: "repo/ci/tasks/send-release-blob-pr/run.sh"
+params:
+  blob: ~
+  branch: ~
+  base_branch: ~
+  owner: ~
+  repository: ~
+  access_token: ~
+  private_key: ~

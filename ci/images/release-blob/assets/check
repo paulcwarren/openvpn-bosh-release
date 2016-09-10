@@ -1,0 +1,14 @@
+#!/bin/sh
+
+exec 3>&1
+exec 1>&2
+set -eu
+
+from_version=$( jq '.version.version // ""' )
+to_version=$( /opt/resource/blob/check )
+
+if [ "$from_version" = "$to_version" ]; then
+  echo '[]' >&3
+else
+  jq -n --arg version "$to_version" '[{"version":$version}]' >&3
+fi

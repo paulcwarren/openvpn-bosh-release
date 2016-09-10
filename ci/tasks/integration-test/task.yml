@@ -1,6 +1,10 @@
 ---
 platform: "linux"
-image: "docker:///dpb587/openvpn-bosh-release#bosh-release"
+image_resource:
+  type: "docker-image"
+  source:
+    repository: "dpb587/openvpn-bosh-release"
+    tag: "ci-bosh-develop"
 inputs:
   - name: "repo"
   - name: "bosh-lite"

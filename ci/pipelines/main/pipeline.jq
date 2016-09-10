@@ -1,39 +1,53 @@
+include "shared" {"search":".."};
+
 {
+  "groups": [
+    {
+      "name": "meta",
+      "jobs": [
+        "ci-bosh-image"
+      ]
+    }
+  ],
   "jobs": [
+    {
+      "name": "ci-bosh-image",
+      "serial": true,
+      "plan": [
+        {
+          "get": "images-repo",
+          "trigger": true
+        },
+        {
+          "put": "ci-bosh-image",
+          "params": {
+            "build": "images-repo/ci/images/bosh"
+          },
+          "get_params": {
+            "skip_download": true
+          }
+        }
+      ]
+    },
     {
       "name": "create-develop-release",
       "serial_groups": [
         "version"
       ],
-      "plan": [
+      "plan": ([
         {
           "get": "repo",
           "resource": "develop-repo",
           "trigger": true
         },
-        {
-          "get": "version",
-          "params": {
-            "pre": "dev"
-          }
-        },
-        {
-          "put": "version",
-          "params": {
-            "file": "version/number"
-          }
-        },
-        {
-          "task": "create-release",
-          "file": "repo/ci/tasks/create-release/task.yml"
-        },
+        create_dev_release,
         {
           "put": "develop-release",
           "params": {
-            "file": "create-release/*.tgz"
+            "file": "release/*.tgz"
           }
         }
-      ]
+      ]|flatten)
     },
     {
       "name": "test-develop-integration",
@@ -59,9 +73,6 @@
           ]
         },
         {
-          "get": "bosh-lite-stemcell"
-        },
-        {
           "put": "integration-github-status",
           "params": {
             "commit": "repo",
@@ -69,27 +80,8 @@
           }
         },
         {
-          "put": "bosh-lite"
-        },
-        {
           "do": [
-            {
-              "put": "bosh-lite-integration-deployment",
-              "params": {
-                "target_file": "bosh-lite/target",
-                "manifest": "repo/ci/tasks/integration-test/deployment.yml",
-                "stemcells": [
-                  "bosh-lite-stemcell/*.tgz"
-                ],
-                "releases": [
-                  "release/*.tgz"
-                ]
-              }
-            },
-            {
-              "task": "integration-test",
-              "file": "repo/ci/tasks/integration-test/task.yml"
-            }
+            run_integration_tests
           ],
           "on_success": {
             "put": "integration-github-status",
@@ -103,15 +95,6 @@
             "params": {
               "commit": "repo",
               "state": "failure"
-            }
-          },
-          "ensure": {
-            "put": "bosh-lite",
-            "params": {
-              "delete": true
-            },
-            "get_params": {
-              "allow_deleted": true
             }
           }
         }
@@ -196,10 +179,10 @@
           "task": "finalize-release",
           "file": "candidate-repo/ci/tasks/finalize-release/task.yml",
           "params": {
-            "blobstore_s3_access_key_id": $config.blobstore.access_key_id,
-            "blobstore_s3_secret_access_key": $config.blobstore.secret_access_key,
-            "git_user_email": $config.user.email,
-            "git_user_name": $config.user.name
+            "blobstore_s3_access_key_id": .blobstore.access_key_id,
+            "blobstore_s3_secret_access_key": .blobstore.secret_access_key,
+            "git_user_email": .bot.email,
+            "git_user_name": .bot.name
           }
         },
         {
@@ -237,6 +220,11 @@
         }
       ]
     },
+
+    #
+    # allow manual major and minor version bumps
+    #
+
     {
       "name": "bump-major",
       "serial_groups": [
@@ -279,6 +267,11 @@
         }
       ]
     },
+
+    #
+    # whenever we release, automatically bump the patch version
+    #
+
     {
       "name": "bump-patch",
       "serial_groups": [
@@ -307,85 +300,124 @@
   ],
   "resources": [
     {
+      "name": "version",
+      "type": "semver",
+      "source": {
+        "bucket": .blobstore.bucket,
+        "key": "version",
+        "access_key_id": .blobstore.access_key_id,
+        "secret_access_key": .blobstore.secret_access_key
+      }
+    },
+
+    #
+    # develop - where the action happens
+    #
+
+    {
       "name": "develop-repo",
       "type": "git",
       "source": {
-        "uri": $config.repository.uri,
-        "branch": $config.repository.develop_branch,
-        "private_key": $config.repository.private_key
+        "uri": .repository.uri,
+        "branch": .repository_branches.develop,
+        "private_key": .repository.private_key
       }
     },
     {
       "name": "develop-release",
       "type": "s3",
       "source": {
-        "bucket": $config.blobstore.bucket,
+        "bucket": .blobstore.bucket,
         "regexp": "develop/release/openvpn-(.*).tgz",
-        "access_key_id": $config.blobstore.access_key_id,
-        "secret_access_key": $config.blobstore.secret_access_key
+        "access_key_id": .blobstore.access_key_id,
+        "secret_access_key": .blobstore.secret_access_key
       }
     },
     {
-      "name": "version",
-      "type": "semver",
+      "name": "integration-github-status",
+      "type": "github-status",
       "source": {
-        "bucket": $config.blobstore.bucket,
-        "key": "version",
-        "access_key_id": $config.blobstore.access_key_id,
-        "secret_access_key": $config.blobstore.secret_access_key
+        "repository": (.repository.github.owner + "/" + .repository.github.repository),
+        "access_token": .repository.github.access_token,
+        "branch": .repository_branches.develop,
+        "context": "ci/integration"
       }
     },
+
+    #
+    # candidate - when we have happy code
+    #
+
     {
       "name": "candidate-repo",
       "type": "git",
       "source": {
-        "uri": $config.repository.uri,
-        "branch": $config.repository.candidate_branch,
-        "private_key": $config.repository.private_key
+        "uri": .repository.uri,
+        "branch": .repository_branches.candidate,
+        "private_key": .repository.private_key
       }
     },
     {
       "name": "candidate-release",
       "type": "s3",
       "source": {
-        "bucket": $config.blobstore.bucket,
+        "bucket": .blobstore.bucket,
         "regexp": "rc/release/openvpn-(.*).tgz",
-        "access_key_id": $config.blobstore.access_key_id,
-        "secret_access_key": $config.blobstore.secret_access_key
+        "access_key_id": .blobstore.access_key_id,
+        "secret_access_key": .blobstore.secret_access_key
       }
     },
+
+    #
+    # master - when we have production code
+    #
+
     {
       "name": "master-repo",
       "type": "git",
       "source": {
-        "uri": $config.repository.uri,
-        "branch": $config.repository.master_branch,
-        "private_key": $config.repository.private_key
+        "uri": .repository.uri,
+        "branch": .repository_branches.master,
+        "private_key": .repository.private_key
       }
     },
     {
       "name": "master-release",
       "type": "s3",
       "source": {
-        "bucket": $config.blobstore.bucket,
+        "bucket": .blobstore.bucket,
         "regexp": "master/release/openvpn-(.*).tgz",
-        "access_key_id": $config.blobstore.access_key_id,
-        "secret_access_key": $config.blobstore.secret_access_key
+        "access_key_id": .blobstore.access_key_id,
+        "secret_access_key": .blobstore.secret_access_key
       }
     },
+    {
+      "name": "master-github-release",
+      "type": "github-release",
+      "source": {
+        "user": .repository.github.owner,
+        "repository": .repository.github.repository,
+        "access_token": .repository.github.access_token
+      }
+    },
+
+    #
+    # bosh-lite provisioning for test environments
+    #
+
     {
       "name": "bosh-lite",
       "type": "aws-bosh-lite",
       "source": {
-        "access_key": $config.bosh_lite.access_key_id,
-        "availability_zone": $config.bosh_lite.availability_zone,
-        "name": $config.bosh_lite.name,
-        "instance_type": $config.bosh_lite.instance_type,
-        "key_name": $config.bosh_lite.key_name,
-        "private_ip": $config.bosh_lite.private_ip,
-        "secret_key": $config.bosh_lite.secret_key,
-        "security_group_id": $config.bosh_lite.security_group_id,
-        "subnet_id": $config.bosh_lite.subnet_id
+        "access_key": .bosh_lite.access_key_id,
+        "availability_zone": .bosh_lite.availability_zone,
+        "name": .bosh_lite.name,
+        "instance_type": .bosh_lite.instance_type,
+        "key_name": .bosh_lite.key_name,
+        "private_ip": .bosh_lite.private_ip,
+        "secret_key": .bosh_lite.secret_key,
+        "security_group_id": .bosh_lite.security_group_id,
+        "subnet_id": .bosh_lite.subnet_id
       }
     },
     {
@@ -404,25 +436,25 @@
         "name": "bosh-warden-boshlite-ubuntu-trusty-go_agent"
       }
     },
+
+    #
+    # images
+    #
+
     {
-      "name": "master-github-release",
-      "type": "github-release",
+      "name": "images-repo",
+      "type": "git",
       "source": {
-        "user": $config.github.user,
-        "repository": $config.github.repository,
-        "access_token": $config.github.access_token
+        "uri": .repository.uri,
+        "branch": .repository_branches.develop,
+        "private_key": .repository.private_key,
+        "paths": [
+          "ci/images/*",
+          "ci/images/**/*"
+        ]
       }
     },
-    {
-      "name": "integration-github-status",
-      "type": "github-status",
-      "source": {
-        "repository": ($config.github.user + "/" + $config.github.repository),
-        "access_token": $config.github.access_token,
-        "branch": $config.repository.develop_branch,
-        "context": "ci/integration"
-      }
-    }
+    docker_ci_image("bosh"; .repository_branches.develop)
   ],
   "resource_types": [
     {
@@ -443,3 +475,4 @@
     }
   ]
 }
+| normalize_pipeline
