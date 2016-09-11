@@ -2,4 +2,10 @@
 
 A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](http://openvpn.net/) network.
 
-To get started, [upload the release](release/README.md) and [learn more](ops/managing-a-pki.md) about setting up the certificates you'll need.
+To get started...
+
+ * [Upload the release](release/README.md)
+ * [Configure a PKI](ops/using-a-local-pki.md)
+ * [Create and sign a Server Certificate](ops/using-a-local-pki.md#creating-a-new-key)
+ * Create a Deployment Manifest
+ * [Configure a Client](ops/client-profiles.md)

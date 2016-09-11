@@ -1,5 +1,4 @@
-title: Advanced Settings
----
+# Advanced Settings
 
 There are a few additional options available which are intended for advanced configuration. Here are some examples of them...
 
