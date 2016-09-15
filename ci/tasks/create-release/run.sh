@@ -2,8 +2,8 @@
 
 set -eu
 
-TASK_DIR=$PWD
-VERSION=$( cat version/number )
+task_dir=$PWD
+version=$( cat version/number )
 
 cd repo
 
@@ -12,8 +12,9 @@ cd repo
 # create dev release
 #
 
-bosh -n create release \
-  --version="$VERSION" \
-  --with-tarball
+bosh create-release \
+  --version="$version" \
+  --force \
+  --tarball
 
-cp dev_releases/*/*.tgz $TASK_DIR/create-release/
+cp releases/*/*.tgz $task_dir/release/

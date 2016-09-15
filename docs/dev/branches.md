@@ -1,5 +1,4 @@
-title: Lifecycle
----
+# Lifecycle
 
 The following core branches are used...
 
@@ -9,4 +8,4 @@ The following core branches are used...
 
 The following internal branches are used...
 
- * `autoupgrade` - attempts by CI to automatically upgrade upstream dependencies
+ * `bump-*` - attempts by CI to automatically upgrade upstream dependencies

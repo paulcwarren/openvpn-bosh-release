@@ -1,0 +1,13 @@
+{
+  "bosh_lite": {
+    "access_key_id": null,
+    "availability_zone": null,
+    "name": "ci-openvpn-bosh-release",
+    "instance_type": null,
+    "key_name": null,
+    "private_ip": null,
+    "secret_key": null,
+    "security_group_id": null,
+    "subnet_id": null
+  }
+}

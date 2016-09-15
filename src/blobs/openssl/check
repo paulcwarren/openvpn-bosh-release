@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
 git ls-remote --tags https://github.com/openssl/openssl.git \
   | cut -f2 \
-  | grep -Ev '\^{}' \
+  | grep -Ev '\^\{\}' \
   | grep -E '^refs/tags/OpenSSL_.+$' \
   | sed -E 's/^refs\/tags\/OpenSSL_(.+)$/\1/' \
   | tr '_' '.' \
-  | grep -E '^\d+\.\d+\.\d+\w*$' \
-  | gsort -rV \
+  | grep -E '^1\.0\.\d+\w*$' \
+  | sort -rV \
   | head -n1

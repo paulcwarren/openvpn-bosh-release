@@ -1,0 +1,7 @@
+{
+  "blobstore": {
+    "bucket": "dpb587-bosh-release-openvpn-us-east-1",
+    "access_key_id": null,
+    "secret_access_key": null
+  }
+}

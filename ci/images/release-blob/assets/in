@@ -1,0 +1,28 @@
+#!/bin/sh
+
+exec 3>&1
+exec 1>&2
+set -eu
+
+cd $1
+
+export VERSION=$( jq -r '.version.version // ""' | tee VERSION )
+
+/opt/resource/blob/get
+
+jq -n \
+  --arg size "$( du -sb . | cut -f1 )" \
+  '
+    {
+      "version": {
+        "version": env.VERSION
+      },
+      "metadata": [
+        {
+          "name": "size",
+          "value": $size
+        }
+      ]
+    }
+  ' \
+  >&3
