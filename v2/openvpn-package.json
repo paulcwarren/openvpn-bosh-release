@@ -1,0 +1,6 @@
+{
+  "name": "openvpn",
+  "files": [
+    "openvpn-blobs/**/*"
+  ]
+}

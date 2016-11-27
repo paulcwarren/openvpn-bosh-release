@@ -1,0 +1,8 @@
+{
+  "name": "openvpn",
+  "files": [
+    "lzo/*",
+    "openssl/*",
+    "openvpn/*"
+  ]
+}
