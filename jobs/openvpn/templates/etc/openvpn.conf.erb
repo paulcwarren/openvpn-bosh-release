@@ -5,7 +5,9 @@ ca /var/vcap/jobs/openvpn/etc/ca.crt
 cert /var/vcap/jobs/openvpn/etc/server.crt
 key /var/vcap/jobs/openvpn/etc/server.key
 dh /var/vcap/jobs/openvpn/etc/dh.pem
+<% if_p('openvpn.crl_pem') do %>
 crl-verify /var/vcap/jobs/openvpn/etc/crl.pem
+<% end %>
 proto tcp
 port <%= p('openvpn.port') %>
 comp-lzo
