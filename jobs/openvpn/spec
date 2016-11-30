@@ -48,6 +48,14 @@ properties:
     type: "string[]"
     help: |
           These should be in a format similar to "192.0.2.0 255.255.255.0".
+  openvpn.cipher:
+    description: "Cipher for encrypting packets"
+    default: "BF-CBC"
+    type: "string"
+  openvpn.keysize:
+    description: "Size of cipher key in bits"
+    default: 256
+    type: "integer"
   openvpn.ca_crt:
     description: "CA Certificate"
     help: |

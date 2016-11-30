@@ -8,6 +8,8 @@ dh /var/vcap/jobs/openvpn/etc/dh.pem
 <% if_p('openvpn.crl_pem') do %>
 crl-verify /var/vcap/jobs/openvpn/etc/crl.pem
 <% end %>
+cipher <%= p('openvpn.cipher') %>
+keysize <%= p('openvpn.keysize') %>
 proto tcp
 port <%= p('openvpn.port') %>
 comp-lzo
