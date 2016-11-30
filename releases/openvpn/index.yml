@@ -11,4 +11,6 @@ builds:
     version: 2.1.3
   d54635ac-2dbe-4883-a433-dda024027ded:
     version: 2.1.0
+  dcdf35c5-9a09-46d4-559c-522938e9b0d6:
+    version: 3.0.0
 format-version: "2"
