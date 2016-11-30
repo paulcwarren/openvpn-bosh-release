@@ -1,5 +1,7 @@
 ---
 final_name: openvpn
+description: |
+  A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](https://openvpn.net/index.php/open-source.html) network.
 blobstore:
   provider: s3
   options:
