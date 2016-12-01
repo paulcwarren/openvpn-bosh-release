@@ -1,7 +1,14 @@
 #!/bin/sh
 
-set -e
+set -eu
 
 curl \
   -o openssl.tar.gz \
-  "ftp://ftp.openssl.org/source/openssl-${VERSION}.tar.gz"
+  "https://www.openssl.org/source/openssl-${VERSION}.tar.gz"
+
+curl \
+  -o openssl.tar.gz.asc \
+  "https://www.openssl.org/source/openssl-${VERSION}.tar.gz.asc"
+
+gpg --import pgp/*.asc
+gpg --verify openssl.tar.gz.asc openssl.tar.gz

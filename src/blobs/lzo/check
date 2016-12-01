@@ -4,7 +4,7 @@ set -e
 
 curl \
   -s \
-  http://www.oberhumer.com/opensource/lzo/download/ \
+  https://www.oberhumer.com/opensource/lzo/download/ \
   | grep -E 'href="lzo-[^"]+.tar.gz"' \
   | sed -E 's/^.+href="lzo-([^"]+).tar.gz".+$/\1/' \
   | sort -rV \
