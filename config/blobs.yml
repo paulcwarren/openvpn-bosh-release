@@ -12,12 +12,16 @@ lzo/lzo.tar.gz.sha256sum:
   sha: 1506980b73da643530412323bd8d0422eb36c7e7
 openssl/VERSION:
   size: 7
-  object_id: cdbb2e29-e391-4cc1-6342-a3a89e5d456e
+  object_id: 65807ba9-c76e-46d5-4f63-0e1b75d1b4b4
   sha: 4572e32f26206d73db86de8c140bea8dd9817e98
 openssl/openssl.tar.gz:
   size: 5307912
-  object_id: befe66a7-81f7-42eb-7346-83d8f11ff103
+  object_id: 7a1aa148-6477-44ad-51d1-70e41d3b814d
   sha: bdfbdb416942f666865fa48fe13c2d0e588df54f
+openssl/openssl.tar.gz.asc:
+  size: 473
+  object_id: b52491f6-7b42-454d-6690-fa88a3194b79
+  sha: 111eb6befb4561c14137b1b36db0ba8988c0ee87
 openvpn/VERSION:
   size: 7
   object_id: 86d876d1-8b2b-4fdb-40e3-2d8fea1a6b7d
