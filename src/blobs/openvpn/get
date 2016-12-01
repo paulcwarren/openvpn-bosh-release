@@ -10,5 +10,5 @@ curl \
   -o openvpn.tar.gz.asc \
   "https://swupdate.openvpn.org/community/releases/openvpn-${VERSION}.tar.gz.asc"
 
-gpg --import pgp/*.asc
+gpg --import /opt/resource/blob/pgp/*.asc
 gpg --verify openvpn.tar.gz.asc openvpn.tar.gz

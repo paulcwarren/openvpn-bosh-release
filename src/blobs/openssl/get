@@ -10,5 +10,5 @@ curl \
   -o openssl.tar.gz.asc \
   "https://www.openssl.org/source/openssl-${VERSION}.tar.gz.asc"
 
-gpg --import pgp/*.asc
+gpg --import /opt/resource/blob/pgp/*.asc
 gpg --verify openssl.tar.gz.asc openssl.tar.gz
