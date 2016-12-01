@@ -24,9 +24,13 @@ openssl/openssl.tar.gz.asc:
   sha: 111eb6befb4561c14137b1b36db0ba8988c0ee87
 openvpn/VERSION:
   size: 7
-  object_id: 86d876d1-8b2b-4fdb-40e3-2d8fea1a6b7d
-  sha: 9433b1f569b74962809c422d825f2dc69a165b30
+  object_id: 0ba407b2-20c0-4ec1-621b-100df0994078
+  sha: 594f396d4c47a428c13f8744e42e879446c36717
 openvpn/openvpn.tar.gz:
-  size: 1235262
-  object_id: 60527fc8-1785-4153-7123-d4f3e38345b0
-  sha: 37d1ff2c92432b8b0a37fe72f938269c487a33d3
+  size: 1237826
+  object_id: 99c2f27d-2ae7-409b-4e5f-992afaa4732e
+  sha: 53353a6e0f46530b2ea811e13157160cfd6ff569
+openvpn/openvpn.tar.gz.asc:
+  size: 181
+  object_id: 29e21ce6-84c1-47eb-797d-37181c9fa94d
+  sha: 38be40d9a754d335a24232d7739ba044fc6b6c39
