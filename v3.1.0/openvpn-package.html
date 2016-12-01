@@ -31,79 +31,37 @@
                 </li>
             </ul>
         </nav>
-        <h1>openvpn<span class="text-muted">/3.0.0</span></h1>
+        <h1>openvpn<span class="text-muted">/3.1.0</span></h1>
 
         <ul class="nav nav-inline" style="margin-bottom:1rem;">
             <li class="nav-item">
-                <a class="nav-link text-muted" href="."><i class="fa fa-inbox"></i> summary</a>
+                <a class="nav-link" href="."><i class="fa fa-inbox"></i> summary</a>
             </li>
                             <li class="nav-item">
                     <a class="nav-link" href="./jobs.html"><i class="fa fa-leaf"></i> jobs</a>
                 </li>
                                         <li class="nav-item">
-                    <a class="nav-link" href="./packages.html"><i class="fa fa-archive"></i> packages</a>
+                    <a class="nav-link text-muted" href="./packages.html"><i class="fa fa-archive"></i> packages</a>
                 </li>
                         <li class="nav-item">
                 <a class="nav-link" href="./downloads.html"><i class="fa fa-download"></i> downloads</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release/tree/86710d38dafaff8e35111307913a48bf47278a22/"><i class="fa fa-github"></i> source</a>
+                <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release/tree/46dda2184efefd49ae586d622b2c48d1cfaffe6e/"><i class="fa fa-github"></i> source</a>
             </li>
         </ul>
     </div>
                 <div class="container">
         <div class="row">
-            <div class="col-sm-9">
-                                    <div class="card">
-                        <div class="card-header">
-                            Release Notes
-                        </div>
-                        <div class="card-block">
-                            <ul>
-<li>make <code>openvpn.crl_pem</code> optional</li>
-<li>support configuring <code>openvpn.cipher</code> and <code>openvpn.keysize</code> (default key size is now 256; existing client connection profiles may need to be updated before they can reconnect)</li>
-<li>upgrade: openssl now 1.0.2j (was 1.0.2h)</li>
-</ul>
+            <div class="col-sm-12">
+                <h2>openvpn <span class="text-muted">package</span></h2>
 
-                        </div>
-                    </div>
                 
-                                    <div class="card">
-                        <div class="card-header">
-                            Usage Snippets
-                        </div>
-                        <div class="card-block" style="background-color:#FCFCFC;font-family:Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;">
-                            bosh upload-release \<br />
-                            &nbsp;&nbsp;--sha1 34027c761876d24549cf4f406375cc8f62f94564 \<br />                            &nbsp;&nbsp;https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-3.0.0.tgz
-                        </div>
-                        <div class="card-block" style="background-color:#FCFCFC;border-top:1px solid rgba(0,0,0,.125);font-family:Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;">
-                            releases:<br />
-                            &nbsp;&nbsp;- name: openvpn<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;url: https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-3.0.0.tgz<br />
-                            &nbsp;&nbsp;&nbsp;&nbsp;sha1: 34027c761876d24549cf4f406375cc8f62f94564
-                        </div>
-                    </div>
-                            </div>
-            <div class="col-sm-3">
-                <strong>Quick Downloads</strong>
+                <p>
+                    This package is compiled to <code>/var/vcap/packages/openvpn</code>.
 
-                <ul class="list-unstyled">
-                                            <li><a href="https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-3.0.0.tgz">BOSH Release</a></li>
-                                        <li><a href="https://github.com/dpb587/openvpn-bosh-release/archive/v3.0.0.tar.gz">GitHub Source</a></li>
-                </ul>
-
-                                    <strong>Jobs</strong>
-
-                    <ul class="list-unstyled">
-                                                    <li><a href="openvpn-job.html">openvpn</a>
-                                            </ul>
-                
-                                    <strong>Packages</strong>
-
-                    <ul class="list-unstyled">
-                                                    <li><a href="openvpn-package.html">openvpn</a>
-                                            </ul>
-                            </div>
+                                    </p>
+            </div>
         </div>
     </div>
                             <div class="row">
