@@ -1,11 +1,15 @@
 lzo/VERSION:
   size: 5
-  object_id: c2773b84-9e5d-4b66-764b-0555bed9f411
+  object_id: 57c3a53b-1445-44bf-442b-515594338e82
   sha: 4ee004f02189e2b9b90b8aa0859579bcadd3879c
 lzo/lzo.tar.gz:
   size: 594855
-  object_id: 80eaccd6-edfb-4598-5209-d189fb748289
+  object_id: 5999fcff-7775-4990-48f6-8dfb47fbeae2
   sha: e2a60aca818836181e7e6f8c4f2c323aca6ac057
+lzo/lzo.tar.gz.sha256sum:
+  size: 41
+  object_id: 7eaeaa72-0e49-4a5f-6312-d26a768162e9
+  sha: 1506980b73da643530412323bd8d0422eb36c7e7
 openssl/VERSION:
   size: 7
   object_id: cdbb2e29-e391-4cc1-6342-a3a89e5d456e
