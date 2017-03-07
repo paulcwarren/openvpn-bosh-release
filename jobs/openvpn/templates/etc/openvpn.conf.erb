@@ -15,7 +15,7 @@ port <%= p('openvpn.port') %>
 comp-lzo
 group nogroup
 user nobody
-status /var/vcap/sys/log/openvpn/status.log
+status /var/vcap/sys/run/openvpn/status
 dev tun0
 local <%= p('openvpn.local') %>
 server <%= p('openvpn.server') %>
