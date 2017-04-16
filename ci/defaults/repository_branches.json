@@ -1,7 +1,0 @@
-{
-  "repository_branches": {
-    "develop": "develop",
-    "candidate": "candidate",
-    "master": "master"
-  }
-}

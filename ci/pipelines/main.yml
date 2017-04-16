@@ -1,0 +1,269 @@
+groups:
+
+- jobs:
+  - create-develop-release
+  - test-develop-integration
+  - promote-candidate
+  - shipit
+  - bump-major
+  - bump-minor
+  - bump-patch
+  name: all
+
+- jobs:
+  - ci-bosh-image
+  name: meta
+
+jobs:
+
+- name: create-develop-release
+  serial_groups:
+  - version
+  plan:
+  - get: repo
+    trigger: true
+    resource: develop-repo
+  - get: version
+    params:
+      pre: dev
+  - put: version
+    params:
+      file: version/number
+  - file: repo/ci/tasks/create-release/task.yml
+    task: create-release
+  - put: develop-release
+    params:
+      file: release/*.tgz
+
+- name: test-develop-integration
+  serial: true
+  plan:
+  - aggregate:
+    - get: release
+      resource: develop-release
+      trigger: true
+      passed:
+      - create-develop-release
+    - get: repo
+      resource: develop-repo
+      passed:
+      - create-develop-release
+  - put: integration-github-status
+    params:
+      commit: repo
+      state: pending
+  - file: repo/ci/tasks/integration-test/task.yml
+    task: integration-test
+    privileged: true
+    on_failure:
+      put: integration-github-status
+      params:
+        commit: repo
+        state: failure
+    on_success:
+      put: integration-github-status
+      params:
+        commit: repo
+        state: success
+
+- name: promote-candidate
+  serial: true
+  plan:
+  - aggregate:
+    - get: release
+      resource: develop-release
+      trigger: true
+      passed:
+      - test-develop-integration
+    - get: repo
+      resource: develop-repo
+      passed:
+      - test-develop-integration
+  - aggregate:
+    - put: candidate-repo
+      params:
+        repository: repo
+    - put: candidate-release
+      params:
+        file: release/*.tgz
+
+- name: shipit
+  serial_groups:
+  - version
+  plan:
+  - aggregate:
+    - get: candidate-release
+      passed:
+      - promote-candidate
+    - get: candidate-repo
+      passed:
+      - promote-candidate
+    - get: version
+      params:
+        bump: final
+    - get: develop-repo
+    - get: master-repo
+  - task: finalize-release
+    file: candidate-repo/ci/tasks/finalize-release/task.yml
+    params:
+      blobstore_s3_access_key_id: ((blobstore_access_key))
+      blobstore_s3_secret_access_key: ((blobstore_secret_key))
+      git_user_email: ci@localhost
+      git_user_name: CI Bot
+  - put: version
+    params:
+      file: version/number
+  - put: master-repo
+    params:
+      repository: master-repo
+  - put: develop-repo
+    params:
+      repository: develop-repo
+  - put: master-release
+    params:
+      file: master-release-artifacts/*.tgz
+  - put: master-github-release
+    params:
+      body: master-release-artifacts/notes.md
+      commitish: master-release-artifacts/commit
+      name: master-release-artifacts/name
+      tag: master-release-artifacts/name
+
+- name: bump-major
+  serial_groups:
+  - version
+  plan:
+  - get: version
+    params:
+      bump: major
+      pre: dev
+  - put: version
+    params:
+      file: version/number
+- name: bump-minor
+  serial_groups:
+  - version
+  plan:
+  - get: version
+    params:
+      bump: minor
+      pre: dev
+  - put: version
+    params:
+      file: version/number
+- name: bump-patch
+  serial_groups:
+  - version
+  plan:
+  - get: version
+    trigger: true
+    params:
+      bump: patch
+      pre: dev
+    passed:
+    - shipit
+  - put: version
+    params:
+      file: version/number
+
+- name: ci-bosh-image
+  serial: true
+  plan:
+  - get: images-repo
+    trigger: true
+  - put: ci-bosh-image
+    params:
+      build: images-repo/ci/images/bosh
+    get_params:
+      skip_download: true
+
+resources:
+- name: develop-release
+  type: s3
+  source:
+    access_key_id: ((blobstore_access_key))
+    bucket: dpb587-bosh-release-openvpn-us-east-1
+    regexp: develop/release/openvpn-(.*).tgz
+    secret_access_key: ((blobstore_secret_key))
+- name: develop-repo
+  type: git
+  source:
+    branch: develop
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
+
+- name: candidate-release
+  type: s3
+  source:
+    access_key_id: ((blobstore_access_key))
+    bucket: dpb587-bosh-release-openvpn-us-east-1
+    regexp: rc/release/openvpn-(.*).tgz
+    secret_access_key: ((blobstore_secret_key))
+- name: candidate-repo
+  type: git
+  source:
+    branch: candidate
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
+
+- name: master-github-release
+  type: github-release
+  source:
+    access_token: ((github_access_token))
+    repository: openvpn-bosh-release
+    user: dpb587
+- name: master-release
+  type: s3
+  source:
+    access_key_id: ((blobstore_access_key))
+    bucket: dpb587-bosh-release-openvpn-us-east-1
+    regexp: master/release/openvpn-(.*).tgz
+    secret_access_key: ((blobstore_secret_key))
+- name: master-repo
+  type: git
+  source:
+    branch: master
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
+
+- name: version
+  type: semver
+  source:
+    access_key_id: ((blobstore_access_key))
+    bucket: dpb587-bosh-release-openvpn-us-east-1
+    key: version
+    secret_access_key: ((blobstore_secret_key))
+
+- name: integration-github-status
+  type: github-status
+  source:
+    access_token: ((github_access_token))
+    branch: develop
+    context: ci/integration
+    repository: dpb587/openvpn-bosh-release
+
+- name: images-repo
+  type: git
+  source:
+    branch: develop
+    paths:
+    - ci/images/*
+    - ci/images/**/*
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
+- name: ci-bosh-image
+  type: docker-image
+  source:
+    email: ((docker_email))
+    password: ((docker_password))
+    repository: dpb587/openvpn-bosh-release
+    tag: ci-bosh-develop
+    username: ((docker_username))
+
+resource_types:
+
+- name: github-status
+  type: docker-image
+  source:
+    repository: dpb587/github-status-resource
+    tag: master

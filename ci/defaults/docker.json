@@ -1,9 +1,0 @@
-{
-  "docker": {
-    "repository": "dpb587/openvpn-bosh-release",
-    "insecure_registries": null,
-    "email": null,
-    "username": null,
-    "password": null
-  }
-}
