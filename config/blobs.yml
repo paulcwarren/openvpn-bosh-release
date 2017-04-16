@@ -1,36 +1,12 @@
-lzo/VERSION:
-  size: 5
-  object_id: 57c3a53b-1445-44bf-442b-515594338e82
-  sha: 4ee004f02189e2b9b90b8aa0859579bcadd3879c
-lzo/lzo.tar.gz:
-  size: 594855
-  object_id: 5999fcff-7775-4990-48f6-8dfb47fbeae2
-  sha: e2a60aca818836181e7e6f8c4f2c323aca6ac057
-lzo/lzo.tar.gz.sha256sum:
-  size: 41
-  object_id: 7eaeaa72-0e49-4a5f-6312-d26a768162e9
-  sha: 1506980b73da643530412323bd8d0422eb36c7e7
-openssl/VERSION:
-  size: 7
-  object_id: 6c7acf2d-0e7a-4877-69c7-96012926bce0
-  sha: b6dc34d82f3a7212eeca6b2402ca5a495e18047a
-openssl/openssl.tar.gz:
+lzo/lzo-2.10.tar.gz:
+  size: 600622
+  object_id: 719b2aa3-eace-413d-6b6d-e87e80b7c914
+  sha: 4924676a9bae5db58ef129dc1cebce3baa3c4b5d
+openssl/openssl-1.0.2k.tar.gz:
   size: 5309236
-  object_id: ba27dc04-cbd4-43ad-612b-d78c8261ec66
+  object_id: ae0b3fd4-d9fd-4fd4-447a-919d784eb46a
   sha: 5f26a624479c51847ebd2f22bb9f84b3b44dcb44
-openssl/openssl.tar.gz.asc:
-  size: 455
-  object_id: b4a1987c-1e10-4b21-607f-162c733189f1
-  sha: 8a0e10287f55529f1bbe582ea634b3f414b42eb5
-openvpn/VERSION:
-  size: 7
-  object_id: 98ada45e-13c8-4a61-7604-7c73b178178b
-  sha: 7d3ef55e0955b06202262bbabc671f104e74e6ed
-openvpn/openvpn.tar.gz:
+openvpn/openvpn-2.3.14.tar.gz:
   size: 1241145
-  object_id: 4a1ae244-b396-466e-70f9-a7a18b272dc3
+  object_id: c1f3e901-69f1-47df-6ce6-8f4d8ca4bc92
   sha: 742b5c5cea02e7a4474b75fb423a37163694dc2a
-openvpn/openvpn.tar.gz.asc:
-  size: 181
-  object_id: d442268c-33dc-4ac7-56ee-1439ffddef11
-  sha: 64ce533bc9270bc15b83059b3241288f1c97c889
