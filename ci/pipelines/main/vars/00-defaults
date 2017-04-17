@@ -1,6 +1,0 @@
-#!/bin/sh
-
-set -eu
-
-cat ../../defaults/* \
-  | jq -s 'add'
