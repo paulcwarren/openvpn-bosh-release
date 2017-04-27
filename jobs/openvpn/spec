@@ -56,6 +56,14 @@ properties:
     description: "Size of cipher key in bits"
     default: 256
     type: "integer"
+  openvpn.tls_version_min:
+    description: "The minimum TLS version accepted from peers"
+    default: "1.0"
+    type: "string"
+  openvpn.tls_cipher:
+    description: "A colon-separated list of allowable TLS ciphers"
+    type: "string"
+    example: "DEFAULT:!EXP:!LOW:!MEDIUM"
   openvpn.ca_crt:
     description: "CA Certificate"
     help: |
