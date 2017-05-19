@@ -41,15 +41,96 @@
                                                             <div class="card">
                             <div class="card-header">
                                 <div class="pull-right text-muted">
+                                    <a class="text-muted" href="https://github.com/dpb587/openvpn-bosh-release/releases/tag/v3.1.4">v3.1.4</a>
+                                    &middot;
+                                    <time datetime="2017-05-19T06:22:46+00:00" title="2017-05-19T06:22:46+00:00">2017-05-19</time>
+                                </div>
+                                <a href="./v3.1.4/">Release 3.1.4</a>
+                                <span class="text-muted">(latest)</span>
+                            </div>
+                            <div class="card-block">
+                                                                    <div class="card-text">
+                                        <ul>
+<li>new, optional <code>openvpn</code> configuration properties: <code>tls_version_min</code>, <code>tls_cipher</code></li>
+<li>upgrade: openvpn/2.4.2</li>
+</ul>
+
+                                    </div>
+                                                                <p class="card-text">
+                                    <small class="text-muted">Jobs: <a href="./v3.1.4/openvpn-job.html">openvpn</a></small><br />
+                                    <small class="text-muted">Packages: <a href="./v3.1.4/openvpn-package.html">openvpn</a></small><br />
+                                </p>
+                            </div>
+                                                    </div>
+                                                                                <div class="card">
+                            <div class="card-header">
+                                <div class="pull-right text-muted">
+                                    <a class="text-muted" href="https://github.com/dpb587/openvpn-bosh-release/releases/tag/v3.1.3">v3.1.3</a>
+                                    &middot;
+                                    <time datetime="2017-04-16T22:18:51+00:00" title="2017-04-16T22:18:51+00:00">2017-04-16</time>
+                                </div>
+                                <a href="./v3.1.3/">Release 3.1.3</a>
+                            </div>
+                                                            <div class="card-block">
+                                    <div class="card-text">
+                                        <ul>
+<li>openvpn status log now lives at <code>/var/vcap/sys/run/openvpn/status</code></li>
+<li>upgrade: openvpn now 2.4.1 (was 2.3.14)</li>
+<li>upgrade: openssl now 1.1.0e (was 1.0.2k)</li>
+<li>upgrade: lzo now 2.10 (was 2.09)</li>
+<li>dev: refactor integration tests to execute within container</li>
+</ul>
+
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                                <div class="card">
+                            <div class="card-header">
+                                <div class="pull-right text-muted">
+                                    <a class="text-muted" href="https://github.com/dpb587/openvpn-bosh-release/releases/tag/v3.1.2">v3.1.2</a>
+                                    &middot;
+                                    <time datetime="2017-02-07T13:53:37+00:00" title="2017-02-07T13:53:37+00:00">2017-02-07</time>
+                                </div>
+                                <a href="./v3.1.2/">Release 3.1.2</a>
+                            </div>
+                                                            <div class="card-block">
+                                    <div class="card-text">
+                                        <ul>
+<li>upgrade: openssl now 1.0.2k (was 1.0.2j)</li>
+</ul>
+
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                                <div class="card">
+                            <div class="card-header">
+                                <div class="pull-right text-muted">
+                                    <a class="text-muted" href="https://github.com/dpb587/openvpn-bosh-release/releases/tag/v3.1.1">v3.1.1</a>
+                                    &middot;
+                                    <time datetime="2016-12-11T22:19:48+00:00" title="2016-12-11T22:19:48+00:00">2016-12-11</time>
+                                </div>
+                                <a href="./v3.1.1/">Release 3.1.1</a>
+                            </div>
+                                                            <div class="card-block">
+                                    <div class="card-text">
+                                        <ul>
+<li>upgrade: openvpn now 2.3.14 (was 2.3.13)</li>
+</ul>
+
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                                <div class="card">
+                            <div class="card-header">
+                                <div class="pull-right text-muted">
                                     <a class="text-muted" href="https://github.com/dpb587/openvpn-bosh-release/releases/tag/v3.1.0">v3.1.0</a>
                                     &middot;
                                     <time datetime="2016-12-01T08:34:18+00:00" title="2016-12-01T08:34:18+00:00">2016-12-01</time>
                                 </div>
                                 <a href="./v3.1.0/">Release 3.1.0</a>
-                                <span class="text-muted">(latest)</span>
                             </div>
-                            <div class="card-block">
-                                                                    <div class="card-text">
+                                                            <div class="card-block">
+                                    <div class="card-text">
                                         <ul>
 <li>automate signature and checksum verification of blobs</li>
 <li>bug fix: make <code>openvpn.crl_pem</code> actually be optional</li>
@@ -57,14 +138,6 @@
 </ul>
 
                                     </div>
-                                                                <p class="card-text">
-                                    <small class="text-muted">Jobs: <a href="./v3.1.0/openvpn-job.html">openvpn</a></small><br />
-                                    <small class="text-muted">Packages: <a href="./v3.1.0/openvpn-package.html">openvpn</a></small><br />
-                                </p>
-                            </div>
-                                                            <div class="card-block" style="background-color:#FCFCFC;border-top:1px solid rgba(0,0,0,.125);font-family:Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;">
-                                    $ bosh upload-release \<br />
-                                    &nbsp;&nbsp;--sha1 2c5a5ba2b46b56ef1e9141369a0cdd672d9c61c5 \<br />                                    &nbsp;&nbsp;https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-3.1.0.tgz
                                 </div>
                                                     </div>
                                                                                 <div class="card">
