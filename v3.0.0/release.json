@@ -1,0 +1,30 @@
+{
+  "name": "openvpn",
+  "version": "3.0.0",
+  "commit_hash": "86710d3",
+  "uncommitted_changes": false,
+  "jobs": [
+    {
+      "name": "openvpn",
+      "version": "1c23d56375973d515a6416509fef8c04a634cd14",
+      "fingerprint": "1c23d56375973d515a6416509fef8c04a634cd14",
+      "sha1": "030ce6761f7e92399a98c2c000c3ea367307888d"
+    }
+  ],
+  "packages": [
+    {
+      "name": "openvpn",
+      "version": "b06586461482446e79586ae6f34231d7ed341f0c",
+      "fingerprint": "b06586461482446e79586ae6f34231d7ed341f0c",
+      "sha1": "4964dad53220e928413d68655a5d5497f6397bbc",
+      "dependencies": [
+
+      ]
+    }
+  ],
+  "license": {
+    "version": "e6c4ccc65c76e75e2338d1edabdcf264d37ee663",
+    "fingerprint": "e6c4ccc65c76e75e2338d1edabdcf264d37ee663",
+    "sha1": "dd2fe24b7bffdfe480ec43799756bf4df815cff5"
+  }
+}
