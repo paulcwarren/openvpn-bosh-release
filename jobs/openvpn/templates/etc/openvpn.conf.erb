@@ -26,6 +26,12 @@ server <%= p('openvpn.server') %>
 <% p('openvpn.push_routes').each do | route | %>
 push "route <%= route %>"
 <% end %>
+<% p('openvpn.push_dns').each do |dns| %>
+push "dhcp-option DNS <%= dns %>"
+<% end %>
+<% if_p('openvpn.push_dns_search_domains') do |domains| %>
+push "dhcp-option DOMAIN-SEARCH <%= domains.join(" ") %>"
+<% end %>
 <% p('openvpn.routes').each do | route | %>
 route <%= route %>
 <% end %>
