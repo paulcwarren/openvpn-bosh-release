@@ -27,6 +27,8 @@ server <%= p('openvpn.server') %>
 push "route <%= route %>"
 <% end %>
 <% p('openvpn.push_dns').each do |dns| %>
+# ensure we can route to the DNS server over the connection
+push "route <%= dns %> 255.255.255.255"
 push "dhcp-option DNS <%= dns %>"
 <% end %>
 <% if_p('openvpn.push_dns_search_domains') do |domains| %>
