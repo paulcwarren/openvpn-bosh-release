@@ -48,6 +48,21 @@ properties:
     type: "string[]"
     help: |
           These should be in a format similar to "192.0.2.0 255.255.255.0".
+  openvpn.push_dns:
+    default: []
+    description: "DNS servers to push to connecting clients"
+    type: "string[]"
+    help: |
+          This should be a list of DNS server IP adddresses that should be pushed to
+          connecting clients to enable DNS resolution over the VPN tunnel.
+  openvpn.push_dns_search_domains:
+    default: []
+    description: "List of search domains to push to clients"
+    type: "string[]"
+    help: |
+          This should be a list of domains that should be pushed to connecting clients
+          for use as DNS search domains.
+
   openvpn.cipher:
     description: "Cipher for encrypting packets"
     default: "BF-CBC"
