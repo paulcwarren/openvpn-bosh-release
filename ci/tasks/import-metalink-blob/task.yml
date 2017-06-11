@@ -7,8 +7,9 @@ image_resource:
     tag: "ci-bosh-develop"
 inputs:
   - name: "repo"
-  - name: "version"
+  - name: "blob"
 outputs:
-  - name: "release"
+  - name: "repo"
+    path: "updated-repo"
 run:
-  path: "repo/ci/tasks/create-release/run.sh"
+  path: "repo/ci/tasks/import-metalink-blob/run.sh"

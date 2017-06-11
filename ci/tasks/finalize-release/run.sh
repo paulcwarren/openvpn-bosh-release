@@ -3,6 +3,9 @@
 set -eu
 
 task_dir=$PWD
+
+release_name=$( bosh interpolate --path /final_name repo/config/final.yml )
+s3_bucket=$( bosh interpolate --path /blobstore/options/bucket_name repo/config/final.yml )
 version=$( cat version/number )
 
 git config --global user.email "${git_user_email:-ci@localhost}"
@@ -10,11 +13,9 @@ git config --global user.name "${git_user_name:-CI Bot}"
 export GIT_COMMITTER_NAME="Concourse"
 export GIT_COMMITTER_EMAIL="concourse.ci@localhost"
 
-git clone file://$task_dir/candidate-repo updated-candidate-repo
-git clone file://$task_dir/master-repo updated-master-repo
-git clone file://$task_dir/develop-repo updated-develop-repo
+git clone --quiet file://$task_dir/repo updated-repo
 
-cd updated-candidate-repo/
+cd updated-repo/
 
 
 #
@@ -36,25 +37,12 @@ EOF
 #
 
 bosh finalize-release \
-  $task_dir/candidate-release/*.tgz \
-  --version="$version"
+  --version="$version" \
+  "$task_dir/dev-release/$release_name-*.tgz"
 
 
 #
-# commit final release
-#
-
-git add -A .final_builds releases
-
-(
-  echo "Release v$version"
-  [ ! -e releases/*/*-$version.md ] || ( echo "" ; cat releases/*/*-$version.md )
-) \
-  | git commit -F-
-
-
-#
-# release artifact
+# create the release tarball
 #
 
 echo "v$version" > $task_dir/master-release-artifacts/name
@@ -66,35 +54,22 @@ else
   touch $task_dir/master-release-artifacts/notes.md
 fi
 
-bosh -n create-release \
-  --version="$version" \
-  --tarball
+tarball="$task_dir/master-release-artifacts/$release_name-$version.tgz"
 
-cp releases/*/*.tgz $task_dir/master-release-artifacts/
+bosh create-release --version="$version" --tarball="$tarball"
 
+metalink_path="releases/$release_name/$release_name-$version.meta4"
 
-#
-# merge release to master
-#
-
-cd $task_dir/updated-master-repo
-
-git remote add --fetch updated-candidate-repo file://$task_dir/updated-candidate-repo
-
-master_branch=$( git rev-parse --abbrev-ref HEAD )
-release_branch=$( basename $( git ls-remote --heads updated-candidate-repo | awk '{ print $2 }' ) )
-
-git merge --no-ff -m "$( echo "Merge branch 'release-$version' into $master_branch" )" updated-candidate-repo/$release_branch
+meta4 create --metalink="$metalink_path"
+meta4 set-published --metalink="$metalink_path" "$( date -u +%Y-%m-%dT%H:%M:%SZ )"
+meta4 import-file --metalink="$metalink_path" --version="$version" "$tarball"
+meta4 file-set-url --metalink="$metalink_path" "https://$s3_bucket.s3.amazonaws.com/releases/$release_name-$version.tgz"
 
 
 #
-# merge release to develop
+# commit final release
 #
 
-cd $task_dir/updated-develop-repo
+git add -A .final_builds releases
 
-git remote add --fetch updated-master-repo file://$task_dir/updated-master-repo
-
-develop_branch=$( git rev-parse --abbrev-ref HEAD )
-
-git merge --no-ff -m "Merge branch '$master_branch' into $develop_branch" updated-master-repo/$master_branch
+git commit -m "Finalize release (v$version)"
