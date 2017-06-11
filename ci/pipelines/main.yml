@@ -24,7 +24,7 @@ jobs:
     task: create-release
   - put: dev-release
     params:
-      file: release/*.tgz
+      file: dev-release/*.tgz
 
 - name: test-develop-integration
   serial: true
@@ -178,7 +178,7 @@ resources:
   type: github-status
   source:
     access_token: ((github_access_token))
-    branch: develop
+    branch: master
     context: ci/integration
     repository: dpb587/openvpn-bosh-release
 
