@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <file name="openvpn-2.1.2.tgz">
+    <hash type="md5">e560a8fda2b74d2d7da7a77930f77066</hash>
+    <hash type="sha-1">5b6df0edf9e644e89f7044e6391340a8b10889be</hash>
+    <hash type="sha-256">5b44c632f6c34d126dee125122963781826c10bd2a906052eb1afa743433d4ac</hash>
+    <hash type="sha-512">0e1d1d5e3ee72156a9c6ba1d2e4ff2cf6de630b69c1398bdc9e97758e03045caa0135f6bdc000e7c166cddace749564a372a587c13c72d91ddfa60569deebe3b</hash>
+    <size>7104963</size>
+    <url>https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-2.1.2.tgz</url>
+    <version>2.1.2</version>
+  </file>
+  <generator>metalink.dpb587.github.io/0.0.0</generator>
+  <published>2016-11-27T07:00:25Z</published>
+</metalink>
