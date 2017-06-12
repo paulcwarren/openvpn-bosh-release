@@ -6,3 +6,5 @@ blobstore:
   provider: s3
   options:
     bucket_name: dpb587-bosh-release-openvpn-us-east-1
+    host: s3-external-1.amazonaws.com
+    region: ""

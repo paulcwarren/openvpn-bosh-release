@@ -5,6 +5,7 @@ set -eux
 task_dir=$PWD
 
 release_name=$( bosh interpolate --path /final_name repo/config/final.yml )
+s3_host=$( bosh interpolate --path /blobstore/options/host repo/config/final.yml )
 s3_bucket=$( bosh interpolate --path /blobstore/options/bucket_name repo/config/final.yml )
 version=$( cat version/number )
 
@@ -31,6 +32,9 @@ blobstore:
     secret_access_key: "$blobstore_s3_secret_access_key"
 EOF
 
+export AWS_ACCESS_KEY_ID="$blobstore_s3_access_key_id"
+export AWS_SECRET_ACCESS_KEY="$blobstore_s3_secret_access_key"
+
 
 #
 # finalize the release
@@ -42,7 +46,7 @@ bosh finalize-release \
 
 
 #
-# create the release tarball
+# upload the release tarball
 #
 
 tarball="../release/$release_name-$version.tgz"
@@ -54,7 +58,7 @@ metalink_path="releases/$release_name/$release_name-$version.meta4"
 meta4 create --metalink="$metalink_path"
 meta4 set-published --metalink="$metalink_path" "$( date -u +%Y-%m-%dT%H:%M:%SZ )"
 meta4 import-file --metalink="$metalink_path" --version="$version" "$tarball"
-meta4 file-set-url --metalink="$metalink_path" "https://$s3_bucket.s3.amazonaws.com/releases/$release_name/$release_name-$version.tgz"
+meta4 file-upload --metalink="$metalink_path" --file="$tarball_nice" "$tarball_real" "s3://$s3_host/$s3_bucket/releases/$release_name/$release_name-$version.tgz"
 
 
 #
@@ -63,7 +67,7 @@ meta4 file-set-url --metalink="$metalink_path" "https://$s3_bucket.s3.amazonaws.
 
 git add -A .final_builds releases
 
-git commit -m "Finalize release v$version"
+git commit -m "Finalize release $version"
 
 
 #

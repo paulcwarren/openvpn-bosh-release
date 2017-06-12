@@ -18,8 +18,9 @@ jobs:
 - name: create-dev-release
   serial: true
   plan:
-  - get: repo
+  - get: triggering-repo
     trigger: true
+  - get: repo
   - file: repo/ci/tasks/create-dev-release/task.yml
     task: create-release
   - put: dev-release
@@ -79,9 +80,6 @@ jobs:
   - put: repo
     params:
       repository: repo
-  - put: release
-    params:
-      file: release/*.tgz
   - put: github-release
     params:
       body: github-release/notes.md
@@ -152,19 +150,24 @@ resources:
     access_token: ((github_access_token))
     repository: openvpn-bosh-release
     user: dpb587
-- name: release
-  type: s3
-  source:
-    access_key_id: ((blobstore_access_key))
-    bucket: dpb587-bosh-release-openvpn-us-east-1
-    regexp: releases/openvpn/openvpn-(.*).tgz
-    secret_access_key: ((blobstore_secret_key))
 - name: repo
   type: git
   source:
     branch: master
     private_key: ((git_private_key))
     uri: git@github.com:dpb587/openvpn-bosh-release.git
+- name: triggering-repo
+  type: git
+  source:
+    branch: master
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
+    ignore_paths:
+    - .final_builds/**/*
+    - compiled_releases/**/*
+    - docs/*
+    - docs/**/*
+    - releases/**/*
 
 - name: version
   type: semver
