@@ -10,9 +10,10 @@ inputs:
   - name: "dev-release"
   - name: "version"
 outputs:
-  - name: "release"
   - name: "repo"
     path: "updated-repo"
+  - name: "release"
+  - name: "github-release"
 run:
   path: "repo/ci/tasks/finalize-release/run.sh"
 params:

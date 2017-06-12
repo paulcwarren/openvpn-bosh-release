@@ -84,10 +84,10 @@ jobs:
       file: release/*.tgz
   - put: github-release
     params:
-      body: release/notes.md
-      commitish: release/commit
-      name: release/name
-      tag: release/name
+      body: github-release/notes.md
+      commitish: github-release/commit
+      name: github-release/name
+      tag: github-release/name
 
 - name: bump-major
   serial_groups:

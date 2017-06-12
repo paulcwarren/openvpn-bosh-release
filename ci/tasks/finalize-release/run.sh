@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eux
 
@@ -45,15 +45,6 @@ bosh finalize-release \
 # create the release tarball
 #
 
-echo "v$version" > $task_dir/release/name
-git rev-parse HEAD > $task_dir/release/commit
-
-if [ -e releases/*/*-$version.md ] ; then
-  cp releases/*/*-$version.md $task_dir/release/notes.md
-else
-  touch $task_dir/release/notes.md
-fi
-
 tarball="../release/$release_name-$version.tgz"
 
 bosh create-release --tarball="$tarball" "releases/$release_name/$release_name-$version.yml"
@@ -73,3 +64,17 @@ meta4 file-set-url --metalink="$metalink_path" "https://$s3_bucket.s3.amazonaws.
 git add -A .final_builds releases
 
 git commit -m "Finalize release v$version"
+
+
+#
+# github release
+#
+
+echo "v$version" > $task_dir/github-release/name
+git rev-parse HEAD > $task_dir/github-release/commit
+
+if [ -e releases/*/*-$version.md ] ; then
+  cp releases/*/*-$version.md $task_dir/github-release/notes.md
+else
+  touch $task_dir/github-release/notes.md
+fi
