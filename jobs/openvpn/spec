@@ -5,13 +5,7 @@ packages:
 templates:
   bin/write-ccd.erb: "bin/write-ccd"
   bin/control: "bin/control"
-  etc/ca.crt.erb: "etc/ca.crt"
-  etc/crl.pem.erb: "etc/crl.pem"
-  etc/crypt.pem.erb: "etc/crypt.pem"
-  etc/dh.pem.erb: "etc/dh.pem"
   etc/openvpn.conf.erb: "etc/openvpn.conf"
-  etc/server.crt.erb: "etc/server.crt"
-  etc/server.key.erb: "etc/server.key"
 provides:
   - name: openvpn
     type: openvpn

@@ -1,22 +1,12 @@
 mode server
 writepid /var/vcap/sys/run/openvpn/openvpn.pid
 client-config-dir /var/vcap/jobs/openvpn/etc/ccd
-ca /var/vcap/jobs/openvpn/etc/ca.crt
-cert /var/vcap/jobs/openvpn/etc/server.crt
-key /var/vcap/jobs/openvpn/etc/server.key
-dh /var/vcap/jobs/openvpn/etc/dh.pem
-<% if_p('crl_pem') do %>
-crl-verify /var/vcap/jobs/openvpn/etc/crl.pem
-<% end %>
 cipher <%= p('cipher') %>
 keysize <%= p('keysize') %>
 <% if_p('tls_cipher') do | v | %>
 tls-cipher <%= v %>
 <% end %>
 tls-version-min <%= p('tls_version_min') %>
-<% if_p('tls_crypt') do %>
-tls-crypt /var/vcap/jobs/openvpn/etc/crypt.pem
-<% end %>
 proto <%= p('protocol') %>
 port <%= p('port') %>
 compress <%= p('compress') %>
@@ -52,3 +42,31 @@ topology subnet
 persist-key
 persist-tun
 <% if_p('extra_config') do | v | %><%= v %><% end %>
+
+<ca>
+<%= p('ca_crt') %>
+</ca>
+
+<% if_p('tls_crypt') do | v | %>
+<tls-crypt>
+<%= v %>
+</tls-crypt>
+<% end %>
+
+<cert>
+<%= p('server_crt') %>
+</cert>
+
+<key>
+<%= p('server_key') %>
+</key>
+
+<% if_p('crl_pem') do | v | %>
+<crl-verify>
+<%= v %>
+</crl-verify>
+<% end %>
+
+<dh>
+<%= p('dh_pem') %>
+</dh>
