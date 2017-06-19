@@ -15,6 +15,13 @@ templates:
   etc/server.crt.erb: "etc/server.crt"
   etc/server.key.erb: "etc/server.key"
 properties:
+  openvpn.protocol:
+    default: tcp
+    description: "Protocol for the server"
+    type: "string"
+    enum:
+      - udp
+      - tcp
   openvpn.port:
     default: 1194
     description: "Bind Port for the server"

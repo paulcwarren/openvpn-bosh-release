@@ -14,7 +14,7 @@ keysize <%= p('openvpn.keysize') %>
 tls-cipher <%= v %>
 <% end %>
 tls-version-min <%= p('openvpn.tls_version_min') %>
-proto tcp
+proto <%= p('openvpn.protocol') %>
 port <%= p('openvpn.port') %>
 comp-lzo
 group nogroup
