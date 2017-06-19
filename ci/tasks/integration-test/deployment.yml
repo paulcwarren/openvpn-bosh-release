@@ -25,6 +25,25 @@ instance_groups:
     properties:
       <<: *openvpn
       server: 192.168.202.0 255.255.255.0
+      tls_crypt: |
+        -----BEGIN OpenVPN Static key V1-----
+        9ebb98f7d6cff536b91b506d19fb4e44
+        1eef3f2c25ef8351e1472131a2ff92c0
+        208db738549d1fd5c97f77b4b71f8836
+        16450c1f1dfddf201be62227c53cbad3
+        a2c41f27461b52c0f0b10c2f15bdd783
+        32db63a4f1a41e307c3d319656d7ce69
+        870cc609852d5b7f742258cd2dc7c171
+        cfe8d0c54255989104ebbd40a843b945
+        75fc6e66cad1decb253180699b25c009
+        960ed59a6963ee8b72a5a491afb800a1
+        fe312a3a8478b20c0803845d6ead40d0
+        ea59da0b2c2ae90f2cda3c782a4804df
+        2d71fd569149180474b5c57d72874637
+        8a51e54443fe31106d609a472a1ba8b0
+        0134fbdb0e216f7f3178fe800e4d65c3
+        888c777f538bee96595cd28630f354e5
+        -----END OpenVPN Static key V1-----
   - name: openvpn-client
     release: openvpn
     consumes:
@@ -49,6 +68,25 @@ instance_groups:
     properties:
       <<: *openvpn
       server: 192.168.206.0 255.255.255.0
+      tls_crypt: |
+        -----BEGIN OpenVPN Static key V1-----
+        24a8774a0d317449775237ee2b305c8c
+        945d05724c1b1127363957c30eab299a
+        3d702cb28424ae5c4cb28faad05c1613
+        2d45f2a896b3c22a0c3cb6bf46ced6bf
+        0d2d068fe2313644d2dc4ff51a895911
+        996fa2a1c64cb4dc9b3f32c3b6f57d50
+        bed149242a201a72df639e300861485d
+        388ca77ce55d9d78d711db3597de61b3
+        76bcf0e84228cde9ef2ac5ab055731f5
+        d900490f3a9a3bd72cf0f3c3aefd74c1
+        31eaf11dd9ca5019b410c343882f7597
+        9a7b3736ac721967a563e78e56dff19d
+        a0500be1dc7c77591781001554082f28
+        5f4fdea282f17202943ed80edd84cd8a
+        c15b0a7fa1458acaa9ee30ca5c9e81f1
+        6055d1f8e19c90fa7486667366dadf67
+        -----END OpenVPN Static key V1-----
   - name: openvpn-client
     release: openvpn
     consumes:

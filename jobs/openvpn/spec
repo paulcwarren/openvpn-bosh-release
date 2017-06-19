@@ -7,6 +7,7 @@ templates:
   bin/control: "bin/control"
   etc/ca.crt.erb: "etc/ca.crt"
   etc/crl.pem.erb: "etc/crl.pem"
+  etc/crypt.pem.erb: "etc/crypt.pem"
   etc/dh.pem.erb: "etc/dh.pem"
   etc/openvpn.conf.erb: "etc/openvpn.conf"
   etc/server.crt.erb: "etc/server.crt"
@@ -21,6 +22,7 @@ provides:
       - keysize
       - tls_version_min
       - tls_cipher
+      - tls_crypt
       - ca_crt
 properties:
   protocol:
@@ -104,6 +106,9 @@ properties:
     description: "A colon-separated list of allowable TLS ciphers"
     type: "string"
     example: "DEFAULT:!EXP:!LOW:!MEDIUM"
+  tls_crypt:
+    description: "Encrypt control channel packets with private key"
+    type: "string"
   ca_crt:
     description: "CA Certificate"
     help: |

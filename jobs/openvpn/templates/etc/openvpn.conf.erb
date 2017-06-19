@@ -14,6 +14,9 @@ keysize <%= p('keysize') %>
 tls-cipher <%= v %>
 <% end %>
 tls-version-min <%= p('tls_version_min') %>
+<% if_p('tls_crypt') do %>
+tls-crypt /var/vcap/jobs/openvpn/etc/crypt.pem
+<% end %>
 proto <%= p('protocol') %>
 port <%= p('port') %>
 compress <%= p('compress') %>
