@@ -6,7 +6,7 @@ if [ -e client*.conf ] ; then
     rm -f client*.conf
 fi
 
-<% p('openvpn.client_config').each_with_index do | config, idx | %>
+<% p('client_config').each_with_index do | config, idx | %>
 cat > client<%= idx+1 %>.conf << EOF
 <%= config %>
 EOF

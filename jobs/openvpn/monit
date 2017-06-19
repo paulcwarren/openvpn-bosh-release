@@ -3,7 +3,7 @@ check process openvpn with pidfile /var/vcap/sys/run/openvpn/openvpn.pid
   start program = "/var/vcap/jobs/openvpn/bin/control start"
   stop program = "/var/vcap/jobs/openvpn/bin/control stop"
 
-<% p('openvpn.client_config').each_with_index do | config, idx | %>
+<% p('client_config').each_with_index do | config, idx | %>
 check process openvpn-client<%= idx+1 %> with pidfile /var/vcap/sys/run/openvpn/openvpn-client<%= idx+1 %>.pid
   group vcap
   start program = "/var/vcap/jobs/openvpn/bin/control-client start <%= idx+1 %>"

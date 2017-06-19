@@ -12,6 +12,6 @@ else
     exit 1
 fi
 
-<% p('openvpn.iptables').each do | rule | %>
+<% p('iptables').each do | rule | %>
 $IPTABLES <%= rule %>
 <% end %>

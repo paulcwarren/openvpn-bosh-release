@@ -5,37 +5,37 @@ ca /var/vcap/jobs/openvpn/etc/ca.crt
 cert /var/vcap/jobs/openvpn/etc/server.crt
 key /var/vcap/jobs/openvpn/etc/server.key
 dh /var/vcap/jobs/openvpn/etc/dh.pem
-<% if_p('openvpn.crl_pem') do %>
+<% if_p('crl_pem') do %>
 crl-verify /var/vcap/jobs/openvpn/etc/crl.pem
 <% end %>
-cipher <%= p('openvpn.cipher') %>
-keysize <%= p('openvpn.keysize') %>
-<% if_p('openvpn.tls_cipher') do | v | %>
+cipher <%= p('cipher') %>
+keysize <%= p('keysize') %>
+<% if_p('tls_cipher') do | v | %>
 tls-cipher <%= v %>
 <% end %>
-tls-version-min <%= p('openvpn.tls_version_min') %>
-proto <%= p('openvpn.protocol') %>
-port <%= p('openvpn.port') %>
+tls-version-min <%= p('tls_version_min') %>
+proto <%= p('protocol') %>
+port <%= p('port') %>
 comp-lzo
 group nogroup
 user nobody
 status /var/vcap/sys/run/openvpn/status
 dev tun0
-local <%= p('openvpn.local') %>
-server <%= p('openvpn.server') %>
-<% p('openvpn.push_routes').each do | route | %>
+local <%= p('local') %>
+server <%= p('server') %>
+<% p('push_routes').each do | route | %>
 push "route <%= route %>"
 <% end %>
-<% p('openvpn.push_dns').each do |dns| %>
+<% p('push_dns').each do |dns| %>
 # ensure we can route to the DNS server over the connection
 push "route <%= dns %> 255.255.255.255"
 push "dhcp-option DNS <%= dns %>"
 <% end %>
-<% p('openvpn.push_dns_search_domains').each do |domain| %>
+<% p('push_dns_search_domains').each do |domain| %>
 push "dhcp-option DOMAIN <%= domain %>"
 push "dhcp-option DOMAIN-SEARCH <%= domain %>"
 <% end %>
-<% p('openvpn.routes').each do | route | %>
+<% p('routes').each do | route | %>
 route <%= route %>
 <% end %>
 push "persist-tun"
@@ -45,4 +45,4 @@ keepalive 15 60
 topology subnet
 persist-key
 persist-tun
-<% if_p('openvpn.extra_config') do | v | %><%= v %><% end %>
+<% if_p('extra_config') do | v | %><%= v %><% end %>
