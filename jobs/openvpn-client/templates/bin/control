@@ -3,15 +3,14 @@
 set -e
 set -u
 
-CLIENTNUM=$2
-PIDFILE=/var/vcap/sys/run/openvpn/openvpn-client$CLIENTNUM.pid
-LOGDIR=/var/vcap/sys/log/openvpn
-RUNDIR=/var/vcap/sys/run/openvpn
+PIDFILE=/var/vcap/sys/run/openvpn-client/openvpn.pid
+LOGDIR=/var/vcap/sys/log/openvpn-client
+RUNDIR=/var/vcap/sys/run/openvpn-client
 
 mkdir -p "$LOGDIR"
 chown vcap:vcap "$LOGDIR"
 
-exec >> $LOGDIR/client$CLIENTNUM-control.log
+exec >> $LOGDIR/control.log
 exec 2>&1
 
 mkdir -p $( dirname "$PIDFILE" )
@@ -25,27 +24,22 @@ export LD_LIBRARY_PATH="/var/vcap/packages/openvpn/external/openssl/lib:${LD_LIB
 case $1 in
 
   start)
-    /var/vcap/jobs/openvpn/bin/write-clients
-    
-    chmod 600 /var/vcap/jobs/openvpn/etc/{*.conf,*.key,dh.pem}
-    chmod 644 /var/vcap/jobs/openvpn/etc/crl.pem
-    
+    chmod 600 /var/vcap/jobs/openvpn-client/etc/profile.ovpn
+
     if [ ! -e /dev/net/tun ] ; then
       mkdir -p /dev/net
       mknod /dev/net/tun c 10 200
     fi
-    
+
     /sbin/start-stop-daemon \
       --background \
       --pidfile "$PIDFILE" \
       --exec /bin/bash \
       --start \
       -- -c "/var/vcap/packages/openvpn/sbin/openvpn \
-        --config /var/vcap/jobs/openvpn/etc/client$CLIENTNUM.conf \
-        --writepid $PIDFILE \
-        --dev tun$CLIENTNUM \
-        >> \"$LOGDIR/client$CLIENTNUM-stdout.log\" \
-        2>> \"$LOGDIR/client$CLIENTNUM-stderr.log\" \
+        --config /var/vcap/jobs/openvpn-client/etc/profile.ovpn \
+        >> \"$LOGDIR/stdout.log\" \
+        2>> \"$LOGDIR/stderr.log\" \
       "
 
     ;;

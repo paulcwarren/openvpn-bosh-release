@@ -4,15 +4,24 @@ packages:
   - "openvpn"
 templates:
   bin/write-ccd.erb: "bin/write-ccd"
-  bin/write-clients.erb: "bin/write-clients"
   bin/control: "bin/control"
-  bin/control-client: "bin/control-client"
   etc/ca.crt.erb: "etc/ca.crt"
   etc/crl.pem.erb: "etc/crl.pem"
   etc/dh.pem.erb: "etc/dh.pem"
   etc/openvpn.conf.erb: "etc/openvpn.conf"
   etc/server.crt.erb: "etc/server.crt"
   etc/server.key.erb: "etc/server.key"
+provides:
+  - name: openvpn
+    type: openvpn
+    properties:
+      - protocol
+      - port
+      - cipher
+      - keysize
+      - tls_version_min
+      - tls_cipher
+      - ca_crt
 properties:
   protocol:
     default: tcp
@@ -70,7 +79,7 @@ properties:
           for use as DNS search domains.
   compress:
     description: "Default compression (or empty to disable)"
-    default: ~
+    default: ''
     type: "string"
     enum:
       - lzo
@@ -124,11 +133,5 @@ properties:
     description: "A list of Client Configuration Directives"
     help: |
           This value is an array, with each client being an array whose first value is the client's common name and second value is the OpenVPN directives.
-    default: []
-    type: "array[]"
-  client_config:
-    description: "A list of Client Configuration Connections"
-    help: |
-          This value is an array, with each client connection being an item.
     default: []
     type: "array[]"

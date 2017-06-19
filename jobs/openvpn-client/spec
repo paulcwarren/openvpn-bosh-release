@@ -1,0 +1,27 @@
+---
+name: "openvpn-client"
+packages:
+  - "openvpn"
+templates:
+  bin/control: "bin/control"
+  etc/profile.ovpn.erb: "etc/profile.ovpn"
+consumes:
+  - name: openvpn
+    type: openvpn
+properties:
+  certificate:
+    description: "Client Certificate"
+    type: "text"
+    help: |
+          This should include `-----BEGIN CERTIFICATE-----` through `-----END CERTIFICATE-----`.
+  private_key:
+    description: "Client Private Key"
+    type: "text"
+    help: |
+          This should include `-----BEGIN RSA PRIVATE KEY-----` through `-----END RSA PRIVATE KEY-----`.
+  extra_config:
+    default: ~
+    description: "Custom OpenVPN configuration statements"
+    type: "text"
+    help: |
+          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.

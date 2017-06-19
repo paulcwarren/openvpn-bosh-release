@@ -5,10 +5,10 @@ releases:
   url: file://((repo_dir))
   version: create
 update:
-  canaries: 2
+  canaries: 1
   canary_watch_time: 1000-60000
   update_watch_time: 1000-60000
-  max_in_flight: 2
+  max_in_flight: 1
 stemcells:
 - alias: default
   os: ubuntu-trusty
@@ -17,37 +17,22 @@ instance_groups:
 - name: role1
   azs: [z1]
   jobs:
-  - release: openvpn
-    name: openvpn
+  - name: openvpn
+    release: openvpn
+    provides:
+      openvpn:
+        as: role1
     properties:
       <<: *openvpn
       server: 192.168.202.0 255.255.255.0
-      client_config:
-        - |
-          client
-          dev tun
-          proto tcp
-          remote 0.role2.default.integration-test.bosh 1194
-          cipher BF-CBC
-          keysize 256
-          resolv-retry infinite
-          nobind
-          persist-key
-          persist-tun
-          mute-replay-warnings
-          remote-cert-tls server
-          verb 3
-          mute 20
-          tls-client
-          <ca>
-          ((role1_client.ca))
-          </ca>
-          <cert>
-          ((role1_client.certificate))
-          </cert>
-          <key>
-          ((role1_client.private_key))
-          </key>
+  - name: openvpn-client
+    release: openvpn
+    consumes:
+      openvpn:
+        from: role2
+    properties:
+      certificate: ((role1_client.certificate))
+      private_key: ((role1_client.private_key))
   instances: 1
   stemcell: default
   vm_type: default
@@ -56,37 +41,22 @@ instance_groups:
 - name: role2
   azs: [z1]
   jobs:
-  - release: openvpn
-    name: openvpn
+  - name: openvpn
+    release: openvpn
+    provides:
+      openvpn:
+        as: role2
     properties:
       <<: *openvpn
       server: 192.168.206.0 255.255.255.0
-      client_config:
-        - |
-          client
-          dev tun
-          proto tcp
-          remote 0.role1.default.integration-test.bosh 1194
-          cipher BF-CBC
-          keysize 256
-          resolv-retry infinite
-          nobind
-          persist-key
-          persist-tun
-          mute-replay-warnings
-          remote-cert-tls server
-          verb 3
-          mute 20
-          tls-client
-          <ca>
-          ((role2_client.ca))
-          </ca>
-          <cert>
-          ((role2_client.certificate))
-          </cert>
-          <key>
-          ((role2_client.private_key))
-          </key>
+  - name: openvpn-client
+    release: openvpn
+    consumes:
+      openvpn:
+        from: role1
+    properties:
+      certificate: ((role2_client.certificate))
+      private_key: ((role2_client.private_key))
   instances: 1
   stemcell: default
   vm_type: default
@@ -118,8 +88,8 @@ variables:
     ca: ca
     common_name: server
     alternative_names:
-    - 0.role1.default.openvpn-deployment.bosh
-    - 0.role2.default.openvpn-deployment.bosh
+    - "*.role1.default.openvpn-deployment.bosh"
+    - "*.role2.default.openvpn-deployment.bosh"
     extended_key_usage:
     - server_auth
 - name: role1_client

@@ -1,0 +1,4 @@
+check process openvpn-client with pidfile /var/vcap/sys/run/openvpn-client/openvpn.pid
+  group vcap
+  start program = "/var/vcap/jobs/openvpn-client/bin/control start"
+  stop program = "/var/vcap/jobs/openvpn-client/bin/control stop"
