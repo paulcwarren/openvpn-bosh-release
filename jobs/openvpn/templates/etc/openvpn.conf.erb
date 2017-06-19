@@ -16,7 +16,10 @@ tls-cipher <%= v %>
 tls-version-min <%= p('tls_version_min') %>
 proto <%= p('protocol') %>
 port <%= p('port') %>
-comp-lzo
+compress <%= p('compress') %>
+<% if p('push_compress') && p('compress') %>
+push "compress <%= p('compress') %>"
+<% end %>
 group nogroup
 user nobody
 status /var/vcap/sys/run/openvpn/status

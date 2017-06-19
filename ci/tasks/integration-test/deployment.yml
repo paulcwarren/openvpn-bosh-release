@@ -28,7 +28,6 @@ instance_groups:
           dev tun
           proto tcp
           remote 0.role2.default.integration-test.bosh 1194
-          comp-lzo
           cipher BF-CBC
           keysize 256
           resolv-retry infinite
@@ -68,7 +67,6 @@ instance_groups:
           dev tun
           proto tcp
           remote 0.role1.default.integration-test.bosh 1194
-          comp-lzo
           cipher BF-CBC
           keysize 256
           resolv-retry infinite

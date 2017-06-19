@@ -69,7 +69,17 @@ properties:
     help: |
           This should be a list of domains that should be pushed to connecting clients
           for use as DNS search domains.
-
+  compress:
+    description: "Default compression (or empty to disable)"
+    default: ~
+    type: "string"
+    enum:
+      - lzo
+      - lz4
+  push_compress:
+    description: "Push default compression setting to clients"
+    default: true
+    type: "boolean"
   cipher:
     description: "Cipher for encrypting packets"
     default: "BF-CBC"
