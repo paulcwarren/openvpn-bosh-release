@@ -86,7 +86,7 @@ properties:
     type: "boolean"
   cipher:
     description: "Cipher for encrypting packets"
-    default: "BF-CBC"
+    default: "AES-256-CBC"
     type: "string"
   keysize:
     description: "Size of cipher key in bits"
@@ -94,7 +94,7 @@ properties:
     type: "integer"
   tls_version_min:
     description: "The minimum TLS version accepted from peers"
-    default: "1.0"
+    default: "1.2"
     type: "string"
   tls_cipher:
     description: "A colon-separated list of allowable TLS ciphers"
