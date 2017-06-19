@@ -3,7 +3,6 @@ name: "openvpn"
 packages:
   - "openvpn"
 templates:
-  bin/apply-iptables.erb: "bin/apply-iptables"
   bin/write-ccd.erb: "bin/write-ccd"
   bin/write-clients.erb: "bin/write-clients"
   bin/control: "bin/control"
@@ -127,13 +126,6 @@ properties:
           This value is an array, with each client being an array whose first value is the client's common name and second value is the OpenVPN directives.
     default: []
     type: "array[]"
-  iptables:
-    description: "IPTable rules to manage"
-    default: []
-    type: "string[]"
-    example:
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.1.0/24 -j MASQUERADE -m comment --comment 'vpn -> private lan'"
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE -m comment --comment 'vpn -> internal backup server'"
   client_config:
     description: "A list of Client Configuration Connections"
     help: |

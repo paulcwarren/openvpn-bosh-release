@@ -12,17 +12,6 @@ In case you want to allow VPN clients to access a network accessible by the Open
       - "10.10.0.0 255.255.0.0"
 
 
-## IP Tables
-
-You can configure IP table rules which will be added on start-up and removed on shut-down.
-
-    properties.openvpn.iptables:
-      # allow VPN traffic to talk to the main network
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.1.0/24 -j MASQUERADE"
-      # allow VPN traffic to talk to a specific server
-      - "POSTROUTING -t nat -s 192.0.2.0/24 -d 10.10.2.100/32 -j MASQUERADE"
-
-
 ## Client-specific Configuration
 
 You might need to assign a specific IP address to a specific VPN client...
