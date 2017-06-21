@@ -1,84 +1,410 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <title>openvpn BOSH Release</title>
+        <meta name="generator" content="dpb587/bosh-valise (v4.0.1)" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" integrity="sha256-xbQIJkhfOw0Dry1H9lawvXRi9XcqdE8jDBZx1Op/mz8=" crossorigin="anonymous" />
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
         <style type="text/css">
             pre {
-                background-color: #F7F7F9;
-                border: #E9E9E9 solid 1px;
-                padding: 0.2rem 0.3rem;
+                background-color: #F0F0F0;
+                border: #DEDEDE solid 1px;
+                padding: 1rem;
+            }
+
+            .inherit-text {
+                color: inherit;
             }
         </style>
     </head>
 
     <body>
-        <div class="container">
-                <div class="clearfix" style="padding:1.25rem 1rem 1rem;">
-        <nav>
-            <ul class="nav nav-inline float-xs-right" style="margin-top:0.5rem;">
-                <li class="nav-item">
-                    <a class="nav-link" href="../"><i class="fa fa-home"></i> bosh release</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release"><i class="fa fa-github"></i> repository</a>
-                </li>
-            </ul>
-        </nav>
-        <h1>openvpn<span class="text-muted">/3.1.1</span></h1>
+                    <nav class="green" role="navigation">
+                <div class="nav-wrapper container">
+                        <a href="#!" class="breadcrumb">dpb587/openvpn-bosh-release</a>
 
-        <ul class="nav nav-inline" style="margin-bottom:1rem;">
-            <li class="nav-item">
-                <a class="nav-link" href="."><i class="fa fa-inbox"></i> summary</a>
-            </li>
-                            <li class="nav-item">
-                    <a class="nav-link" href="./jobs.html"><i class="fa fa-leaf"></i> jobs</a>
-                </li>
-                                        <li class="nav-item">
-                    <a class="nav-link text-muted" href="./packages.html"><i class="fa fa-archive"></i> packages</a>
-                </li>
-                        <li class="nav-item">
-                <a class="nav-link" href="./downloads.html"><i class="fa fa-download"></i> downloads</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release/tree/b387f9b926b19a3cde8a74b7dcab85ee403b86ce/"><i class="fa fa-github"></i> source</a>
-            </li>
-        </ul>
-    </div>
-                <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Packages</h2>
 
-                                    <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                <a href="./openvpn-package.html"><i class="fa fa-archive fa-fw"></i> <strong>openvpn</strong></a>
-                                                            </li>
-                                            </ul>
-                            </div>
-        </div>
-    </div>
-                            <div class="row">
-                    <div class="col-sm-12">
-                        <footer class="text-xs-center" style="margin-top:2rem;padding-bottom:4px;">
-                            <small class="text-muted">
-                                <a class="text-muted" href="https://github.com/dpb587/bosh-valise-site" title="Generated with"><i class="fa fa-trophy"></i> valise (v3.3.0)</a>
-                                &nbsp;&middot;&nbsp;
-                                <a class="text-muted" href="https://dpb587.me/" target="_blank" title="Created by"><i class="fa fa-hand-peace-o"></i> dpb587</a>
-                            </small>
-                        </footer>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="https://github.com/dpb587/openvpn-bosh-release"><i class="material-icons left">launch</i> Source</a></li>
+                    </ul>
+                </div>
+            </nav>
+        
+                
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s2 right-align">
+                    <p class="flow-text"><i class="material-icons small">info_outline</i></p>
+                </div>
+                <div class="col s10">
+                    <p class="flow-text">A <a href="https://bosh.io/">BOSH</a> release to help manage an <a href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+
+                                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col s2 right-align">
+                    <h3 style="margin:0;">3.2.1</h3>
+                    <span class="grey-text">2017-06-11</span>
+                </div>
+                <div class="col s10">
+                    <p style="margin-top:5px;">
+                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v3.2.1">Docs</a>
+                        &nbsp;&nbsp;
+                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v3.2.1/downloads.html">Downloads</a>
+                        &nbsp;&nbsp;
+                        <a class="modal-trigger waves-effect waves-light white black-text btn" href="https://github.com/dpb587/openvpn-bosh-release/tree/e27f9becdcbcd6ca472ac856708ec37ca5b12bc7">Source</a>
+                    </p>
+                                    </div>
+            </div>
+
+                            <div class="row grey-text">
+                    <div class="col s2 right-align">
+                        <p class="flow-text"><i class="material-icons small">restore</i></p>
+                    </div>
+                    <div class="col s10">
+                        <p class="flow-text">Older Versions</p>
                     </div>
                 </div>
-                    </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    </body>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.2.0</h3>
+                            <span class="grey-text">2017-06-08</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.2.0">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.2.0/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/e9b118e0ee22376a429bde51a13f047fe2d84fc2">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>support pushing DNS servers via <code>openvpn.push_dns</code></li>
+<li>support pushing DNS search domains via <code>openvpn.push_dns_search_domains</code></li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.1.4</h3>
+                            <span class="grey-text">2017-05-19</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.4">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.4/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/b802745dc52109d3af60016fe0373a1fa9fec781">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>new, optional <code>openvpn</code> configuration properties: <code>tls_version_min</code>, <code>tls_cipher</code></li>
+<li>upgrade: openvpn/2.4.2</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.1.3</h3>
+                            <span class="grey-text">2017-04-16</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.3">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.3/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/3002a013310cc8e7b65141e86ab686273d6b3442">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>openvpn status log now lives at <code>/var/vcap/sys/run/openvpn/status</code></li>
+<li>upgrade: openvpn now 2.4.1 (was 2.3.14)</li>
+<li>upgrade: openssl now 1.1.0e (was 1.0.2k)</li>
+<li>upgrade: lzo now 2.10 (was 2.09)</li>
+<li>dev: refactor integration tests to execute within container</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.1.2</h3>
+                            <span class="grey-text">2017-02-07</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.2">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.2/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/2ffa45ac1b25ba35bbfc7d9b64324ba7f096dccd">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>upgrade: openssl now 1.0.2k (was 1.0.2j)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.1.1</h3>
+                            <span class="grey-text">2016-12-11</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.1">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.1/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/b387f9b926b19a3cde8a74b7dcab85ee403b86ce">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>upgrade: openvpn now 2.3.14 (was 2.3.13)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.1.0</h3>
+                            <span class="grey-text">2016-12-01</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.0">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.1.0/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/46dda2184efefd49ae586d622b2c48d1cfaffe6e">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>automate signature and checksum verification of blobs</li>
+<li>bug fix: make <code>openvpn.crl_pem</code> actually be optional</li>
+<li>upgrade: openvpn now 2.3.13 (was 2.3.12)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.0.0</h3>
+                            <span class="grey-text">2016-11-30</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.0.0">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.0.0/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/86710d38dafaff8e35111307913a48bf47278a22">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <ul class="browser-default">
+<li>make <code>openvpn.crl_pem</code> optional</li>
+<li>support configuring <code>openvpn.cipher</code> and <code>openvpn.keysize</code> (default key size is now 256; existing client connection profiles may need to be updated before they can reconnect)</li>
+<li>upgrade: openssl now 1.0.2j (was 1.0.2h)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">2.1.3</h3>
+                            <span class="grey-text">2016-09-12</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.3">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.3/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/6ffd41869f1dc30b0b0bf6102aa63e0733b969ee">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Upgrades:</p>
+
+<ul class="browser-default">
+<li>openvpn now 2.3.12 (was 2.3.11)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">2.1.2</h3>
+                            <span class="grey-text">2016-05-14</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.2">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.2/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/07a261ca75f77446d6fa80fc5bc9684f0fb8f1df">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Upgrades:</p>
+
+<ul class="browser-default">
+<li>openssl now 1.0.2h (was 1.0.2g)</li>
+<li>openvpn now 2.3.11 (was 2.3.10)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">2.1.0</h3>
+                            <span class="grey-text">2016-05-03</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.0">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.1.0/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/92458dbe950c62f1c093b4164295cdc15bfaa9b8">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Upgrades:</p>
+
+<ul class="browser-default">
+<li>openssl now 1.0.2g (was 1.0.2e)</li>
+<li>openvpn now 2.3.10 (was 2.3.8)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">2.0.1</h3>
+                            <span class="grey-text">2016-05-03</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.0.1">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2.0.1/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/1d55433c5be1a8df5cddfb32bbf068930ca4721b">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Bug fix to correctly use packaged openssl</p>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">2</h3>
+                            <span class="grey-text">2015-12-10</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v2/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/27b0bd4afd28be10acddc20bfd5877e2cfc615c3">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Upgrades:</p>
+
+<ul class="browser-default">
+<li>openssl now 1.0.2e (was 1.0.1m)</li>
+<li>openvpn now 2.3.8 (was 2.3.6)</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">1</h3>
+                            <span class="grey-text">2015-05-25</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v1">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v1/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/37f770a28507cbf0df8145408f6b44dc4684c271">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Initial release for deploying an OpenVPN server/client.</p>
+
+                                </div>
+                                                    </div>
+                    </div>
+                                    </div>
+    </div>
+
+                    <footer class="page-footer green">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">dpb587/openvpn-bosh-release</h5>
+                            <div class="grey-text text-lighten-4"><p>A <a class="grey-text text-lighten-4" href="https://bosh.io/">BOSH</a> release to help manage an <a class="grey-text text-lighten-4" href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+</div>
+                        </div>
+                                                                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Operators</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://dpb587.github.io/openvpn-bosh-release">Home Page</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/issues">Issues</a></li>
+                                                                    </ul>
+                            </div>
+                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Developers</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release">Repository</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md">Contributing</a></li>
+                                                                    </ul>
+                            </div>
+                                            </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container green-text text-lighten-4">
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m8">
+                                Copyright 2017 Danny Berger
+
+                            </div>
+                            <div class="col s12 m4 right-align">
+                                Generated by <a class="green-text text-lighten-4" href="http://dpb587.github.io/bosh-valise/" title="v4.0.1">dpb587/bosh-valise</a>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" integrity="sha256-lVmbGVbzHBkNHCUK0y+z2AyJei/v7jSNYppXTcq2FtU=" crossorigin="anonymous"></script>
+            </body>
 </html>

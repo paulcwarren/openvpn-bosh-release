@@ -1,0 +1,34 @@
+{
+  "final_name": "openvpn",
+  "description": "A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](https://openvpn.net/index.php/open-source.html) network with servers or clients.\n",
+  "links": [
+    {
+      "group": "Operators",
+      "links": {
+        "Home Page": "https://dpb587.github.io/openvpn-bosh-release",
+        "Documentation": "https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops",
+        "Issues": "https://github.com/dpb587/openvpn-bosh-release/issues"
+      }
+    },
+    {
+      "group": "Developers",
+      "links": {
+        "Repository": "https://github.com/dpb587/openvpn-bosh-release",
+        "Documentation": "https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev",
+        "Contributing": "https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md"
+      }
+    }
+  ],
+  "blobstore": {
+    "provider": "s3",
+    "options": {
+      "bucket_name": "dpb587-bosh-release-openvpn-us-east-1",
+      "host": "s3-external-1.amazonaws.com",
+      "region": ""
+    }
+  },
+  "repository_clone_uri": "git@github.com:dpb587/openvpn-bosh-release.git",
+  "repository_http_uri": "https://github.com/dpb587/openvpn-bosh-release",
+  "repository_owner": "dpb587",
+  "repository_name": "openvpn-bosh-release"
+}

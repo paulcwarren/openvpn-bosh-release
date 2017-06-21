@@ -1,65 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>openvpn/3.1.3 (dpb587/openvpn-bosh-release)</title>
+        <meta name="generator" content="dpb587/bosh-valise (v4.0.1)" />
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" integrity="sha256-xbQIJkhfOw0Dry1H9lawvXRi9XcqdE8jDBZx1Op/mz8=" crossorigin="anonymous" />
 
-        <title>openvpn BOSH Release</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
         <style type="text/css">
             pre {
-                background-color: #F7F7F9;
-                border: #E9E9E9 solid 1px;
-                padding: 0.2rem 0.3rem;
+                background-color: #F0F0F0;
+                border: #DEDEDE solid 1px;
+                padding: 1rem;
+            }
+
+            .inherit-text {
+                color: inherit;
             }
         </style>
     </head>
 
     <body>
-        <div class="container">
-                <div class="clearfix" style="padding:1.25rem 1rem 1rem;">
-        <nav>
-            <ul class="nav nav-inline float-xs-right" style="margin-top:0.5rem;">
-                <li class="nav-item">
-                    <a class="nav-link" href="../"><i class="fa fa-home"></i> bosh release</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release"><i class="fa fa-github"></i> repository</a>
-                </li>
-            </ul>
-        </nav>
-        <h1>openvpn<span class="text-muted">/3.1.3</span></h1>
+                    <nav class="green" role="navigation">
+                <div class="nav-wrapper container">
+                        <a href="../" class="breadcrumb">openvpn</a>
+    <a href="./" class="breadcrumb">3.1.3</a>
 
-        <ul class="nav nav-inline" style="margin-bottom:1rem;">
-            <li class="nav-item">
-                <a class="nav-link text-muted" href="."><i class="fa fa-inbox"></i> summary</a>
-            </li>
-                            <li class="nav-item">
-                    <a class="nav-link" href="./jobs.html"><i class="fa fa-leaf"></i> jobs</a>
-                </li>
-                                        <li class="nav-item">
-                    <a class="nav-link" href="./packages.html"><i class="fa fa-archive"></i> packages</a>
-                </li>
-                        <li class="nav-item">
-                <a class="nav-link" href="./downloads.html"><i class="fa fa-download"></i> downloads</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/dpb587/openvpn-bosh-release/tree/3002a013310cc8e7b65141e86ab686273d6b3442/"><i class="fa fa-github"></i> source</a>
-            </li>
-        </ul>
-    </div>
-                <div class="container">
+
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="https://github.com/dpb587/openvpn-bosh-release/tree/3002a013310cc8e7b65141e86ab686273d6b3442"><i class="material-icons left">launch</i> Source</a></li>
+                    </ul>
+                </div>
+            </nav>
+        
+            <div class="container">
         <div class="row">
-            <div class="col-sm-9">
-                                    <div class="card">
-                        <div class="card-header">
-                            Release Notes
-                        </div>
-                        <div class="card-block">
-                            <ul>
+            <div class="col s12 m9">
+                <div class="row">
+                    <div class="col s12">
+                        <h3>openvpn/3.1.3</h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <h4 id="usage">Usage</h4>
+
+                        <p>
+                            Upload the source release to your environment. For more options and compiled releases, see the <a href="downloads.html">version downloads</a> page.
+                        </p>
+
+                                            </div>
+                </div>
+
+                                    <div class="row">
+                        <div class="col s12">
+                            <h4 id="release-notes">Release Notes</h4>
+
+                            <div class="markdown">
+                                <ul class="browser-default">
 <li>openvpn status log now lives at <code>/var/vcap/sys/run/openvpn/status</code></li>
 <li>upgrade: openvpn now 2.4.1 (was 2.3.14)</li>
 <li>upgrade: openssl now 1.1.0e (was 1.0.2k)</li>
@@ -67,46 +67,81 @@
 <li>dev: refactor integration tests to execute within container</li>
 </ul>
 
+                            </div>
                         </div>
                     </div>
                 
-                            </div>
-            <div class="col-sm-3">
-                <strong>Quick Downloads</strong>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <h4 id="jobs">Jobs</h4>
 
-                <ul class="list-unstyled">
-                                        <li><a href="https://github.com/dpb587/openvpn-bosh-release/archive/v3.1.3.tar.gz">GitHub Source</a></li>
-                </ul>
+                        <ul class="collection">
+                                                            <li class="collection-item"><a href="openvpn-job.html">openvpn</a></li>
+                                                    </ul>
+                    </div>
 
-                                    <strong>Jobs</strong>
+                    <div class="col s12 m6">
+                        <h4 id="packages">Packages</h4>
 
-                    <ul class="list-unstyled">
-                                                    <li><a href="openvpn-job.html">openvpn</a>
-                                            </ul>
-                
-                                    <strong>Packages</strong>
-
-                    <ul class="list-unstyled">
-                                                    <li><a href="openvpn-package.html">openvpn</a>
-                                            </ul>
-                            </div>
-        </div>
-    </div>
-                            <div class="row">
-                    <div class="col-sm-12">
-                        <footer class="text-xs-center" style="margin-top:2rem;padding-bottom:4px;">
-                            <small class="text-muted">
-                                <a class="text-muted" href="https://github.com/dpb587/bosh-valise-site" title="Generated with"><i class="fa fa-trophy"></i> valise (v3.3.0)</a>
-                                &nbsp;&middot;&nbsp;
-                                <a class="text-muted" href="https://dpb587.me/" target="_blank" title="Created by"><i class="fa fa-hand-peace-o"></i> dpb587</a>
-                            </small>
-                        </footer>
+                        <ul class="collection">
+                                                            <li class="collection-item"><a href="openvpn-package.html">openvpn</a></li>
+                                                    </ul>
                     </div>
                 </div>
-                    </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-    </body>
+                            </div>
+
+            <div class="col s12 m3">
+                <ul class="collection">
+                    <li class="collection-item"><a href="#usage">Usage</a></li>
+                                            <li class="collection-item"><a href="#release-notes">Release Notes</a></li>
+                                        <li class="collection-item"><a href="#jobs">Jobs &amp; Packages</a></li>
+                                    </ul>
+            </div>
+        </div>
+    </div>
+
+                    <footer class="page-footer green">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">dpb587/openvpn-bosh-release</h5>
+                            <div class="grey-text text-lighten-4"><p>A <a class="grey-text text-lighten-4" href="https://bosh.io/">BOSH</a> release to help manage an <a class="grey-text text-lighten-4" href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+</div>
+                        </div>
+                                                                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Operators</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://dpb587.github.io/openvpn-bosh-release">Home Page</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/issues">Issues</a></li>
+                                                                    </ul>
+                            </div>
+                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Developers</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release">Repository</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md">Contributing</a></li>
+                                                                    </ul>
+                            </div>
+                                            </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container green-text text-lighten-4">
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m8">
+                                Copyright 2017 Danny Berger
+
+                            </div>
+                            <div class="col s12 m4 right-align">
+                                Generated by <a class="green-text text-lighten-4" href="http://dpb587.github.io/bosh-valise/" title="v4.0.1">dpb587/bosh-valise</a>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" integrity="sha256-lVmbGVbzHBkNHCUK0y+z2AyJei/v7jSNYppXTcq2FtU=" crossorigin="anonymous"></script>
+            </body>
 </html>
