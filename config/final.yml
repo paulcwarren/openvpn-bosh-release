@@ -1,7 +1,18 @@
 ---
 final_name: openvpn
 description: |
-  A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](https://openvpn.net/index.php/open-source.html) network.
+  A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](https://openvpn.net/index.php/open-source.html) network with servers or clients.
+links:
+  - group: Operators
+    links:
+      Home Page: "https://dpb587.github.io/openvpn-bosh-release"
+      Documentation: "https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops"
+      Issues: "https://github.com/dpb587/openvpn-bosh-release/issues"
+  - group: Developers
+    links:
+      Repository: "https://github.com/dpb587/openvpn-bosh-release"
+      Documentation: "https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev"
+      Contributing: "https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md"
 blobstore:
   provider: s3
   options:
