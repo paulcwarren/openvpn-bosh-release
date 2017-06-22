@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>openvpn/3.2.1 downloads (dpb587/openvpn-bosh-release)</title>
-        <meta name="generator" content="dpb587/bosh-valise (v4.0.4)" />
+        <meta name="generator" content="dpb587/bosh-valise (v4.0.9)" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" integrity="sha256-xbQIJkhfOw0Dry1H9lawvXRi9XcqdE8jDBZx1Op/mz8=" crossorigin="anonymous" />
 
@@ -88,7 +88,8 @@
                                         <label>Operating System</label>
                                     </div>
                                     <div class="input-field col s6">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <select name="stemcell">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <select name="stemcell">
+                                                                                            <option value="3421.9">3421.9</option>
                                                                                             <option value="3421.6">3421.6</option>
                                                                                             <option value="3421.4">3421.4</option>
                                                                                             <option value="3312.28">3312.28</option>
@@ -99,7 +100,24 @@
                             </form>
 
                             <div id="compiled-release-snippets">
-                                                                    <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.6">
+                                                                    <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.9">
+                                        <div class="col s12">
+
+                                            <pre><code>bosh upload-release --name=openvpn --version=3.2.1 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-3.2.1-on-ubuntu-trusty-stemcell-3421.9-compiled-1.20170621072927.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-3.2.1-on-ubuntu-trusty-stemcell-3421.9-compiled-1.20170621072927.0.tgz</a> \
+  --sha1=01f0559a378872da7851e3e58cf16746d5e5d03b</code></pre>
+
+                                            <div class="center-align">
+                                                &mdash; OR &mdash;
+                                            </div>
+
+                                            <pre><code>- name: openvpn
+  version: 3.2.1
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-3.2.1-on-ubuntu-trusty-stemcell-3421.9-compiled-1.20170621072927.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-3.2.1-on-ubuntu-trusty-stemcell-3421.9-compiled-1.20170621072927.0.tgz</a>
+  sha1: 01f0559a378872da7851e3e58cf16746d5e5d03b</code></pre>
+                                        </div>
+                                    </div>
+                                                                    <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.6">
                                         <div class="col s12">
 
                                             <pre><code>bosh upload-release --name=openvpn --version=3.2.1 \
