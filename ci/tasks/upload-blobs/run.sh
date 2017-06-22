@@ -11,7 +11,7 @@ export GIT_COMMITTER_EMAIL="concourse.ci@localhost"
 
 git clone --quiet file://$task_dir/repo updated-repo
 
-cd updated-repo/
+cd repo/
 
 
 #
@@ -36,7 +36,14 @@ bosh upload-blobs
 
 
 #
-# done
+# commit
 #
+
+
+cd $task_dir/updated-repo/
+
+cp $task_dir/repo/config/blobs.yml config/blobs.yml
+
+git add config/blobs.yml
 
 git commit -m "${git_message:-Update blobs}"
