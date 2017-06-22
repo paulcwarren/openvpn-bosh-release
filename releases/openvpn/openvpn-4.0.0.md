@@ -13,3 +13,8 @@ New Features
  * UDP is now supported (see `protocol` property of `openvpn`)
  * the openvpn `compress` option is now supported (see `compress` property of `openvpn`)
  * the openvpn `tls-crypt` option is now supported (see `tls_crypt` property of `openvpn`)
+
+Upgrades
+
+ * openvpn 2.4.3
+ 
