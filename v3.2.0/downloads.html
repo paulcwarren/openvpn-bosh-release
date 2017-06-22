@@ -44,7 +44,33 @@
                     </div>
                 </div>
 
-                                
+                                                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h4 id="source-release">Source Release</h4>
+
+                                    <p>
+                                        A source release contains original source code and can be compiled, as needed, on any operating system and stemcell version.
+                                    </p>
+
+                                    <pre><code>bosh upload-release --name=openvpn --version=3.2.0 \
+  <a class="inherit-text" href="http://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/master/release/openvpn-3.2.0.tgz">http://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/master/release/openvpn-3.2.0.tgz</a> \
+  --sha1=c9a162ae1d4e3adfd961ce82d2b40eb5869a13b4</code></pre>
+
+                                    <div class="center-align">
+                                        &mdash; OR &mdash;
+                                    </div>
+
+                                    <pre><code>- name: openvpn
+  version: 3.2.0
+  url: <a class="inherit-text" href="http://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/master/release/openvpn-3.2.0.tgz">http://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/master/release/openvpn-3.2.0.tgz</a>
+  sha1: c9a162ae1d4e3adfd961ce82d2b40eb5869a13b4</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
                 
                 <div class="row">
                     <div class="col s12">
@@ -70,6 +96,7 @@ git checkout e9b118e0ee22376a429bde51a13f047fe2d84fc2</code></pre>
 
             <div class="col s12 m3">
                 <ul class="collection">
+                                            <li class="collection-item"><a href="#source-release">Source Release</a></li>
                                                             <li class="collection-item"><a href="#source">Source Code</a></li>
                 </ul>
             </div>

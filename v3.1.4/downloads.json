@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "files": [
+      {
+        "name": "openvpn-3.1.4.tgz",
+        "hashes": [
+          {
+            "type": "md5",
+            "hash": "18bac30dd736f653f5a1f61b619ceb90"
+          },
+          {
+            "type": "sha-1",
+            "hash": "96eba0b9ba489ad1f872cb3be5b34d43bde2ddf8"
+          },
+          {
+            "type": "sha-256",
+            "hash": "8219915da18b67e3080eb6a00ffeac494f2962057fa5e4d16955d0b36f0220de"
+          },
+          {
+            "type": "sha-512",
+            "hash": "135161a261758a3d4608a26f5fa54750cd26c5c24a9bdb9e15326a1885c66245222916b44592cc9c4fd68f311617cda82707f8154b317418d2eaa6a591df892d"
+          }
+        ],
+        "size": 7209706,
+        "url": [
+          {
+            "url": "http://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/master/release/openvpn-3.1.4.tgz"
+          }
+        ],
+        "version": "3.1.4"
+      }
+    ],
+    "generator": "metalink.dpb587.github.io/0.0.0",
+    "published": "2017-05-18T06:36:02Z"
+  }
+]
