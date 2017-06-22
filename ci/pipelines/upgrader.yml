@@ -25,12 +25,16 @@ jobs:
     privileged: true
 - name: bump-lzo
   plan:
-  - get: blob
-    resource: lzo-blob
-    passed:
-    - test-lzo
-  - task: create-dev-release
-    file: repo/ci/tasks/create-dev-release/task.yml
+  - aggregate:
+    - get: blob
+      resource: lzo-blob
+      passed:
+      - test-lzo
+    - get: repo
+  - task: update-blob
+    file: repo/ci/tasks/import-metalink-blob/task.yml
+    params:
+      blob: lzo
   - task: upload-blobs
     file: repo/ci/tasks/upload-blobs/task.yml
     params:
@@ -59,12 +63,16 @@ jobs:
     privileged: true
 - name: bump-openssl
   plan:
-  - get: blob
-    resource: openssl-blob
-    passed:
-    - test-openssl
-  - task: create-dev-release
-    file: repo/ci/tasks/create-dev-release/task.yml
+  - aggregate:
+    - get: blob
+      resource: openssl-blob
+      passed:
+      - test-openssl
+    - get: repo
+  - task: update-blob
+    file: repo/ci/tasks/import-metalink-blob/task.yml
+    params:
+      blob: openssl
   - task: upload-blobs
     file: repo/ci/tasks/upload-blobs/task.yml
     params:
@@ -93,12 +101,16 @@ jobs:
     privileged: true
 - name: bump-openvpn
   plan:
-  - get: blob
-    resource: openvpn-blob
-    passed:
-    - test-openvpn
-  - task: create-dev-release
-    file: repo/ci/tasks/create-dev-release/task.yml
+  - aggregate:
+    - get: blob
+      resource: openvpn-blob
+      passed:
+      - test-openvpn
+    - get: repo
+  - task: update-blob
+    file: repo/ci/tasks/import-metalink-blob/task.yml
+    params:
+      blob: openvpn
   - task: upload-blobs
     file: repo/ci/tasks/upload-blobs/task.yml
     params:
