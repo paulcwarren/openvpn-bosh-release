@@ -1,12 +1,14 @@
+*Please review these changes carefully - many properties and defaults have changed which may impact connectivity. While breaking changes are generally avoided, the goals of this release necessitated some significant changes. Those goals were: utilize modern BOSH features, improve performance, encourage secure defaults, avoid duplicated features, and simplify configuration requirements.*
+
 Breaking Changes
 
  * properties are no longer prefixed with `openvpn` namespace
- * new `openvpn-client` job (client functionality removed from `openvpn` job)
-    * requires a `openvpn` link (automatic or manual) with public server properties
- * custom iptables rules are no longer managed (use the `iptables` job of [networking](https://github.com/cloudfoundry/networking-release) release instead)
+ * default protocol is now `udp` (this must be in sync with clients; previous default `tcp`)
+ * the `openvpn` job will no longer act as a client (see the new `openvpn-client` job)
  * the `openvpn` job improves security defaults (either explicitly use older values, or upgrade clients as necessary)
     * `cipher` is now `AES-256-CBC` (this must be in sync with clients; previous default `BF-CBC`)
     * `tls_version_min` is now `1.2` (requires clients 2.3.3+; previous default `1.0`)
+ * custom iptables rules are no longer managed (use the `iptables` job of [networking](https://github.com/cloudfoundry/networking-release) release instead)
 
 New Features
 
@@ -17,4 +19,3 @@ New Features
 Upgrades
 
  * openvpn 2.4.3
- 

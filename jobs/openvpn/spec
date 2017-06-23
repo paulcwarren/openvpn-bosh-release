@@ -20,7 +20,7 @@ provides:
       - ca_crt
 properties:
   protocol:
-    default: tcp
+    default: udp
     description: "Protocol for the server"
     type: "string"
     enum:
