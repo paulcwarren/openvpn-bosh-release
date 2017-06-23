@@ -64,6 +64,7 @@ jobs:
       passed:
       - test-develop-integration
     - get: repo
+      resource: finalize-repo
     - get: version
       params:
         bump: final
@@ -77,8 +78,9 @@ jobs:
   - put: version
     params:
       file: version/number
-  - put: repo
+  - put: finalize-repo
     params:
+      rebase: true
       repository: repo
   - put: github-release
     params:
@@ -168,6 +170,12 @@ resources:
     - docs/*
     - docs/**/*
     - releases/**/*
+- name: finalize-repo
+  type: git
+  source:
+    branch: master
+    private_key: ((git_private_key))
+    uri: git@github.com:dpb587/openvpn-bosh-release.git
 
 - name: version
   type: semver
@@ -188,7 +196,7 @@ resources:
 - name: images-repo
   type: git
   source:
-    branch: develop
+    branch: master
     paths:
     - ci/images/*
     - ci/images/**/*
@@ -200,7 +208,7 @@ resources:
     email: ((docker_email))
     password: ((docker_password))
     repository: dpb587/openvpn-bosh-release
-    tag: ci-bosh-develop
+    tag: ci-bosh-master
     username: ((docker_username))
 
 resource_types:
