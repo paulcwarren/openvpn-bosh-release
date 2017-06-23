@@ -58,7 +58,7 @@ metalink_path="releases/$release_name/$release_name-$version.meta4"
 meta4 create --metalink="$metalink_path"
 meta4 set-published --metalink="$metalink_path" "$( date -u +%Y-%m-%dT%H:%M:%SZ )"
 meta4 import-file --metalink="$metalink_path" --version="$version" "$tarball"
-meta4 file-upload --metalink="$metalink_path" --file="$( basename "$tarball_nice" )" "$tarball_real" "s3://$s3_host/$s3_bucket/releases/$release_name/$release_name-$version.tgz"
+meta4 file-upload --metalink="$metalink_path" --file="$( basename "$tarball" )" "$tarball" "s3://$s3_host/$s3_bucket/releases/$release_name/$release_name-$version.tgz"
 
 
 #
