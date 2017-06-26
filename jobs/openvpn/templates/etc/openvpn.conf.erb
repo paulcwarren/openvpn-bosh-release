@@ -16,7 +16,7 @@ push "compress <%= p('compress') %>"
 group nogroup
 user nobody
 status /var/vcap/sys/run/openvpn/status
-dev tun0
+dev <%= p('device') %>
 local <%= p('local') %>
 server <%= p('server') %>
 <% p('push_routes').each do | route | %>

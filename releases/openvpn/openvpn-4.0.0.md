@@ -18,6 +18,7 @@ New Features
  * the openvpn `compress` option is now supported (see `compress` property of `openvpn`)
  * the openvpn `tls-crypt` option is now supported (see `tls_crypt` property of `openvpn`)
  * new `extra_configs` property of `openvpn` and `openvpn-client` (similar to `extra_config`, but accepts an array of openvpn directives)
+ * new `device` property is now supported for explicit virtual network device usage
 
 Upgrades
 

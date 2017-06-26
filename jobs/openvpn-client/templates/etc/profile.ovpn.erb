@@ -3,7 +3,7 @@ writepid /var/vcap/sys/run/openvpn-client/openvpn.pid
 group nogroup
 user nobody
 status /var/vcap/sys/run/openvpn-client/status
-dev tun
+dev <%= p('device') %>
 persist-key
 persist-tun
 verb 3

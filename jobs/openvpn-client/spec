@@ -21,6 +21,9 @@ properties:
         -----BEGIN RSA PRIVATE KEY-----
         ...
         -----END RSA PRIVATE KEY-----
+  device:
+    description: "Virtual network device to use"
+    default: "tun1"
   extra_config:
     default: ~
     description: "Custom OpenVPN configuration statements"

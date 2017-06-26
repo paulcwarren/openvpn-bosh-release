@@ -53,6 +53,9 @@ properties:
     type: "string"
     help: |
           This is the basis of the IP pool which the server will allocate to clients.
+  device:
+    description: "Virtual network device to use"
+    default: "tun0"
   routes:
     default: []
     description: "Routes for the local routing table"
