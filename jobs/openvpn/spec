@@ -36,6 +36,12 @@ properties:
     type: "text"
     help: |
           For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
+  extra_configs:
+    default: []
+    description: "Custom OpenVPN configuration statements (array)"
+    type: "text"
+    help: |
+          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
   local:
     default: "0.0.0.0"
     description: "Bind IP for the server"

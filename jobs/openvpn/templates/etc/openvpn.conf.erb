@@ -42,6 +42,9 @@ topology subnet
 persist-key
 persist-tun
 <% if_p('extra_config') do | v | %><%= v %><% end %>
+<% p('extra_configs').each do | v | %>
+<%= v %>
+<% end %>
 
 <ca>
 <%= p('ca_crt') %>
