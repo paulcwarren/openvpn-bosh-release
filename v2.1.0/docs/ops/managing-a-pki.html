@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>openvpn/2.1.0 (dpb587/openvpn-bosh-release)</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" integrity="sha256-xbQIJkhfOw0Dry1H9lawvXRi9XcqdE8jDBZx1Op/mz8=" crossorigin="anonymous" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <style type="text/css">
+            pre {
+                background-color: #F0F0F0;
+                border: #DEDEDE solid 1px;
+                padding: 1rem;
+            }
+
+            .inherit-text {
+                color: inherit;
+            }
+        </style>
+                    <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-37464314-3', 'auto');
+              ga('send', 'pageview');
+            </script>
+            </head>
+
+    <body>
+                    <nav class="green" role="navigation">
+                <div class="nav-wrapper container">
+                                                                        <a href="https://dpb587.github.io/openvpn-bosh-release/" class="breadcrumb">openvpn</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v2.1.0/" class="breadcrumb">2.1.0</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v2.1.0/docs/" class="breadcrumb">docs</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v2.1.0/docs/ops/" class="breadcrumb">ops</a>
+                                            
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="https://github.com/dpb587/openvpn-bosh-release/blob/92458dbe950c62f1c093b4164295cdc15bfaa9b8/docs/ops/managing-a-pki.md"><i class="material-icons left">launch</i> Source</a></li>
+                    </ul>
+                </div>
+            </nav>
+        
+                    <div class="container">
+                <div class="row">
+                    <div class="col s12 m9">
+                            <div class="row">
+        <div class="col s12">
+            <div class="markdown">
+                <h2 id="title-creating-a-pki">title: Creating a PKI</h2>
+
+<p>OpenVPN uses a <a href="http://en.wikipedia.org/wiki/Public_key_infrastructure">PKI</a> for authentication. You may need to create
+one from scratch and the <a href="https://github.com/OpenVPN/easy-rsa/">easy-rsa</a> package simplifies those workflows...</p>
+
+<pre><code>$ echo '/easyrsa' &gt;&gt; .gitignore
+$ mkdir easyrsa
+$ wget -qO- "https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.0-rc1/EasyRSA-3.0.0-rc1.tgz" \
+  | tar -xzC easyrsa --strip-components 1
+</code></pre>
+
+<h2 id="setup">Setup</h2>
+
+<p>Customize an environment file to store some reusable config values, then load it...</p>
+
+<pre><code>$ cat &gt; .env &lt;&lt; EOF
+export EASYRSA_VARS_FILE="vars"
+export EASYRSA_REQ_COUNTRY="US"
+export EASYRSA_REQ_PROVINCE="California"
+export EASYRSA_REQ_CITY="San Francisco"
+export EASYRSA_REQ_ORG="Copyleft Certificate Co"
+export EASYRSA_REQ_OU="My Organizational Unit"
+export EASYRSA_REQ_EMAIL="me@example.net"
+EOF
+$ source .env
+</code></pre>
+
+<p>Initialize your PKI and create the authority...</p>
+
+<pre><code>$ ( cd easyrsa/ &amp;&amp; EASYRSA_PKI=../pki ./easyrsa init-pki )
+$ cd pki
+$ cat ../easyrsa/vars.example \
+  | sed -E "s/^#?set_var[[:space:]]+EASYRSA[[:space:]]+.*\$/set_var EASYRSA \"\$PWD\/..\/easyrsa\"/" \
+  | sed -E "s/^#?set_var[[:space:]]+EASYRSA_PKI[[:space:]]+.*\$/set_var EASYRSA_PKI \"\$PWD\"/" \
+  &gt; vars
+$ ../easyrsa/easyrsa build-ca
+  # password will be used whenever you need to sign new certificates
+  # common name = openvpn
+$ ../easyrsa/easyrsa gen-crl
+$ ../easyrsa/easyrsa gen-dh
+$ cd ../
+</code></pre>
+
+<h2 id="server-keypair">Server Key-pair</h2>
+
+<p>You will need at least one server key, so create and sign one...</p>
+
+<pre><code>$ cd pki
+$ CN=server
+$ openssl req -new -nodes -days 3650 -newkey rsa:2048 \
+  -subj "/C=$EASYRSA_REQ_COUNTRY/ST=$EASYRSA_REQ_PROVINCE/L=$EASYRSA_REQ_CITY/O=$EASYRSA_REQ_ORG/OU=$EASYRSA_REQ_OU/CN=$CN/emailAddress=$EASYRSA_REQ_EMAIL" \
+  -out "reqs/$CN.req" \
+  -keyout "private/$CN.key"
+$ ../easyrsa/easyrsa sign server "$CN"
+$ cd ../
+</code></pre>
+
+<h2 id="signing-client-requests">Signing Client Requests</h2>
+
+<p>When the client sends a CSR to the operator, the operator can sign the request using the following...</p>
+
+<pre><code>$ cd pki
+$ ../easyrsa/easyrsa sign client "$TMP_CN" )
+</code></pre>
+
+<h2 id="deployment-configuration">Deployment Configuration</h2>
+
+<p>Once you have a PKI setup and a server key-pair configured, you can use the file data for your deployment properties...</p>
+
+<pre><code>* openvpn.ca_crt -&gt; ./pki/ca.crt
+* openvpn.server_crt -&gt; ./pki/issued/server.crt
+* openvpn.server_key -&gt; ./pki/private/server.key
+* openvpn.crl_pem -&gt; ./pki/crl.pem
+* openvpn.dh_pem -&gt; ./pki/dh.pem
+</code></pre>
+
+            </div>
+        </div>
+    </div>
+                    </div>
+
+                    <div class="col s12 m3">
+                        <div class="section">
+                                                            <div class="card-panel orange lighten-5">
+                                    <strong>Note</strong>: this is information for an older release. Are you looking for the latest release, <a href="/v3.2.2">v3.2.2</a>, instead?
+                                </div>
+                            
+                            <div class="table-of-contents pin-top hide-on-small-only">
+                                            <ul class="collection">
+                            <li class="collection-item"><a href="#title-creating-a-pki">title: Creating a PKI</a></li>
+                            <li class="collection-item"><a href="#setup">Setup</a></li>
+                            <li class="collection-item"><a href="#server-keypair">Server Key-pair</a></li>
+                            <li class="collection-item"><a href="#signing-client-requests">Signing Client Requests</a></li>
+                            <li class="collection-item"><a href="#deployment-configuration">Deployment Configuration</a></li>
+                    </ul>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                    <footer class="page-footer green">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">dpb587/openvpn-bosh-release</h5>
+                            <div class="grey-text text-lighten-4"><p>A <a class="grey-text text-lighten-4" href="https://bosh.io/">BOSH</a> release to help manage an <a class="grey-text text-lighten-4" href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+</div>
+                        </div>
+                                                                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Operators</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://dpb587.github.io/openvpn-bosh-release">Home Page</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/issues">Issues</a></li>
+                                                                    </ul>
+                            </div>
+                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Developers</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release">Repository</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md">Contributing</a></li>
+                                                                    </ul>
+                            </div>
+                                            </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container green-text text-lighten-4">
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m8">
+                                Copyright 2017 Danny Berger
+
+                            </div>
+                            <div class="col s12 m4 right-align">
+                                Generated by <a class="green-text text-lighten-4" href="https://dpb587.github.io/bosh-valise/">dpb587/bosh-valise</a>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" integrity="sha256-lVmbGVbzHBkNHCUK0y+z2AyJei/v7jSNYppXTcq2FtU=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $('h2').scrollSpy();
+                $('.pin-top').pushpin({
+                    top: 72
+                });
+            });
+        </script>
+            </body>
+</html>

@@ -18,14 +18,22 @@
                 color: inherit;
             }
         </style>
-    </head>
+                    <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-37464314-3', 'auto');
+              ga('send', 'pageview');
+            </script>
+            </head>
 
     <body>
                     <nav class="green" role="navigation">
                 <div class="nav-wrapper container">
-                        <a href="#!" class="breadcrumb">dpb587/openvpn-bosh-release</a>
-
-
+                                                                        <a href="https://dpb587.github.io/openvpn-bosh-release/" class="breadcrumb">openvpn</a>
+                                            
                     <ul class="right hide-on-med-and-down">
                         <li><a href="https://github.com/dpb587/openvpn-bosh-release"><i class="material-icons left">launch</i> Source</a></li>
                     </ul>
@@ -40,9 +48,19 @@
                     <p class="flow-text"><i class="material-icons small">info_outline</i></p>
                 </div>
                 <div class="col s10">
-                    <p class="flow-text">A <a href="https://bosh.io/">BOSH</a> release to help manage an <a href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+                    <p class="flow-text">A <a href="https://bosh.io/">BOSH</a> release to help manage an <a href="http://openvpn.net/">OpenVPN</a> network.</p>
 
-                                    </div>
+<ul class="browser-default">
+<li>releases: <a href="https://github.com/dpb587/openvpn-bosh-release/releases">semantically versioned</a></li>
+<li>documentation: <a href="/v3.2.2/docs/"><code>docs</code> directory</a></li>
+<li>troubles: <a href="https://github.com/dpb587/openvpn-bosh-release/issues">report an issue</a></li>
+</ul>
+
+<h2 id="license">License</h2>
+
+<p><a href="/v3.2.2/docs/../../LICENSE">Apache License, Version 2.0</a></p>
+
+                </div>
             </div>
 
             <div class="row">
@@ -432,5 +450,13 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" integrity="sha256-lVmbGVbzHBkNHCUK0y+z2AyJei/v7jSNYppXTcq2FtU=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $('h2').scrollSpy();
+                $('.pin-top').pushpin({
+                    top: 72
+                });
+            });
+        </script>
             </body>
 </html>
