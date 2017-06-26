@@ -38,7 +38,7 @@ mkdir -p role1-logs
 bosh scp role1/0:/var/vcap/sys/log/openvpn-client/stdout.log role1-logs/client-stdout.log
 bosh scp role1/0:/var/vcap/sys/log/openvpn/stdout.log role1-logs/stdout.log
 
-if ! grep -q "TCP connection established with" role1-logs/client-stdout.log* ; then
+if ! grep -q "Initialization Sequence Completed" role1-logs/client-stdout.log* ; then
   fail "Client failed to connect to server"
 elif ! grep -q "/sbin/ifconfig tun1 192.168.206.2 netmask 255.255.255.0" role1-logs/client-stdout.log* ; then
   fail "Client failed to establish tunnel correctly"
@@ -62,7 +62,7 @@ mkdir -p role2-logs
 bosh scp role2/0:/var/vcap/sys/log/openvpn-client/stdout.log role2-logs/client-stdout.log
 bosh scp role2/0:/var/vcap/sys/log/openvpn/stdout.log role2-logs/stdout.log
 
-if ! grep -q "TCP connection established with" role2-logs/client-stdout.log* ; then
+if ! grep -q "Initialization Sequence Completed" role2-logs/client-stdout.log* ; then
   fail "Client failed to connect to server"
 elif ! grep -q "/sbin/ifconfig tun1 192.168.202.2 netmask 255.255.255.0" role2-logs/client-stdout.log* ; then
   fail "Client failed to establish tunnel correctly"
