@@ -5,6 +5,8 @@ groups:
   - ubuntu-trusty-3312.x
 jobs:
 - name: ubuntu-trusty-3421.x
+  serial_groups:
+  - pipeline
   plan:
   - aggregate:
     - get: release
@@ -30,6 +32,8 @@ jobs:
       rebase: true
       repository: repo
 - name: ubuntu-trusty-3312.x
+  serial_groups:
+  - pipeline
   plan:
   - aggregate:
     - get: release
