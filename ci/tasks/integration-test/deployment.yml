@@ -6,8 +6,8 @@ releases:
   version: create
 update:
   canaries: 1
-  canary_watch_time: 1000-60000
-  update_watch_time: 1000-60000
+  canary_watch_time: 10000-60000
+  update_watch_time: 10000-60000
   max_in_flight: 1
 stemcells:
 - alias: default

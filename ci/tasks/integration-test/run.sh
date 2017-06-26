@@ -4,20 +4,15 @@ set -eu
 
 fail () { echo "FAILURE: $1" >&2 ; exit 1 ; }
 
-wget -qO /tmp/release.tgz https://s3.amazonaws.com/bosh-compiled-release-tarballs/bosh-260.5-ubuntu-trusty-3312.15-20170124-025145-688314225-20170124025151.tgz?versionId=XdnsJBm4uh.wTJ1aKy5BZ.B.NtBOZFTD
-
 cd repo
 
-start-bosh \
-    -o /usr/local/bosh-deployment/local-bosh-release.yml \
-    -o $PWD/ci/tasks/integration-test/bosh-ops.yml \
-    -v local_bosh_release=/tmp/release.tgz
+start-bosh -o $PWD/ci/tasks/integration-test/bosh-ops.yml
 
 source /tmp/local-bosh/director/env
 
 bosh upload-stemcell \
-  --sha1=4cf583da9e2388480e93f348b52c60374b9a097e \
-  https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3363.15-warden-boshlite-ubuntu-trusty-go_agent.tgz
+  --sha1=1396d7877204e630b9e77ae680f492d26607461d \
+  https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3421.9-warden-boshlite-ubuntu-trusty-go_agent.tgz
 
 export BOSH_DEPLOYMENT=integration-test
 
@@ -81,12 +76,6 @@ bosh -n delete-deployment
 #
 
 bosh -n clean-up --all
-
-set +u
-
-source /etc/profile.d/chruby.sh
-
-chruby 2.3.1
 
 bosh delete-env "/tmp/local-bosh/director/bosh-director.yml" \
   --vars-store="/tmp/local-bosh/director/creds.yml" \
