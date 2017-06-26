@@ -23,20 +23,28 @@ Start a YAML configuration file named `openvpn-creds.yml` which will contain sim
     vpn_network_mask: 255.255.255.0
     vpn_network_mask_bits: 24
 
+    # IaaS/LAN internal network
+    lan_cidr: 10.10.250.0/24
+    lan_gateway: 10.10.250.1
+    lan_ip: 10.10.250.9
+
+    # IaaS/WAN public IP address
+    wan_ip: 123.123.123.123
+
 
 ### Optional Features
 
 There are several `with-*.yml` files which can be used to change some behaviors of the server. To use, include them in the later `create-env` command, and be sure to add documented settings to the configuration file.
 
 
-#### Gateway Redirection (`-o with-gateway-redirection.yml`)
+#### Gateway Redirection
 
-If you want to force clients to redirect all their traffic through the VPN server.
+If you want to force clients to redirect all their traffic through the VPN server, include the `-o with-gateway-redirection.yml` option.
 
 
-#### Log Forwarding (`-o with-log-forwarding.yml`)
+#### Log Forwarding
 
-If you want to forward system and OpenVPN logs to a syslog server. Be sure to add a few more settings to `openvpn-creds.yml`...
+If you want to forward system and OpenVPN logs to a syslog server, include the `-o with-log-forwarding.yml` option. Be sure to add a few more settings to `openvpn-creds.yml`...
 
     # the syslog server host and port
     syslog_address: logs12345.papertrailapp.com
@@ -49,9 +57,9 @@ If you want to forward system and OpenVPN logs to a syslog server. Be sure to ad
     syslog_tls_enabled: true
 
 
-#### SSH Access (`-o with-ssh.yml`)
+#### SSH Access
 
-If you want SSH access to the VM. To use an existing public key, set `ssh.public_key` in `openvpn-creds.yml`...
+If you want SSH access to the VM, include the `-o with-ssh.yml` option. To use an existing public key, set `ssh.public_key` in `openvpn-creds.yml`...
 
     ssh:
       public_key: ssh-rsa ....
@@ -96,6 +104,28 @@ Ensure the standard `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment 
     -o init-aws.yml -v access_key_id="$AWS_ACCESS_KEY_ID" -v secret_access_key="$AWS_SECRET_ACCESS_KEY"
 
 
+### Google Cloud Platform (`google`)
+
+GCP requires the additional settings that you should add to `openvpn-creds.yml` using the following template...
+
+    # the project to use
+    project_id: openvpn-test
+
+    # the zone to deploy to
+    zone: us-east1-b
+
+    # the network and subnetwork to deploy to
+    network: default
+    subnetwork: default
+
+    # zero or more tags to apply to the VM
+    tags: [openvpn]
+
+Ensure you have a service account file. When running the `create-env` command, you'll need to append the following arguments to the command...
+
+    -o init-google.yml --var-file gcp_credentials_json=~/.config/gcloud/application_default_credentials.json
+
+
 ## Deploy
 
 Once everything has been configured, run the full `create-env` command. Be sure to add IaaS and feature-specific arguments to the command, as necessary.
@@ -116,13 +146,10 @@ After the command has completed, there will be an `openvpn-state.json` file - be
 
 ## Client Setup
 
-After the server is running, you can generate an OpenVPN connection profile for [a client](../client-software.md)...
+After the server is running, you can generate an OpenVPN connection profile for [a client](../client/software.md)...
 
-    bosh interpolate --vars-store openvpn-profile.yml -l openvpn-creds.yml --path=/profile > openvpn.ovpn
+    bosh interpolate --vars-store openvpn-client-creds.yml -l openvpn-creds.yml --path=/profile openvpn-client.yml > openvpn-client.ovpn
 
 And then use the profile to connect...
 
-    openvpn --config openvpn.ovpn
-
-
-## Maintenance
+    openvpn --config openvpn-client.ovpn

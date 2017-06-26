@@ -1,0 +1,3 @@
+- path: /instance_groups/name=openvpn/jobs/name=openvpn/properties/push_routes
+  type: replace
+  value: ((push_routes))

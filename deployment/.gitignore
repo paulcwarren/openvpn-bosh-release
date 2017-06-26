@@ -1,0 +1,5 @@
+# referenced by documentation
+/openvpn-client.ovpn
+/openvpn-client-creds.yml
+/openvpn-creds.yml
+/openvpn-state.json

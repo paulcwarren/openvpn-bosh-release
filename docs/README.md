@@ -3,6 +3,7 @@
 **Operations**
 
  * Server
+   * [Deploying a Standalone Server](ops/deployment/standalone-server.md)
    * [Advanced Settings](ops/server/advanced-settings.md)
    * [Using a Local PKI](ops/server/using-a-local-pki.md)
  * Clients

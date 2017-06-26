@@ -1,0 +1,19 @@
+- path: /releases/name=networking?
+  type: replace
+  value:
+    name: networking
+    version: 9
+    url: http://bosh.io/d/github.com/cloudfoundry/networking-release?v=9
+    sha1: 9b5f9d27917c3754e492470ac6c9af80d62963db
+- path: /instance_groups/name=openvpn/jobs/name=iptables?
+  type: replace
+  value:
+    name: iptables
+    release: networking
+    properties:
+      nat:
+        POSTROUTING:
+        - -s ((vpn_network))/((vpn_network_mask_bits)) -d 0/0 -j MASQUERADE
+- path: /instance_groups/name=openvpn/jobs/name=openvpn/properties/extra_configs?/-
+  type: replace
+  value: push "redirect-gateway def1"

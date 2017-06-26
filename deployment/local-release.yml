@@ -1,0 +1,5 @@
+- path: /releases/name=openvpn
+  type: replace
+  value:
+    name: openvpn
+    url: file://((local_release))

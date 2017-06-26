@@ -1,0 +1,33 @@
+profile: |
+  client
+  dev tun
+  proto udp
+  remote ((wan_ip)) 1194
+  resolv-retry infinite
+  nobind
+  persist-key
+  persist-tun
+  mute-replay-warnings
+  remote-cert-tls server
+  verb 3
+  mute 20
+  tls-client
+  cipher AES-256-CBC
+  keysize 256
+  <ca>
+  ((ca.ca))
+  </ca>
+  <cert>
+  ((key_pair.certificate))
+  </cert>
+  <key>
+  ((key_pair.private_key))
+  </key>
+variables:
+- name: key_pair
+  type: certificate
+  options:
+    ca: ca
+    common_name: client
+    extended_key_usage:
+    - client_auth

@@ -1,0 +1,14 @@
+- path: /instance_groups/name=openvpn/jobs/name=user_add?
+  type: replace
+  value:
+    name: user_add
+    release: os-conf
+    properties:
+      users:
+      - name: openvpn
+        public_key: ((ssh.public_key))
+- path: /variables/-
+  type: replace
+  value:
+    name: ssh
+    type: ssh
