@@ -75,7 +75,7 @@ git commit -m "Finalize release $version"
 #
 
 echo "v$version" > $task_dir/github-release/name
-git rev-parse HEAD > $task_dir/github-release/commit
+git rev-parse "$( bosh int --path=/commit_hash "releases/$release_name/$release_name-$version.yml" )" > $task_dir/github-release/commit
 
 if [ -e releases/*/*-$version.md ] ; then
   cp releases/*/*-$version.md $task_dir/github-release/notes.md

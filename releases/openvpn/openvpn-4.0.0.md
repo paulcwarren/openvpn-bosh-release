@@ -20,6 +20,6 @@ New Features
  * new `extra_configs` property of `openvpn` and `openvpn-client` (similar to `extra_config`, but accepts an array of openvpn directives)
  * new `device` property is now supported for explicit virtual network device usage
 
-Upgrades
+Development & Tooling
 
- * openvpn 2.4.3
+ * git version tags now refer to the commit a release was created from (previously the commit which finalized the release was used)
