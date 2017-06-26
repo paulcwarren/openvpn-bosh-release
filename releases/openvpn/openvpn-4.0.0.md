@@ -9,6 +9,8 @@ Breaking Changes
     * `cipher` is now `AES-256-CBC` (this must be in sync with clients; previous default `BF-CBC`)
     * `tls_version_min` is now `1.2` (requires clients 2.3.3+; previous default `1.0`)
  * custom iptables rules are no longer managed (use the `iptables` job of [networking](https://github.com/cloudfoundry/networking-release) release instead)
+ * server and client certificates are now configured with the `tls_key_pair` property with support for certificate generation (previously via `ca_crt`, `certificate`, and `private_key` properties)
+ * certificate revocation lists for `openvpn` are now configured with the `tls_crl` property (previously via `crl_pem` property)
 
 New Features
 

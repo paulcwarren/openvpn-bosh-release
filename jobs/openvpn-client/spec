@@ -9,16 +9,18 @@ consumes:
   - name: openvpn
     type: openvpn
 properties:
-  certificate:
-    description: "Client Certificate"
-    type: "text"
-    help: |
-          This should include `-----BEGIN CERTIFICATE-----` through `-----END CERTIFICATE-----`.
-  private_key:
-    description: "Client Private Key"
-    type: "text"
-    help: |
-          This should include `-----BEGIN RSA PRIVATE KEY-----` through `-----END RSA PRIVATE KEY-----`.
+  tls_key_pair:
+    description: "Certificate and Private Key for the server"
+    type: "certificate"
+    example:
+      certificate: |
+        -----BEGIN CERTIFICATE-----
+        ...
+        -----END CERTIFICATE-----
+      private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        ...
+        -----END RSA PRIVATE KEY-----
   extra_config:
     default: ~
     description: "Custom OpenVPN configuration statements"

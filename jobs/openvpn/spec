@@ -17,7 +17,7 @@ provides:
       - tls_version_min
       - tls_cipher
       - tls_crypt
-      - ca_crt
+      - tls_key_pair # until tls_key_pair.ca...
 properties:
   protocol:
     default: udp
@@ -109,31 +109,32 @@ properties:
   tls_crypt:
     description: "Encrypt control channel packets with private key"
     type: "string"
-  ca_crt:
-    description: "CA Certificate"
-    help: |
-          This should include `-----BEGIN CERTIFICATE-----` through `-----END CERTIFICATE-----`.
+  tls_key_pair:
+    description: "Certificate and Private Key for the server"
+    type: "certificate"
+    example:
+      ca: |
+        -----BEGIN CERTIFICATE-----
+        ...
+        -----END CERTIFICATE-----
+      certificate: |
+        -----BEGIN CERTIFICATE-----
+        ...
+        -----END CERTIFICATE-----
+      private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        ...
+        -----END RSA PRIVATE KEY-----
+  tls_crl:
+    description: "Certificate Revocation List"
     type: "text"
-  server_crt:
-    description: "Server Certificate"
-    type: "text"
     help: |
-          This should include `-----BEGIN CERTIFICATE-----` through `-----END CERTIFICATE-----`.
-  server_key:
-    description: "Server Key"
-    type: "text"
-    help: |
-          This should include `-----BEGIN RSA PRIVATE KEY-----` through `-----END RSA PRIVATE KEY-----`.
+          This should include `-----BEGIN X509 CRL-----` through `-----END X509 CRL-----`.
   dh_pem:
     description: "Diffie-Hellmann Key"
     type: "text"
     help: |
           This should include `-----BEGIN DH PARAMETERS-----` through `-----END DH PARAMETERS-----`.
-  crl_pem:
-    description: "Certificate Revocation List"
-    type: "text"
-    help: |
-          This should inclulde `-----BEGIN X509 CRL-----` through `-----END X509 CRL-----`.
   ccd:
     description: "A list of Client Configuration Directives"
     help: |

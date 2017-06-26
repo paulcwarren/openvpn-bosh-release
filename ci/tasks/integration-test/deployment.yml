@@ -50,8 +50,7 @@ instance_groups:
       openvpn:
         from: role2
     properties:
-      certificate: ((role1_client.certificate))
-      private_key: ((role1_client.private_key))
+      tls_key_pair: ((role1_client))
   instances: 1
   stemcell: default
   vm_type: default
@@ -93,8 +92,7 @@ instance_groups:
       openvpn:
         from: role1
     properties:
-      certificate: ((role2_client.certificate))
-      private_key: ((role2_client.private_key))
+      tls_key_pair: ((role2_client))
   instances: 1
   stemcell: default
   vm_type: default
@@ -102,9 +100,7 @@ instance_groups:
   - name: default
 properties:
   openvpn: &openvpn
-    ca_crt: ((server_crt.ca))
-    server_crt: ((server_crt.certificate))
-    server_key: ((server_crt.private_key))
+    tls_key_pair: ((server))
     dh_pem: |
       -----BEGIN DH PARAMETERS-----
       MIIBCAKCAQEA/oih/YXvkf13npOIF5LW170/V5j4R20NjL/IzgdZUYMlsQtm5zMZ
@@ -120,7 +116,7 @@ variables:
   options:
     is_ca: true
     common_name: ca
-- name: server_crt
+- name: server
   type: certificate
   options:
     ca: ca

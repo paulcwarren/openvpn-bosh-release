@@ -35,7 +35,7 @@ tls-version-min <%= v %>
 <% end %>
 
 <ca>
-<%= server.p('ca_crt') %>
+<%= server.p('tls_key_pair')['ca'] %>
 </ca>
 
 <% server.if_p('tls_crypt') do %>
@@ -45,9 +45,9 @@ tls-version-min <%= v %>
 <% end %>
 
 <cert>
-<%= p('certificate') %>
+<%= p('tls_key_pair')['certificate'] %>
 </cert>
 
 <key>
-<%= p('private_key') %>
+<%= p('tls_key_pair')['private_key'] %>
 </key>
