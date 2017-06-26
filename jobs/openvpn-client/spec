@@ -1,5 +1,7 @@
 ---
 name: "openvpn-client"
+description: |
+  The `openvpn-client` job runs an OpenVPN client, connecting to a remote server.
 packages:
   - "openvpn"
 templates:

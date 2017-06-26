@@ -1,5 +1,7 @@
 ---
 name: "openvpn"
+description: |
+  The `openvpn` job provides an OpenVPN server for clients to connect to.
 packages:
   - "openvpn"
 templates:

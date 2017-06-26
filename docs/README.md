@@ -1,11 +1,15 @@
-# openvpn-bosh-release
+# openvpn Documentation
 
-A [BOSH](https://bosh.io/) release to help manage an [OpenVPN](http://openvpn.net/) network.
+**Operations**
 
-To get started...
+ * Server
+   * [Advanced Settings](ops/server/advanced-settings.md)
+   * [Using a Local PKI](ops/server/using-a-local-pki.md)
+ * Clients
+   * [Profiles](ops/client/profiles.md)
+   * [Software](ops/client/software.md)
 
- * [Upload the release](release/README.md)
- * [Configure a PKI](ops/using-a-local-pki.md)
- * [Create and sign a Server Certificate](ops/using-a-local-pki.md#creating-a-new-key)
- * Create a Deployment Manifest
- * [Configure a Client](ops/client-profiles.md)
+
+**Development**
+
+If you are interested in the development of this project, learn more about the [practices](dev) or [contributing](../CONTRIBUTING.md).

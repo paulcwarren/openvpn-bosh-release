@@ -94,8 +94,8 @@ Once a certificate is signed, you can provide it back to the requester.
 
 Once you have a PKI setup and a server key-pair configured, you can use the file data for the ``openvpn`` job properties...
 
- * `ca_crt` is `./pki/ca.crt`
- * `server_crt` is `./pki/issued/main-server.crt`
- * `server_key` is `./pki/private/main-server.key`
- * `crl_pem` is `./pki/crl.pem`
+ * `tls_key_pair.ca` is `./pki/ca.crt`
+ * `tls_key_pair.certificate` is `./pki/issued/main-server.crt`
+ * `tls_key_pair.private_key` is `./pki/private/main-server.key`
+ * `tls_crl` is `./pki/crl.pem`
  * `dh_pem` is `./pki/dh.pem`
