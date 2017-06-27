@@ -3,7 +3,6 @@
 Breaking Changes
 
  * properties are no longer prefixed with `openvpn` namespace
- * default protocol is now `udp` (this must be in sync with clients; previous default `tcp`)
  * the `openvpn` job will no longer act as a client (see the new `openvpn-client` job)
  * the `openvpn` job improves security defaults (either explicitly use older values, or upgrade clients as necessary)
     * `cipher` is now `AES-256-CBC` (this must be in sync with clients; previous default `BF-CBC`)

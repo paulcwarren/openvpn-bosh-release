@@ -1,7 +1,7 @@
 profile: |
   client
   dev tun
-  proto udp
+  proto tcp
   remote ((wan_ip)) 1194
   resolv-retry infinite
   nobind

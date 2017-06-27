@@ -22,7 +22,7 @@ provides:
       - tls_key_pair # until tls_key_pair.ca...
 properties:
   protocol:
-    default: udp
+    default: tcp
     description: "Protocol for the server"
     type: "string"
     enum:
