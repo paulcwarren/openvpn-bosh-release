@@ -73,6 +73,6 @@ When generating a certificate, you may also want to provide the user with a base
     EOF
     fi
 
-Once the user appends their private key to the profile, they can use file with their [OpenVPN client](client-software.md)...
+Once the user appends their private key to the profile, they can use file with their [OpenVPN client](software.md)...
 
     $ openvpn --config client.ovpn

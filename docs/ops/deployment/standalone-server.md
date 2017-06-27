@@ -9,7 +9,7 @@ Make sure you have several tools installed...
 
  * `bosh` - from [bosh.io](http://bosh.io/docs/cli-v2#install)
  * `ruby` - used by `bosh` to generate server configuration files
- * `openvpn` - for [connecting](../client-profiles.md) from your workstation
+ * `openvpn` - for [connecting](../users/profiles.md) from your workstation
 
 
 ## Configuration
@@ -59,7 +59,7 @@ If you want to forward system and OpenVPN logs to a syslog server, include the `
 
 #### SSH Access
 
-If you want SSH access to the VM, include the `-o with-ssh.yml` option. To use an existing public key, set `ssh.public_key` in `openvpn-creds.yml`...
+If you want SSH access with the user `openvpn`, include the `-o with-ssh.yml` option. To use an existing public key, set `ssh.public_key` in `openvpn-creds.yml`...
 
     ssh:
       public_key: ssh-rsa ....
@@ -96,6 +96,10 @@ AWS requires the additional settings that you should add to `openvpn-creds.yml` 
 
     # security group IDs to apply to the VM
     default_security_groups: [sg-a1b2c3d4]
+
+    # an already-registered key pair name, and path to the ssh private key
+    bootstrap_ssh_key_name: default
+    bootstrap_ssh_key_path: ~/.ssh/id_rsa
 
 While provisioning to AWS, SSH access will be required. Ensure port `22/tcp` is open, although it can be disabled once provisioning is finished.
 
@@ -146,7 +150,7 @@ After the command has completed, there will be an `openvpn-state.json` file - be
 
 ## Client Setup
 
-After the server is running, you can generate an OpenVPN connection profile for [a client](../client/software.md)...
+After the server is running, you can generate an OpenVPN connection profile for [a client](../users/software.md)...
 
     bosh interpolate --vars-store openvpn-client-creds.yml -l openvpn-creds.yml --path=/profile openvpn-client.yml > openvpn-client.ovpn
 
