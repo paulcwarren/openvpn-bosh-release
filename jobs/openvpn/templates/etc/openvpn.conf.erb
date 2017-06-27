@@ -34,7 +34,6 @@ push "dhcp-option DOMAIN-SEARCH <%= domain %>"
 <% p('routes').each do | route | %>
 route <%= route %>
 <% end %>
-push "persist-tun"
 push "ping 15"
 push "ping-restart 60"
 keepalive 15 60

@@ -3,13 +3,13 @@ name: "openvpn-client"
 description: |
   The `openvpn-client` job runs an OpenVPN client, connecting to a remote server.
 packages:
-  - "openvpn"
+- "openvpn"
 templates:
   bin/control: "bin/control"
   etc/profile.ovpn.erb: "etc/profile.ovpn"
 consumes:
-  - name: openvpn
-    type: openvpn
+- name: openvpn
+  type: openvpn
 properties:
   tls_key_pair:
     description: "Certificate and Private Key for the server"
@@ -28,13 +28,9 @@ properties:
     default: "tun1"
   extra_config:
     default: ~
-    description: "Custom OpenVPN configuration statements"
+    description: "Custom OpenVPN configuration statements (see [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage))"
     type: "text"
-    help: |
-          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
   extra_configs:
     default: []
-    description: "Custom OpenVPN configuration statements (array)"
-    type: "text"
-    help: |
-          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
+    description: "A list of custom OpenVPN configuration statements (see [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage))"
+    type: "string[]"

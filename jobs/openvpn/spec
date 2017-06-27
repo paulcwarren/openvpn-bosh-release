@@ -3,94 +3,74 @@ name: "openvpn"
 description: |
   The `openvpn` job provides an OpenVPN server for clients to connect to.
 packages:
-  - "openvpn"
+- "openvpn"
 templates:
   bin/write-ccd.erb: "bin/write-ccd"
   bin/control: "bin/control"
   etc/openvpn.conf.erb: "etc/openvpn.conf"
 provides:
-  - name: openvpn
-    type: openvpn
-    properties:
-      - protocol
-      - port
-      - cipher
-      - keysize
-      - tls_version_min
-      - tls_cipher
-      - tls_crypt
-      - tls_key_pair # until tls_key_pair.ca...
+- name: openvpn
+  type: openvpn
+  properties:
+  - protocol
+  - port
+  - cipher
+  - keysize
+  - tls_version_min
+  - tls_cipher
+  - tls_crypt
+  - tls_key_pair # until tls_key_pair.ca...
 properties:
   protocol:
     default: tcp
     description: "Protocol for the server"
-    type: "string"
     enum:
-      - udp
-      - tcp
+    - udp
+    - tcp
   port:
     default: 1194
     description: "Bind Port for the server"
     type: "integer"
   extra_config:
     default: ~
-    description: "Custom OpenVPN configuration statements"
+    description: "Custom OpenVPN configuration statements (see [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage))"
     type: "text"
-    help: |
-          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
   extra_configs:
     default: []
-    description: "Custom OpenVPN configuration statements (array)"
-    type: "text"
-    help: |
-          For more details, see the [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage) with all the available options.
+    description: "A list of custom OpenVPN configuration statements (see [manual](https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage))"
+    type: "string[]"
   local:
     default: "0.0.0.0"
     description: "Bind IP for the server"
     regex: "\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}"
-    type: "string"
   server:
-    description: "VPN IP and netmask"
+    description: "VPN IP and netmask (basis of the IP pool which the server will allocate to clients)"
     regex: "\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3} \\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3}"
-    type: "string"
-    help: |
-          This is the basis of the IP pool which the server will allocate to clients.
   device:
     description: "Virtual network device to use"
     default: "tun0"
   routes:
     default: []
-    description: "Routes for the local routing table"
+    description: "A list of routes for the local routing table (in the format of \"192.0.2.0 255.255.255.0\")"
     type: "string[]"
-    help: |
-          These will be added to the local kernel's routing table and should be in the format of "192.0.2.0 255.255.255.0".
   push_routes:
     default: []
-    description: "Routes to push to connecting clients"
+    description: "A list of routes to push to connecting clients (in the format of \"192.0.2.0 255.255.255.0\")"
     type: "string[]"
-    help: |
-          These should be in a format similar to "192.0.2.0 255.255.255.0".
   push_dns:
     default: []
-    description: "DNS servers to push to connecting clients"
+    description: "DNS servers to push to connecting clients to enable DNS resolution over the VPN tunnel"
     type: "string[]"
-    help: |
-          This should be a list of DNS server IP adddresses that should be pushed to
-          connecting clients to enable DNS resolution over the VPN tunnel.
   push_dns_search_domains:
     default: []
     description: "List of search domains to push to clients"
     type: "string[]"
-    help: |
-          This should be a list of domains that should be pushed to connecting clients
-          for use as DNS search domains.
   compress:
     description: "Default compression (or empty to disable)"
     default: ''
-    type: "string"
     enum:
-      - lzo
-      - lz4
+    - lzo
+    - lz4
   push_compress:
     description: "Push default compression setting to clients"
     default: true
@@ -98,7 +78,6 @@ properties:
   cipher:
     description: "Cipher for encrypting packets"
     default: "AES-256-CBC"
-    type: "string"
   keysize:
     description: "Size of cipher key in bits"
     default: 256
@@ -106,14 +85,11 @@ properties:
   tls_version_min:
     description: "The minimum TLS version accepted from peers"
     default: "1.2"
-    type: "string"
   tls_cipher:
     description: "A colon-separated list of allowable TLS ciphers"
-    type: "string"
     example: "DEFAULT:!EXP:!LOW:!MEDIUM"
   tls_crypt:
     description: "Encrypt control channel packets with private key"
-    type: "string"
   tls_key_pair:
     description: "Certificate and Private Key for the server"
     type: "certificate"
@@ -131,18 +107,12 @@ properties:
         ...
         -----END RSA PRIVATE KEY-----
   tls_crl:
-    description: "Certificate Revocation List"
+    description: "Certificate Revocation List (`X509 CRL`, including the begin/end markers)"
     type: "text"
-    help: |
-          This should include `-----BEGIN X509 CRL-----` through `-----END X509 CRL-----`.
   dh_pem:
-    description: "Diffie-Hellmann Key"
+    description: "Diffie-Hellmann Key (`DH PARAMETERS`, including the begin/end markers)"
     type: "text"
-    help: |
-          This should include `-----BEGIN DH PARAMETERS-----` through `-----END DH PARAMETERS-----`.
   ccd:
-    description: "A list of Client Configuration Directives"
-    help: |
-          This value is an array, with each client being an array whose first value is the client's common name and second value is the OpenVPN directives.
+    description: "A list of Client Configuration Directives. This value is an array, with each client being an array whose first value is the client's common name and second value is the OpenVPN directives."
     default: []
     type: "array[]"
