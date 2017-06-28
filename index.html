@@ -52,7 +52,7 @@
 
 <ul class="browser-default">
 <li>releases: <a href="https://github.com/dpb587/openvpn-bosh-release/releases">semantically versioned</a></li>
-<li>documentation: <a href="https://dpb587.github.io/openvpn-bosh-release/v3.2.2/docs"><code>docs</code> directory</a></li>
+<li>documentation: <a href="https://dpb587.github.io/openvpn-bosh-release/v4.0.0/docs"><code>docs</code> directory</a></li>
 <li>troubles: <a href="https://github.com/dpb587/openvpn-bosh-release/issues">report an issue</a></li>
 </ul>
 
@@ -61,22 +61,51 @@
 
             <div class="row">
                 <div class="col s2 right-align">
-                    <h3 style="margin:0;">3.2.2</h3>
-                    <span class="grey-text">2017-06-23</span>
+                    <h3 style="margin:0;">4.0.0</h3>
+                    <span class="grey-text">2017-06-28</span>
                 </div>
                 <div class="col s10">
                     <p style="margin-top:5px;">
-                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v3.2.2">Docs</a>
+                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v4.0.0">Docs</a>
                         &nbsp;&nbsp;
-                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v3.2.2/downloads.html">Downloads</a>
+                        <a class="modal-trigger waves-effect waves-light btn green darken-2" href="./v4.0.0/downloads.html">Downloads</a>
                         &nbsp;&nbsp;
-                        <a class="modal-trigger waves-effect waves-light white black-text btn" href="https://github.com/dpb587/openvpn-bosh-release/tree/4943797afeae4a86ec1cb07c024cc6ffdcdb1839">Source</a>
+                        <a class="modal-trigger waves-effect waves-light white black-text btn" href="https://github.com/dpb587/openvpn-bosh-release/tree/v4.0.0">Source</a>
                     </p>
                                             <div class="markdown">
-                            <p>Upgrades</p>
+                            <p><em>Please review these changes carefully - many properties and defaults have changed which may impact connectivity. While breaking changes are generally avoided, the goals of this release necessitated some significant changes. Those goals were: utilize modern BOSH features, encourage secure defaults, avoid duplicating features, and simplify configuration requirements.</em></p>
+
+<p>Breaking Changes</p>
 
 <ul class="browser-default">
-<li>openvpn 2.4.3</li>
+<li>properties are no longer prefixed with <code>openvpn</code> namespace</li>
+<li>the <code>openvpn</code> job will no longer act as a client (see the new <code>openvpn-client</code> job)</li>
+<li>the <code>openvpn</code> job improves security defaults (either explicitly use older values, or upgrade clients as necessary)
+
+<ul class="browser-default">
+<li><code>cipher</code> is now <code>AES-256-CBC</code> (this must be in sync with clients; previous default <code>BF-CBC</code>)</li>
+<li><code>tls_version_min</code> is now <code>1.2</code> (requires clients 2.3.3+; previous default <code>1.0</code>)</li>
+</ul></li>
+<li>custom iptables rules are no longer managed (use the <code>iptables</code> job of <a href="https://github.com/cloudfoundry/networking-release">networking</a> release instead)</li>
+<li>server and client certificates are now configured with the <code>tls_server</code> and <code>tls_client</code> properties, respectively (previously via <code>ca_crt</code>, <code>certificate</code>, and <code>private_key</code> properties)</li>
+<li>certificate revocation lists for <code>openvpn</code> are now configured with the <code>tls_crl</code> property (previously via <code>crl_pem</code> property)</li>
+</ul>
+
+<p>New Features</p>
+
+<ul class="browser-default">
+<li>UDP is now supported (see <code>protocol</code> property of <code>openvpn</code>)</li>
+<li>the openvpn <code>compress</code> option is now supported (see <code>compress</code> property of <code>openvpn</code>)</li>
+<li>the openvpn <code>tls-crypt</code> option is now supported (see <code>tls_crypt</code> property of <code>openvpn</code>)</li>
+<li>new <code>extra_configs</code> property of <code>openvpn</code> and <code>openvpn-client</code> (similar to <code>extra_config</code>, but accepts an array of openvpn directives)</li>
+<li>new <code>device</code> property is now supported for explicit virtual network device usage</li>
+<li>certificate-related properties can now be dynamically generated</li>
+</ul>
+
+<p>Development &amp; Tooling</p>
+
+<ul class="browser-default">
+<li>git version tags now refer to the commit a release was created from (previously the commit which finalized the release was used)</li>
 </ul>
 
                         </div>
@@ -92,6 +121,29 @@
                     </div>
                 </div>
 
+                                    <div class="row">
+                        <div class="col s2 right-align">
+                            <h3 style="margin:0;">3.2.2</h3>
+                            <span class="grey-text">2017-06-23</span>
+                        </div>
+                        <div class="col s10">
+                            <p style="margin-top:5px;">
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.2.2">Docs</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn green" href="./v3.2.2/downloads.html">Downloads</a>
+                                &nbsp;&nbsp;
+                                <a class="modal-trigger waves-effect waves-light btn white black-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/4943797afeae4a86ec1cb07c024cc6ffdcdb1839">Source</a>
+                            </p>
+                                                            <div class="markdown">
+                                    <p>Upgrades</p>
+
+<ul class="browser-default">
+<li>openvpn 2.4.3</li>
+</ul>
+
+                                </div>
+                                                    </div>
+                    </div>
                                     <div class="row">
                         <div class="col s2 right-align">
                             <h3 style="margin:0;">3.2.1</h3>
