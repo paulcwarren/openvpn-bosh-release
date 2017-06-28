@@ -19,7 +19,7 @@ provides:
   - tls_version_min
   - tls_cipher
   - tls_crypt
-  - tls_key_pair # until tls_key_pair.ca...
+  - tls_server # until tls_server.ca...
 properties:
   protocol:
     default: tcp
@@ -90,7 +90,7 @@ properties:
     example: "DEFAULT:!EXP:!LOW:!MEDIUM"
   tls_crypt:
     description: "Encrypt control channel packets with private key"
-  tls_key_pair:
+  tls_server:
     description: "Certificate and Private Key for the server"
     type: "certificate"
     example:

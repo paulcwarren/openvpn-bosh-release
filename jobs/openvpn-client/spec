@@ -8,10 +8,10 @@ templates:
   bin/control: "bin/control"
   etc/profile.ovpn.erb: "etc/profile.ovpn"
 consumes:
-- name: openvpn
+- name: server
   type: openvpn
 properties:
-  tls_key_pair:
+  tls_client:
     description: "Certificate and Private Key for the server"
     type: "certificate"
     example:

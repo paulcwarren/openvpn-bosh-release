@@ -47,10 +47,10 @@ instance_groups:
   - name: openvpn-client
     release: openvpn
     consumes:
-      openvpn:
+      server:
         from: role2
     properties:
-      tls_key_pair: ((role1_client))
+      tls_client: ((role1_client))
   instances: 1
   stemcell: default
   vm_type: default
@@ -89,10 +89,10 @@ instance_groups:
   - name: openvpn-client
     release: openvpn
     consumes:
-      openvpn:
+      server:
         from: role1
     properties:
-      tls_key_pair: ((role2_client))
+      tls_client: ((role2_client))
   instances: 1
   stemcell: default
   vm_type: default
@@ -100,7 +100,7 @@ instance_groups:
   - name: default
 properties:
   openvpn: &openvpn
-    tls_key_pair: ((server))
+    tls_server: ((server))
     dh_pem: |
       -----BEGIN DH PARAMETERS-----
       MIIBCAKCAQEA/oih/YXvkf13npOIF5LW170/V5j4R20NjL/IzgdZUYMlsQtm5zMZ

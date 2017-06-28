@@ -46,7 +46,7 @@ persist-tun
 <% end %>
 
 <ca>
-<%= p('tls_key_pair')['ca'] %>
+<%= p('tls_server')['ca'] %>
 </ca>
 
 <% if_p('tls_crypt') do | v | %>
@@ -56,11 +56,11 @@ persist-tun
 <% end %>
 
 <cert>
-<%= p('tls_key_pair')['certificate'] %>
+<%= p('tls_server')['certificate'] %>
 </cert>
 
 <key>
-<%= p('tls_key_pair')['private_key'] %>
+<%= p('tls_server')['private_key'] %>
 </key>
 
 <% if_p('tls_crl') do | v | %>

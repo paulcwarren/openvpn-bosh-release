@@ -13,7 +13,7 @@ Here's an example of consuming a [cross-deployment](https://bosh.io/docs/links.h
       - name: openvpn-client
         release: openvpn
         consumes:
-          openvpn:
+          server:
             from: openvpn
             deployment: aws-infra-vpn
 
@@ -28,7 +28,7 @@ For scenarios where the OpenVPN server is not provided by BOSH, you can manually
       - name: openvpn-client
         release: openvpn
         consumes:
-          openvpn:
+          server:
             instances:
             - address: infra-vpn.aws-use1.prod.acme.local
             properties:
@@ -36,13 +36,13 @@ For scenarios where the OpenVPN server is not provided by BOSH, you can manually
               port: 1194
               cipher: AES-256-CBC
               keysize: 256
-              tls_key_pair:
+              tls_server:
                 ca: |
                   -----BEGIN CERTIFICATE-----
                   ...
                   -----END CERTIFICATE-----
         properties:
-          tls_key_pair:
+          tls_client:
             certificate: |
               -----BEGIN CERTIFICATE-----
               ...

@@ -1,6 +1,8 @@
 # openvpn Documentation
 
-**Operations**
+## Operations
+
+For running an OpenVPN server or connecting clients to the OpenVPN network.
 
  * Server
    * [Deploying a Standalone Server](ops/deployment/standalone-server.md)
@@ -13,6 +15,6 @@
    * [Software](ops/users/software.md)
 
 
-**Development**
+## Development
 
 If you are interested in the development of this project, learn more about the [practices](dev) or [contributing](../CONTRIBUTING.md).
