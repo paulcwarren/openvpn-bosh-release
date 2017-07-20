@@ -74,7 +74,7 @@ Identify which IaaS you will be deploying to (e.g. Amazon Web Services, Google, 
 The following ingress ports are used...
 
  * `22/tcp` - SSH access (only required to enable SSH access, or for some IaaSes during provisioning)
- * `1194/udp` - OpenVPN
+ * `1194/tcp` - OpenVPN
  * `6868/tcp` - BOSH management service (only required during provisioning)
 
 You may want to restrict egress traffic, depending on your requirements.

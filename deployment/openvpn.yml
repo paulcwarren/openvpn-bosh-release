@@ -2,9 +2,8 @@
 name: openvpn
 releases:
 - name: openvpn
-  url: https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-3.2.2-on-ubuntu-trusty-stemcell-3421.9-compiled-1.20170624025614.0.tgz
-  version: 3.2.2
-  sha1: 334b6d0b86ab80d4d03d93a672b7353412e764ea
+  url: https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.11-compiled-1.20170630134749.0.tgz
+  sha1: 19e79e45b690bc933b0ff5d9e54574f25d0899b9
 - name: os-conf
   version: 11
   url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=11
@@ -36,7 +35,7 @@ instance_groups:
     release: openvpn
     properties:
       server: ((vpn_network)) ((vpn_network_mask))
-      tls_key_pair: ((server_key_pair))
+      tls_server: ((server_key_pair))
       dh_pem: |
         -----BEGIN DH PARAMETERS-----
         MIIBCAKCAQEA/oih/YXvkf13npOIF5LW170/V5j4R20NjL/IzgdZUYMlsQtm5zMZ
