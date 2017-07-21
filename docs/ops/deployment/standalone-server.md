@@ -19,12 +19,14 @@ Start a YAML configuration file named `openvpn-creds.yml` which will contain sim
     # the starting address of the VPN network assigned to clients
     vpn_network: 192.168.250.0
 
-    # the network mask (as both IP and bits)
+    # the VPN network mask (as both IP and bits)
     vpn_network_mask: 255.255.255.0
     vpn_network_mask_bits: 24
 
     # IaaS/LAN internal network
-    lan_cidr: 10.10.250.0/24
+    lan_network: 10.10.250.0
+    lan_network_mask: 255.255.255.0
+    lan_network_mask_bits: 24
     lan_gateway: 10.10.250.1
     lan_ip: 10.10.250.9
 

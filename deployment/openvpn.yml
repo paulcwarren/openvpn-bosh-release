@@ -19,7 +19,7 @@ networks:
 - name: default
   type: manual
   subnets:
-  - range: ((lan_cidr))
+  - range: ((lan_network))/((lan_network_mask_bits))
     gateway: ((lan_gateway))
     static:
     - ((lan_ip))
