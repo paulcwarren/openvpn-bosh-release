@@ -17,6 +17,9 @@ git clone --quiet file://$task_dir/repo updated-repo
 
 tar -xzf compiled-release/*.tgz $( tar -tzf compiled-release/*.tgz | grep release.MF$ )
 version=$( grep '^version:' release.MF | awk '{print $2}' | tr -d "\"'" )
+stemcell=$( grep 'stemcell:' release.MF | head -n1 | awk '{print $2}' | tr -d "\"'" )
+stemcell_os=$( echo "$stemcell" | cut -d/ -f1 )
+stemcell_version=$( echo "$stemcell" | cut -d/ -f2 )
 
 cd updated-repo/
 
@@ -34,9 +37,9 @@ export AWS_SECRET_ACCESS_KEY="$blobstore_s3_secret_access_key"
 #
 
 tarball_real=$( echo "../compiled-release/$release_name"-*.tgz )
-tarball_nice="$( basename "$( echo "$tarball_real" | sed -E 's/-compiled-1.+.tgz/.tgz/' )" )"
+tarball_nice="$release_name-$version-on-$stemcell_os-stemcell-$stemcell_version"
 
-metalink_path="compiled_releases/$release_name/$( basename "$tarball_nice" | sed 's/.tgz$//' ).meta4"
+metalink_path="releases/$release_name/$stemcell_os/$stemcell_version/$release_name-$version.meta4"
 
 mkdir -p "$( dirname "$metalink_path" )"
 
@@ -52,4 +55,4 @@ meta4 file-upload --metalink="$metalink_path" --file="$tarball_nice" "$tarball_r
 
 git add -A compiled_releases
 
-git commit -m "Finalize compiled release"
+git commit -m "Finalize compiled release ($stemcell)"
