@@ -59,8 +59,11 @@ properties:
     type: "string[]"
   push_dns:
     default: []
-    description: "DNS servers to push to connecting clients to enable DNS resolution over the VPN tunnel"
+    description: "A list of DNS servers to push to connecting clients to enable DNS resolution over the VPN tunnel"
     type: "string[]"
+    example:
+    - 8.8.4.4
+    - 8.8.8.8
   push_dns_search_domains:
     default: []
     description: "List of search domains to push to clients"
