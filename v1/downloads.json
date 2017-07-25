@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "files": [
+      {
+        "name": "openvpn-1.tgz",
+        "hashes": [
+          {
+            "type": "md5",
+            "hash": "c299ca339c89f3d6b4580adf05b4a779"
+          },
+          {
+            "type": "sha-1",
+            "hash": "de7daa47ddfc899daba52efd07e0ec9b8f5a944f"
+          },
+          {
+            "type": "sha-256",
+            "hash": "54aa68950e7a17919453870877ca554ef7c985308d7c954b49590d8bb6a47c49"
+          },
+          {
+            "type": "sha-512",
+            "hash": "f2e5b29f4e3167d7944a07cd3d1905ac3c98aeb6deb6e532bc77b1142f4cff288bb3785de7f398a3465e44bf15d243608b538b2736e0f233bf86470cc80532e3"
+          }
+        ],
+        "size": 6338197,
+        "url": [
+          {
+            "url": "https://s3.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn-1.tgz"
+          }
+        ],
+        "version": "1"
+      }
+    ],
+    "generator": "metalink.dpb587.github.io/0.0.0",
+    "published": "2016-11-27T06:58:44Z"
+  }
+]
