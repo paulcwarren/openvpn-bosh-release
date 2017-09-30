@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -eu
+
+mkdir -p /var/vcap/jobs/openvpn-clients/etc
+cd /var/vcap/jobs/openvpn-clients/etc
+
+if [ -e client*.conf ] ; then
+    rm -f client*.conf
+fi
+
+<% p('configs').each_with_index do | config, idx | %>
+cat > client<%= idx+1 %>.conf << EOF
+<%= config %>
+EOF
+<% end %>

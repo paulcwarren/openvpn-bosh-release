@@ -1,0 +1,19 @@
+---
+name: "openvpn-clients"
+description: |
+  The `openvpn-clients` job runs OpenVPN clients, connecting to a remote server.
+packages:
+- "openvpn"
+templates:
+  bin/control: "bin/control"
+  bin/pre-start: "bin/pre-start"
+consumes:
+- name: server
+  type: openvpn
+properties:
+  configs:
+    description: "A list of Client Configuration Connections"
+    help: |
+          This value is an array, with each client connection being an item.
+    default: []
+    type: "array[]"
