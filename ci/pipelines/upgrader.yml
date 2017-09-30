@@ -132,18 +132,19 @@ resources:
 - name: lzo-blob
   type: metalink-repository
   source:
-    uri: https://dpb587.github.io/upstream-blob-mirror/repository/lzo/index.xml
+    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/lzo
     version: ^2
 - name: openssl-blob
   type: metalink-repository
   source:
-    uri: https://dpb587.github.io/upstream-blob-mirror/repository/openssl/index.xml
+    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/openssl
+    skip_signature_verification: true # trust this was verified by upstream-blob-mirror rather than also maintaining keys
     version: ^1
 - name: openvpn-blob
   type: metalink-repository
   source:
-    uri: https://dpb587.github.io/upstream-blob-mirror/repository/openvpn/index.xml
-    skip_signature_verification: true
+    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/openvpn
+    skip_signature_verification: true # trust this was verified by upstream-blob-mirror rather than also maintaining keys
     version: ^2
 resource_types:
 - name: metalink-repository
