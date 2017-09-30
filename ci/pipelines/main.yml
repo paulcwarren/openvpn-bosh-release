@@ -58,6 +58,8 @@ jobs:
         state: success
 
 - name: shipit
+  serial_groups:
+  - version
   plan:
   - aggregate:
     - get: dev-release
@@ -79,9 +81,13 @@ jobs:
       blobstore_s3_secret_access_key: ((blobstore_secret_key))
       git_user_email: ((maintainer_email))
       git_user_name: ((maintainer_name))
-  - put: version
-    params:
-      file: version/number
+  - do:
+    - put: version
+      params:
+        file: version/number
+    - put: version
+      params:
+        bump: patch
   - put: finalize-repo
     params:
       rebase: true
@@ -90,8 +96,8 @@ jobs:
     params:
       repository: source-repo
       only_tag: true
-      tag: github-release/name
-      annotate: github-release/name
+      tag: /tmp/build/put/github-release/name
+      annotate: /tmp/build/put/github-release/name
   - put: github-release
     params:
       body: github-release/notes.md
@@ -126,12 +132,9 @@ jobs:
   - version
   plan:
   - get: version
-    trigger: true
     params:
       bump: patch
       pre: dev
-    passed:
-    - shipit
   - put: version
     params:
       file: version/number
