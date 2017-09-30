@@ -38,9 +38,9 @@ tls-version-min <%= v %>
 <%= server.p('tls_server')['ca'] %>
 </ca>
 
-<% server.if_p('tls_crypt') do %>
+<% server.if_p('tls_crypt') do | v | %>
 <tls-crypt>
-<%= server.p('tls_crypt') %>
+<%= v %>
 </tls-crypt>
 <% end %>
 
