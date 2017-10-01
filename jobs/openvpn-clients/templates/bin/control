@@ -3,15 +3,15 @@
 set -e
 set -u
 
-CLIENTNUM=$2
-PIDFILE=/var/vcap/sys/run/openvpn-clients/client$CLIENTNUM.pid
+CLIENT_NAME=$2
+PIDFILE=/var/vcap/sys/run/openvpn-clients/client-$CLIENT_NAME.pid
 LOGDIR=/var/vcap/sys/log/openvpn-clients
 RUNDIR=/var/vcap/sys/run/openvpn-clients
 
 mkdir -p "$LOGDIR"
 chown vcap:vcap "$LOGDIR"
 
-exec >> $LOGDIR/control-$CLIENTNUM.log
+exec >> $LOGDIR/control-$CLIENT_NAME.log
 exec 2>&1
 
 mkdir -p $( dirname "$PIDFILE" )
@@ -36,11 +36,10 @@ case $1 in
       --exec /bin/bash \
       --start \
       -- -c "/var/vcap/packages/openvpn/sbin/openvpn \
-        --config /var/vcap/jobs/openvpn-clients/etc/client$CLIENTNUM.conf \
+        --config /var/vcap/jobs/openvpn-clients/etc/client-$CLIENT_NAME.ovpn \
         --writepid $PIDFILE \
-        --dev tun$CLIENTNUM \
-        >> \"$LOGDIR/client$CLIENTNUM-stdout.log\" \
-        2>> \"$LOGDIR/client$CLIENTNUM-stderr.log\" \
+        >> \"$LOGDIR/client-$CLIENT_NAME.stdout.log\" \
+        2>> \"$LOGDIR/client-$CLIENT_NAME.stderr.log\" \
       "
 
     ;;

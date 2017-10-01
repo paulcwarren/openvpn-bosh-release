@@ -3,14 +3,24 @@
 set -eu
 
 mkdir -p /var/vcap/jobs/openvpn-clients/etc
+
 cd /var/vcap/jobs/openvpn-clients/etc
 
-if [ -e client*.conf ] ; then
-    rm -f client*.conf
+if [ -e client-*.ovpn ] ; then
+    rm -f client-*.ovpn
 fi
 
-<% p('configs').each_with_index do | config, idx | %>
-cat > client<%= idx+1 %>.conf << EOF
-<%= config %>
-EOF
+<% p('clients').each_with_index do | client, index | %>
+cat > client-<%= client['name'] %>.ovpn << EOFOPENVPNCLIENTSJOB
+# auto-generated job configuration
+client
+dev tun<%= index+2 %> # offset 2 for possible openvpn and openvpn-client jobs
+group nogroup
+user nobody
+
+# user configuration
+<%= client['config'] %>
+EOFOPENVPNCLIENTSJOB
+
+chmod 0600 client-<%= client['name'] %>.ovpn
 <% end %>
