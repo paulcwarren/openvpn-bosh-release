@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>openvpn job for openvpn/4.1.0 (dpb587/openvpn-bosh-release)</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" integrity="sha256-xbQIJkhfOw0Dry1H9lawvXRi9XcqdE8jDBZx1Op/mz8=" crossorigin="anonymous" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <style type="text/css">
+            pre {
+                background-color: #F0F0F0;
+                border: #DEDEDE solid 1px;
+                padding: 1rem;
+            }
+
+            .inherit-text {
+                color: inherit;
+            }
+        </style>
+                    <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-37464314-3', 'auto');
+              ga('send', 'pageview');
+            </script>
+            </head>
+
+    <body>
+                    <nav class="green" role="navigation">
+                <div class="nav-wrapper container">
+                                                                        <a href="https://dpb587.github.io/openvpn-bosh-release/" class="breadcrumb">openvpn</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v4.1.0/" class="breadcrumb">4.1.0</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v4.1.0/jobs.html" class="breadcrumb">jobs</a>
+                                                    <a href="https://dpb587.github.io/openvpn-bosh-release/v4.1.0/openvpn-job.html" class="breadcrumb">openvpn</a>
+                                            
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="https://github.com/dpb587/openvpn-bosh-release/tree/v4.1.0/jobs/openvpn"><i class="material-icons left">launch</i> Source</a></li>
+                    </ul>
+                </div>
+            </nav>
+        
+                    <div class="container">
+                <div class="row">
+                    <div class="col s12 m9">
+                            <div class="row">
+        <div class="col s12">
+            <h1>openvpn <span class="grey-text">job</span></h1>
+
+                            <p class="flow-text"><p class="flow-text">The <code>openvpn</code> job provides an OpenVPN server for clients to connect to.</p>
+</p>
+            
+            <p>This job is installed to <code>/var/vcap/jobs/openvpn</code>.</p>
+        </div>
+    </div>
+
+            <div class="row">
+            <div class="col s12">
+                <h2 id="properties">Properties</h2>
+
+                <p>The following properties can be configured for the job.</p>
+
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-protocol"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-protocol">protocol</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Protocol for the server</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;tcp&quot;</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-port"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-port">port</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Bind Port for the server</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>1194</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-extra_config"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-extra_config">extra_config</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Custom OpenVPN configuration statements (see <a href="https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage">manual</a>)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-extra_configs"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-extra_configs">extra_configs</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A list of custom OpenVPN configuration statements (see <a href="https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage">manual</a>)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-local"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-local">local</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Bind IP for the server</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;0.0.0.0&quot;</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-server"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-server">server</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>VPN IP and netmask (basis of the IP pool which the server will allocate to clients)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-device"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-device">device</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Virtual network device to use</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;tun0&quot;</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-routes"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-routes">routes</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A list of routes for the local routing table (in the format of "192.0.2.0 255.255.255.0")</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-push_routes"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-push_routes">push_routes</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A list of routes to push to connecting clients (in the format of "192.0.2.0 255.255.255.0")</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-push_dns"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-push_dns">push_dns</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A list of DNS servers to push to connecting clients to enable DNS resolution over the VPN tunnel</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">example</p></div>
+                            <div class="col s10">
+                                                                                                    <pre><code>- 8.8.4.4
+- 8.8.8.8</code></pre>
+                                                            </div>
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-push_dns_search_domains"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-push_dns_search_domains">push_dns_search_domains</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>List of search domains to push to clients</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-compress"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-compress">compress</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Default compression (or empty to disable)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-push_compress"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-push_compress">push_compress</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Push default compression setting to clients</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>true</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-cipher"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-cipher">cipher</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Cipher for encrypting packets</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;AES-256-CBC&quot;</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-keysize"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-keysize">keysize</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Size of cipher key in bits (deprecated)</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>256</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-tls_version_min"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-tls_version_min">tls_version_min</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>The minimum TLS version accepted from peers</p>
+
+                                </div>
+                            </div>
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">default</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;1.2&quot;</code></p>
+                                                            </div>
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-tls_cipher"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-tls_cipher">tls_cipher</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A colon-separated list of allowable TLS ciphers</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">example</p></div>
+                            <div class="col s10">
+                                                                                                    <p><code>&quot;DEFAULT:!EXP:!LOW:!MEDIUM&quot;</code></p>
+                                                            </div>
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-tls_crypt"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-tls_crypt">tls_crypt</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Encrypt control channel packets with private key</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-tls_server"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-tls_server">tls_server</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Certificate and Private Key for the server</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                                    <div class="col s2 right-align"><p class="grey-text">example</p></div>
+                            <div class="col s10">
+                                                                                                    <pre><code>ca: &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n&quot;
+certificate: &quot;-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n&quot;
+private_key: &quot;-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----\n&quot;</code></pre>
+                                                            </div>
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-tls_crl"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-tls_crl">tls_crl</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Certificate Revocation List (<code>X509 CRL</code>, including the begin/end markers)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-dh_pem"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-dh_pem">dh_pem</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>Diffie-Hellmann Key (<code>DH PARAMETERS</code>, including the begin/end markers)</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#property-ccd"><i class="material-icons tiny">assignment</i></a></h5></div>
+                        <div class="col s10"><h5 id="property-ccd">ccd</h5></div>
+
+                                                    <div class="col s2 right-align"><p class="grey-text">note</p></div>
+                            <div class="col s10">
+                                <div class="markdown">
+                                    <p>A list of Client Configuration Directives. This value is an array, with each client being an array whose first value is the client's common name and second value is the OpenVPN directives.</p>
+
+                                </div>
+                            </div>
+                        
+                        
+                                            </div>
+                            </div>
+        </div>
+    
+            <div class="row">
+            <div class="col s12">
+                <h2 id="links">Links</h2>
+
+                <p>The following links are consumed and provided.</p>
+
+                                    <div class="row">
+                        <div class="col s2"><h5 class="right-align"><a href="#provides-openvpn"><i class="material-icons tiny" title="provides">call_made</i></a></h5></div>
+                        <div class="col s10"><h5 id="provides-openvpn">openvpn</h5></div>
+
+                        <div class="col s2 right-align"><p class="grey-text">type</p></div>
+                        <div class="col s10"><p><code>openvpn</code></p></div>
+
+                        <div class="col s2 right-align"><p class="grey-text">properties</p></div>
+                        <div class="col s10">
+                            <p>
+                                <code>protocol</code>, <code>port</code>, <code>cipher</code>, <code>keysize</code>, <code>tls_version_min</code>, <code>tls_cipher</code>, <code>tls_crypt</code>, <code>tls_server</code>                            </p>
+                        </div>
+                    </div>
+                
+                            </div>
+        </div>
+    
+            <div class="row">
+            <div class="col s12">
+                <h2 id="packages">Packages</h2>
+
+                <p>The job depends on the following packages installed in <code>/var/vcap/packages</code>.</p>
+
+                <ul class="collection">
+                                            <li class="collection-item"><a href="openvpn-package.html">openvpn</a></li>
+                                    </ul>
+            </div>
+        </div>
+    
+    <div class="row">
+        <div class="col s12">
+            <h2 id="templates">Templates</h2>
+
+            <p>The following templates are rendered and installed in <code>/var/vcap/jobs/openvpn</code>.</p>
+
+            <ul class="collection">
+                                    <li class="collection-item"><a href="https://github.com/dpb587/openvpn-bosh-release/blob/bbc6b3aefa6ee675e94f9c742c05cc11a50db119/jobs/openvpn/templates/bin/control">bin/control</a></li>
+                                    <li class="collection-item"><a href="https://github.com/dpb587/openvpn-bosh-release/blob/bbc6b3aefa6ee675e94f9c742c05cc11a50db119/jobs/openvpn/templates/bin/write-ccd.erb">bin/write-ccd</a></li>
+                                    <li class="collection-item"><a href="https://github.com/dpb587/openvpn-bosh-release/blob/bbc6b3aefa6ee675e94f9c742c05cc11a50db119/jobs/openvpn/templates/etc/openvpn.conf.erb">etc/openvpn.conf</a></li>
+                                <li class="collection-item"><a href="https://github.com/dpb587/openvpn-bosh-release/blob/bbc6b3aefa6ee675e94f9c742c05cc11a50db119/jobs/openvpn/monit">monit</a></li>
+            </ul>
+        </div>
+    </div>
+                    </div>
+
+                    <div class="col s12 m3">
+                        <div class="section">
+                            
+                            <div class="table-of-contents pin-top hide-on-small-only">
+                                    <ul class="collection">
+                    <li class="collection-item"><a href="#properties">Properties</a></li>
+                            <li class="collection-item"><a href="#links">Links</a></li>
+                            <li class="collection-item"><a href="#packages">Packages</a></li>
+                <li class="collection-item"><a href="#templates">Templates</a></li>
+    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                    <footer class="page-footer green">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">dpb587/openvpn-bosh-release</h5>
+                            <div class="grey-text text-lighten-4"><p>A <a class="grey-text text-lighten-4" href="https://bosh.io/">BOSH</a> release to help manage an <a class="grey-text text-lighten-4" href="https://openvpn.net/index.php/open-source.html">OpenVPN</a> network with servers or clients.</p>
+</div>
+                        </div>
+                                                                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Operators</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://dpb587.github.io/openvpn-bosh-release">Home Page</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/ops">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/issues">Issues</a></li>
+                                                                    </ul>
+                            </div>
+                                                    <div class="col l3 s12 right-align">
+                                <h5 class="white-text">Developers</h5>
+                                <ul>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release">Repository</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/tree/master/docs/dev">Documentation</a></li>
+                                                                            <li><a class="white-text" href="https://github.com/dpb587/openvpn-bosh-release/blob/master/CONTRIBUTING.md">Contributing</a></li>
+                                                                    </ul>
+                            </div>
+                                            </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container green-text text-lighten-4">
+                        <div class="row" style="margin-bottom:0;">
+                            <div class="col s12 m8">
+                                Copyright 2017 Danny Berger
+
+                            </div>
+                            <div class="col s12 m4 right-align">
+                                Generated by <a class="green-text text-lighten-4" href="https://dpb587.github.io/bosh-valise/">dpb587/bosh-valise</a>
+                            </div>
+                        </div>
+                    </div>
+            </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js" integrity="sha256-lVmbGVbzHBkNHCUK0y+z2AyJei/v7jSNYppXTcq2FtU=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $('h2').scrollSpy();
+                $('.pin-top').pushpin({
+                    top: 72
+                });
+            });
+        </script>
+            </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "openvpn-clients",
+  "description": "The `openvpn-clients` job runs OpenVPN clients, connecting to a remote server.\n\nUse this to establish multiple connections or for more advanced configurations which are unsupported by the `openvpn-client` job.\n",
+  "packages": [
+    "openvpn"
+  ],
+  "templates": {
+    "bin/control": "bin/control",
+    "bin/pre-start": "bin/pre-start"
+  },
+  "properties": {
+    "clients": {
+      "description": "An array of Client Configuration connections",
+      "help": "This value is an array of client connections. Each connection must have a `name` and `config` property.\nThe client name must be a simple string of a-z, 0-9, or dashes.\n",
+      "default": [
+
+      ],
+      "type": "[]map[string]string",
+      "example": [
+        {
+          "name": "aws-us-east-1",
+          "config": "remote vpn.aws-us-east-1.staging-snowstorm.internal.example.com 1194 tcp\n...snip...\n<cert>\n...\n</cert>\n<key>\n...\n</key>\n"
+        },
+        {
+          "name": "google-a1",
+          "config": "remote vpn.google-a1.staging-snowstorm.internal.example.com 1194 tcp\n...snip...\n<cert>\n...\n</cert>\n<key>\n...\n</key>\n"
+        }
+      ]
+    }
+  }
+}
