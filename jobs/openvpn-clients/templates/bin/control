@@ -1,0 +1,64 @@
+#!/bin/bash
+
+set -e
+set -u
+
+CLIENT_NAME=$2
+PIDFILE=/var/vcap/sys/run/openvpn-clients/client-$CLIENT_NAME.pid
+LOGDIR=/var/vcap/sys/log/openvpn-clients
+RUNDIR=/var/vcap/sys/run/openvpn-clients
+
+mkdir -p "$LOGDIR"
+chown vcap:vcap "$LOGDIR"
+
+exec >> $LOGDIR/control-$CLIENT_NAME.log
+exec 2>&1
+
+mkdir -p $( dirname "$PIDFILE" )
+chown vcap:vcap $( dirname "$PIDFILE" )
+
+mkdir -p "$RUNDIR"
+chown vcap:vcap "$RUNDIR"
+
+export LD_LIBRARY_PATH="/var/vcap/packages/openvpn/external/openssl/lib:${LD_LIBRARY_PATH:-}"
+
+case $1 in
+
+  start)
+    if [ ! -e /dev/net/tun ] ; then
+      mkdir -p /dev/net
+      mknod /dev/net/tun c 10 200
+    fi
+
+    /sbin/start-stop-daemon \
+      --background \
+      --pidfile "$PIDFILE" \
+      --exec /bin/bash \
+      --start \
+      -- -c "/var/vcap/packages/openvpn/sbin/openvpn \
+        --config /var/vcap/jobs/openvpn-clients/etc/client-$CLIENT_NAME.ovpn \
+        --writepid $PIDFILE \
+        >> \"$LOGDIR/client-$CLIENT_NAME.stdout.log\" \
+        2>> \"$LOGDIR/client-$CLIENT_NAME.stderr.log\" \
+      "
+
+    ;;
+
+  stop)
+    /sbin/start-stop-daemon \
+      --pidfile "$PIDFILE" \
+      --signal TERM \
+      --oknodo \
+      --stop \
+      --retry 15
+
+    ;;
+
+  *)
+    echo "Usage: control {start|stop}" >&2
+
+    exit 1
+
+    ;;
+
+esac

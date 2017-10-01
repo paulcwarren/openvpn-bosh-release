@@ -1,0 +1,7 @@
+<% p('clients').each do | client | %>
+check process openvpn-client-<%= client['name'] %> with pidfile /var/vcap/sys/run/openvpn-clients/client-<%= client['name'] %>.pid
+  group vcap
+  start program = "/var/vcap/jobs/openvpn-clients/bin/control start <%= client['name'] %>"
+  stop program = "/var/vcap/jobs/openvpn-clients/bin/control stop <%= client['name'] %>"
+
+<% end %>
