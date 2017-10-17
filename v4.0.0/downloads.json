@@ -138,7 +138,7 @@
   {
     "files": [
       {
-        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.18",
+        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.18.tgz",
         "hashes": [
           {
             "type": "md5",
@@ -172,7 +172,7 @@
   {
     "files": [
       {
-        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.19",
+        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.19.tgz",
         "hashes": [
           {
             "type": "md5",
@@ -206,7 +206,7 @@
   {
     "files": [
       {
-        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.20",
+        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.20.tgz",
         "hashes": [
           {
             "type": "md5",
@@ -240,7 +240,7 @@
   {
     "files": [
       {
-        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.24",
+        "name": "openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.24.tgz",
         "hashes": [
           {
             "type": "md5",

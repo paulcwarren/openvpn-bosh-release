@@ -62,8 +62,8 @@
                         </p>
 
                         <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
-  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz</a> \
-  --sha1=121eb90d88d6239970dbbfb4a4877a83ff033a61</code></pre>
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn/openvpn-4.1.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn/openvpn-4.1.0.tgz</a> \
+  --sha1=88173b93582dc5321f47a9faa7b2e8de9333a501</code></pre>
 
                         <div class="center-align">
                             &mdash; OR &mdash;
@@ -71,13 +71,95 @@
 
                         <pre><code>- name: openvpn
   version: 4.1.0
-  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz</a>
-  sha1: 121eb90d88d6239970dbbfb4a4877a83ff033a61</code></pre>
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn/openvpn-4.1.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn/openvpn-4.1.0.tgz</a>
+  sha1: 88173b93582dc5321f47a9faa7b2e8de9333a501</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     
+            <div class="row">
+            <div class="col s12">
+                <h2 id="compiled-release">Compiled Release</h2>
+
+                <p>
+                    A compiled release has been compiled for a specific OS and stemcell version, avoiding the need to compile during deploy.
+                </p>
+
+                <form id="compiled-release-picker">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select name="os">
+                                                                    <option value="ubuntu-trusty">Ubuntu Trusty</option>
+                                                            </select>
+                            <label>Operating System</label>
+                        </div>
+                        <div class="input-field col s6">
+                                                                                                                                                                                                                                                                                                                                                            <select name="stemcell">
+                                                                    <option value="3468">3468</option>
+                                                                    <option value="3445.11">3445.11</option>
+                                                                    <option value="3421.26">3421.26</option>
+                                                            </select>
+                            <label>Stemcell Version</label>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="compiled-release-snippets">
+                                            <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468-compiled-1.20171017141355.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468-compiled-1.20171017141355.0.tgz</a> \
+  --sha1=3ddea18dcf1710fd8034a7f073410e8cf5e82fb7</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.1.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468-compiled-1.20171017141355.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468-compiled-1.20171017141355.0.tgz</a>
+  sha1: 3ddea18dcf1710fd8034a7f073410e8cf5e82fb7</code></pre>
+                            </div>
+                        </div>
+                                            <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3445.11">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171001031155.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171001031155.0.tgz</a> \
+  --sha1=38bfd179ff563d9ccf3d16c9f6467dc37605e786</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.1.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171001031155.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171001031155.0.tgz</a>
+  sha1: 38bfd179ff563d9ccf3d16c9f6467dc37605e786</code></pre>
+                            </div>
+                        </div>
+                                            <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.26">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz</a> \
+  --sha1=121eb90d88d6239970dbbfb4a4877a83ff033a61</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.1.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3421.26-compiled-1.20171001025215.0.tgz</a>
+  sha1: 121eb90d88d6239970dbbfb4a4877a83ff033a61</code></pre>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+        </div>
     
     <div class="row">
         <div class="col s12">
@@ -106,7 +188,8 @@ git checkout v4.1.0</code></pre>
                             <div class="table-of-contents pin-top hide-on-small-only">
                                     <ul class="collection">
                     <li class="collection-item"><a href="#source-release">Source Release</a></li>
-                        <li class="collection-item"><a href="#source">Source Code</a></li>
+                            <li class="collection-item"><a href="#compiled-release">Compiled Release</a></li>
+                <li class="collection-item"><a href="#source">Source Code</a></li>
     </ul>
                             </div>
                         </div>
@@ -164,5 +247,26 @@ git checkout v4.1.0</code></pre>
                 });
             });
         </script>
-                </body>
+                    <script type="text/javascript">
+            $(document).ready(function () {
+                $('select').material_select();
+
+                var snippets = $('div.row[data-compiled-release-os]', '#compiled-release-snippets');
+                var formos = $('select[name=os]', 'form#compiled-release-picker')[0];
+                var formstemcell = $('select[name=stemcell]', 'form#compiled-release-picker')[0];
+
+                $([formos, formstemcell]).change(function () {
+                    snippets.each(function () {
+                        var snippet = $(this);
+
+                        if (snippet.attr('data-compiled-release-os') == formos.value && snippet.attr('data-compiled-release-stemcell') == formstemcell.value) {
+                            snippet.removeClass('hide');
+                        } else {
+                            snippet.addClass('hide');
+                        }
+                    })
+                });
+            })
+        </script>
+        </body>
 </html>
