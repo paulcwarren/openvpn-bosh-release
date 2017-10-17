@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metalink xmlns="urn:ietf:params:xml:ns:metalink">
-  <file name="openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.18">
+  <file name="openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.18.tgz">
     <hash type="md5">46ad1d9e3be08bebddd46837969c2828</hash>
     <hash type="sha-1">39c1e11955eb2b5bc831d8df9e268b9632696f05</hash>
     <hash type="sha-256">27fcfd829a3314a146ef92e2eddc691b88d047ed5b20a63b3d48e6ee4adfae8e</hash>

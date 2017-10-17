@@ -37,7 +37,7 @@ export AWS_SECRET_ACCESS_KEY="$blobstore_s3_secret_access_key"
 #
 
 tarball_real=$( echo "../compiled-release/$release_name"-*.tgz )
-tarball_nice="$release_name-$version-on-$stemcell_os-stemcell-$stemcell_version"
+tarball_nice="$release_name-$version-on-$stemcell_os-stemcell-$stemcell_version.tgz"
 
 metalink_path="releases/$release_name/$stemcell_os/$stemcell_version/$release_name-$version.meta4"
 
