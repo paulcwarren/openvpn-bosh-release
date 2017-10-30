@@ -2,8 +2,8 @@
 name: openvpn
 releases:
 - name: openvpn
-  url: https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.0.0-on-ubuntu-trusty-stemcell-3421.11-compiled-1.20170630134749.0.tgz
-  sha1: 19e79e45b690bc933b0ff5d9e54574f25d0899b9
+  url: https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468-compiled-1.20171017141355.0.tgz
+  sha1: 3ddea18dcf1710fd8034a7f073410e8cf5e82fb7
 - name: os-conf
   version: 11
   url: https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=11
