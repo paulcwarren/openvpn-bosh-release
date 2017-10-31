@@ -8,8 +8,8 @@
 - type: replace
   path: /resource_pools/name=default/stemcell?
   value:
-    url: https://bosh.io/d/stemcells/bosh-google-kvm-ubuntu-trusty-go_agent?v=3421.9
-    sha1: 408f78a2091d108bb5418964026e73c822def32d
+    url: https://s3.amazonaws.com/bosh-gce-light-stemcells/light-bosh-stemcell-3468.1-google-kvm-ubuntu-trusty-go_agent.tgz
+    sha1: e7ec554900af7140d8e947f629af5d5c0a9defc3
 - type: replace
   path: /resource_pools/name=default/cloud_properties?
   value:
