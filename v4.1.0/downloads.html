@@ -95,7 +95,8 @@
                             <label>Operating System</label>
                         </div>
                         <div class="input-field col s6">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select name="stemcell">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <select name="stemcell">
+                                                                    <option value="3468.5">3468.5</option>
                                                                     <option value="3468.1">3468.1</option>
                                                                     <option value="3468">3468</option>
                                                                     <option value="3445.11">3445.11</option>
@@ -108,7 +109,24 @@
                 </form>
 
                 <div id="compiled-release-snippets">
-                                            <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.1">
+                                            <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.5">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468.5-compiled-1.20171111071124.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468.5-compiled-1.20171111071124.0.tgz</a> \
+  --sha1=12144db1de30c72f9aa8870a72f21ebae54ce479</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.1.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468.5-compiled-1.20171111071124.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.1.0-on-ubuntu-trusty-stemcell-3468.5-compiled-1.20171111071124.0.tgz</a>
+  sha1: 12144db1de30c72f9aa8870a72f21ebae54ce479</code></pre>
+                            </div>
+                        </div>
+                                            <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.1">
                             <div class="col s12">
 
                                 <pre><code>bosh upload-release --name=openvpn --version=4.1.0 \
