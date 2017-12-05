@@ -2,6 +2,7 @@ groups:
 - name: all
   jobs:
   - ubuntu-trusty-latest
+  - ubuntu-trusty-3468.x
   - ubuntu-trusty-3445.x
   - ubuntu-trusty-3421.x
 jobs:
@@ -15,6 +16,33 @@ jobs:
       trigger: true
     - get: stemcell
       resource: ubuntu-trusty-latest
+      trigger: true
+  - get: release-compiler
+  - task: compile-release
+    file: release-compiler/concourse/execute-local-bosh.yml
+    privileged: true
+  - get: repo
+  - task: finalize-compiled-release
+    file: repo/ci/tasks/finalize-compiled-release/task.yml
+    params:
+      blobstore_s3_access_key_id: ((blobstore_access_key))
+      blobstore_s3_secret_access_key: ((blobstore_secret_key))
+      git_user_email: ((maintainer_email))
+      git_user_name: ((maintainer_name))
+  - put: repo
+    params:
+      rebase: true
+      repository: repo
+- name: ubuntu-trusty-3468.x
+  serial_groups:
+  - pipeline
+  plan:
+  - aggregate:
+    - get: release
+      resource: openvpn-release
+      trigger: true
+    - get: stemcell
+      resource: ubuntu-trusty-3468.x
       trigger: true
   - get: release-compiler
   - task: compile-release
@@ -105,7 +133,7 @@ resources:
   type: metalink-repository
   source:
     uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/bosh.io/stemcell/bosh-warden-boshlite-ubuntu-trusty-go_agent
-    version: ">= 3446"
+    version: ">= 3469"
 - name: ubuntu-trusty-3421.x
   type: metalink-repository
   source:
@@ -116,6 +144,11 @@ resources:
   source:
     uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/bosh.io/stemcell/bosh-warden-boshlite-ubuntu-trusty-go_agent
     version: ^3445
+- name: ubuntu-trusty-3468.x
+  type: metalink-repository
+  source:
+    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/bosh.io/stemcell/bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: ^3468
 resource_types:
 - name: metalink-repository
   type: docker-image
