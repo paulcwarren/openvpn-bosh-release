@@ -3,6 +3,8 @@
 set -e
 set -u
 
+cpus=$( grep -c ^processor /proc/cpuinfo )
+
 ( cd openssl
 
   tar -xzf openssl-*.tar.gz
@@ -14,7 +16,7 @@ set -u
     --prefix=${BOSH_INSTALL_TARGET}/external/openssl \
     --openssldir=${BOSH_INSTALL_TARGET}/external/openssldir
 
-  make
+  make -j$cpus
   make install
 )
 
@@ -26,7 +28,7 @@ set -u
   ./configure \
     --prefix=${BOSH_INSTALL_TARGET}/external/lzo \
 
-  make
+  make -j$cpus
   make install
 )
 
@@ -46,6 +48,6 @@ set -u
     --prefix=${BOSH_INSTALL_TARGET} \
     --disable-plugin-auth-pam
 
-  make
+  make -j$cpus
   make install
 )
