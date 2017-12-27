@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <metalink xmlns="urn:ietf:params:xml:ns:metalink">
   <file name="openvpn-2.4.1.tar.gz">
     <hash type="md5">01c2a737c464204c79b17c9ab33fe640</hash>
