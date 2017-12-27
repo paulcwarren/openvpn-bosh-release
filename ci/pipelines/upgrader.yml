@@ -1,127 +1,15 @@
-groups:
-- name: all
-  jobs:
-  - test-lzo
-  - bump-lzo
-  - test-openssl
-  - bump-openssl
-  - test-openvpn
-  - bump-openvpn
-jobs:
-- name: test-lzo
-  plan:
-  - get: blob
-    resource: lzo-blob
-    trigger: true
-  - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: lzo
+metalink_upgrader_pipeline:
+  after_sync_blobs:
   - task: create-dev-release
     file: repo/ci/tasks/create-dev-release/task.yml
   - task: integration-test
     file: repo/ci/tasks/integration-test/task.yml
     privileged: true
-- name: bump-lzo
-  plan:
-  - aggregate:
-    - get: blob
-      resource: lzo-blob
-      passed:
-      - test-lzo
-    - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: lzo
-  - task: upload-blobs
-    file: repo/ci/tasks/upload-blobs/task.yml
-    params:
-      blobstore_s3_access_key_id: ((blobstore_access_key))
-      blobstore_s3_secret_access_key: ((blobstore_secret_key))
-      git_message: "Update lzo blobs"
-      git_user_email: ((maintainer_email))
-      git_user_name: ((maintainer_name))
+  after_upload_blobs:
   - put: repo
     params:
       repository: repo
-- name: test-openssl
-  plan:
-  - get: blob
-    resource: openssl-blob
-    trigger: true
-  - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: openssl
-  - task: create-dev-release
-    file: repo/ci/tasks/create-dev-release/task.yml
-  - task: integration-test
-    file: repo/ci/tasks/integration-test/task.yml
-    privileged: true
-- name: bump-openssl
-  plan:
-  - aggregate:
-    - get: blob
-      resource: openssl-blob
-      passed:
-      - test-openssl
-    - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: openssl
-  - task: upload-blobs
-    file: repo/ci/tasks/upload-blobs/task.yml
-    params:
-      blobstore_s3_access_key_id: ((blobstore_access_key))
-      blobstore_s3_secret_access_key: ((blobstore_secret_key))
-      git_message: "Update openssl blobs"
-      git_user_email: ((maintainer_email))
-      git_user_name: ((maintainer_name))
-  - put: repo
-    params:
-      repository: repo
-- name: test-openvpn
-  plan:
-  - get: blob
-    resource: openvpn-blob
-    trigger: true
-  - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: openvpn
-  - task: create-dev-release
-    file: repo/ci/tasks/create-dev-release/task.yml
-  - task: integration-test
-    file: repo/ci/tasks/integration-test/task.yml
-    privileged: true
-- name: bump-openvpn
-  plan:
-  - aggregate:
-    - get: blob
-      resource: openvpn-blob
-      passed:
-      - test-openvpn
-    - get: repo
-  - task: update-blob
-    file: repo/ci/tasks/import-metalink-blob/task.yml
-    params:
-      blob: openvpn
-  - task: upload-blobs
-    file: repo/ci/tasks/upload-blobs/task.yml
-    params:
-      blobstore_s3_access_key_id: ((blobstore_access_key))
-      blobstore_s3_secret_access_key: ((blobstore_secret_key))
-      git_message: "Update openvpn blobs"
-      git_user_email: ((maintainer_email))
-      git_user_name: ((maintainer_name))
-  - put: repo
-    params:
-      repository: repo
+      rebase: true
 resources:
 - name: repo
   type: git
@@ -129,25 +17,3 @@ resources:
     branch: master
     private_key: ((git_private_key))
     uri: git@github.com:dpb587/openvpn-bosh-release.git
-- name: lzo-blob
-  type: metalink-repository
-  source:
-    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/lzo
-    version: ^2
-- name: openssl-blob
-  type: metalink-repository
-  source:
-    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/openssl
-    skip_signature_verification: true # trust this was verified by upstream-blob-mirror rather than also maintaining keys
-    version: ^1
-- name: openvpn-blob
-  type: metalink-repository
-  source:
-    uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/openvpn
-    skip_signature_verification: true # trust this was verified by upstream-blob-mirror rather than also maintaining keys
-    version: ^2
-resource_types:
-- name: metalink-repository
-  type: docker-image
-  source:
-    repository: dpb587/metalink-repository-resource
