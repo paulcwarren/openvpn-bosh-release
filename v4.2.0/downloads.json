@@ -236,5 +236,39 @@
     ],
     "generator": "metalink.dpb587.github.io/0.0.0",
     "published": "2018-01-18T06:21:37Z"
+  },
+  {
+    "files": [
+      {
+        "name": "openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.20.tgz",
+        "hashes": [
+          {
+            "type": "md5",
+            "hash": "f4a033d0edbeb8ba54c8a49680896a34"
+          },
+          {
+            "type": "sha-1",
+            "hash": "e4f846e85fb3111ae63f5ed48687c687cb0c1313"
+          },
+          {
+            "type": "sha-256",
+            "hash": "9cfce096a146c0530ce66e4f9935e317ca58f1b0956ea09fbb0c3bf7d1fefccf"
+          },
+          {
+            "type": "sha-512",
+            "hash": "05f7b19e8731d887e6aff828817c19526f274d19fdc89db477c332e9f0806afa638004dbb8bc9ae6118fdf867cd1fb57b5c327db84a8c4e56bf4823baf27ebca"
+          }
+        ],
+        "size": 5728472,
+        "url": [
+          {
+            "url": "https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.20-compiled-1.20180123130647.0.tgz"
+          }
+        ],
+        "version": "4.2.0"
+      }
+    ],
+    "generator": "metalink.dpb587.github.io/0.0.0",
+    "published": "2018-01-23T13:09:41Z"
   }
 ]
