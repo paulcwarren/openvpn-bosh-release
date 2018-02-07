@@ -95,13 +95,15 @@
                             <label>Operating System</label>
                         </div>
                         <div class="input-field col s6">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select name="stemcell">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <select name="stemcell">
+                                                                    <option value="3468.22">3468.22</option>
                                                                     <option value="3468.21">3468.21</option>
                                                                     <option value="3468.20">3468.20</option>
                                                                     <option value="3468.19">3468.19</option>
                                                                     <option value="3468.15">3468.15</option>
                                                                     <option value="3468.13">3468.13</option>
                                                                     <option value="3445.11">3445.11</option>
+                                                                    <option value="3421.39">3421.39</option>
                                                                     <option value="3421.38">3421.38</option>
                                                                     <option value="3421.36">3421.36</option>
                                                                     <option value="3421.34">3421.34</option>
@@ -112,7 +114,25 @@
                 </form>
 
                 <div id="compiled-release-snippets">
-                                            <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.21">
+                                            <div class="row" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.22">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.2.0 --stemcell=ubuntu-trusty/3468.22 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.22-compiled-1.20180207023430.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.22-compiled-1.20180207023430.0.tgz</a> \
+  --sha1=967054a5f2a36bc55f690fc4cf3948175eaae40c</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.2.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.22-compiled-1.20180207023430.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3468.22-compiled-1.20180207023430.0.tgz</a>
+  sha1: 967054a5f2a36bc55f690fc4cf3948175eaae40c
+  stemcell: { os: ubuntu-trusty, version: 3468.22 }</code></pre>
+                            </div>
+                        </div>
+                                            <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3468.21">
                             <div class="col s12">
 
                                 <pre><code>bosh upload-release --name=openvpn --version=4.2.0 --stemcell=ubuntu-trusty/3468.21 \
@@ -218,6 +238,24 @@
   url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171211055123.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3445.11-compiled-1.20171211055123.0.tgz</a>
   sha1: 661118f7f6f51c1e4afbd72e12fd97bc28eae349
   stemcell: { os: ubuntu-trusty, version: 3445.11 }</code></pre>
+                            </div>
+                        </div>
+                                            <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.39">
+                            <div class="col s12">
+
+                                <pre><code>bosh upload-release --name=openvpn --version=4.2.0 --stemcell=ubuntu-trusty/3421.39 \
+  <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3421.39-compiled-1.20180207024845.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3421.39-compiled-1.20180207024845.0.tgz</a> \
+  --sha1=60b552b32d8476b8475520eefc3a9140db3654d3</code></pre>
+
+                                <div class="center-align">
+                                    &mdash; OR &mdash;
+                                </div>
+
+                                <pre><code>- name: openvpn
+  version: 4.2.0
+  url: <a class="inherit-text" href="https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3421.39-compiled-1.20180207024845.0.tgz">https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.0-on-ubuntu-trusty-stemcell-3421.39-compiled-1.20180207024845.0.tgz</a>
+  sha1: 60b552b32d8476b8475520eefc3a9140db3654d3
+  stemcell: { os: ubuntu-trusty, version: 3421.39 }</code></pre>
                             </div>
                         </div>
                                             <div class="row hide" data-compiled-release-os="ubuntu-trusty" data-compiled-release-stemcell="3421.38">
