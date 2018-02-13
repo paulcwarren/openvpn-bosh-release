@@ -12,9 +12,9 @@ source /tmp/local-bosh/director/env
 
 bosh upload-stemcell \
   --name=bosh-warden-boshlite-ubuntu-trusty-go_agent \
-  --version=3421.9 \
-  --sha1=1396d7877204e630b9e77ae680f492d26607461d \
-  https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3421.9-warden-boshlite-ubuntu-trusty-go_agent.tgz
+  --version=3541.2 \
+  --sha1=314b3144192db02f29e086ffbf928792ae3789fa \
+  https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3541.2-warden-boshlite-ubuntu-trusty-go_agent.tgz
 
 export BOSH_DEPLOYMENT=integration-test
 
