@@ -1,0 +1,70 @@
+[
+  {
+    "files": [
+      {
+        "name": "openvpn-4.2.1.tgz",
+        "hashes": [
+          {
+            "type": "md5",
+            "hash": "ea583f4f3d591179564565b1b60dfb62"
+          },
+          {
+            "type": "sha-1",
+            "hash": "cbaca9fe8ceffb13ea1d481ad49fd5a706afbe9c"
+          },
+          {
+            "type": "sha-256",
+            "hash": "b3fd37b13f9048925c9e09728026dab9d13c94e2ade8e1f544c8379c6b07c0a9"
+          },
+          {
+            "type": "sha-512",
+            "hash": "9e065cb0cff96c9e478c260a88f1d934341b3144e50e5a27ef423fd8761088afe758867552637a5a7aafd6fa6eb073eb8fa34e7f1a3673e52caff1199daf905f"
+          }
+        ],
+        "size": 7398828,
+        "url": [
+          {
+            "url": "https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/releases/openvpn/openvpn-4.2.1.tgz"
+          }
+        ],
+        "version": "4.2.1"
+      }
+    ],
+    "generator": "metalink.dpb587.github.io/0.0.0",
+    "published": "2018-02-13T06:03:39Z"
+  },
+  {
+    "files": [
+      {
+        "name": "openvpn-4.2.1-on-ubuntu-trusty-stemcell-3541.2.tgz",
+        "hashes": [
+          {
+            "type": "md5",
+            "hash": "717e3f8d48dc27948cddd874b532b340"
+          },
+          {
+            "type": "sha-1",
+            "hash": "38487a4d581d1efb10a158eee10c655f723d078a"
+          },
+          {
+            "type": "sha-256",
+            "hash": "8d4e4943f1e60e4f4d85cbc600caccbd668b35caf3ef811f71800d213f7f942b"
+          },
+          {
+            "type": "sha-512",
+            "hash": "8ff295876e766fcbe211ef673e47fa25a58bb97fe3543b7d3eec78136a8a2b3f59bb86596fdb4db39355c7b03d284b053543a61243a3ceae397cea8fc760bb0d"
+          }
+        ],
+        "size": 5728907,
+        "url": [
+          {
+            "url": "https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.1-on-ubuntu-trusty-stemcell-3541.2-compiled-1.20180213061728.0.tgz"
+          }
+        ],
+        "version": "4.2.1"
+      }
+    ],
+    "generator": "metalink.dpb587.github.io/0.0.0",
+    "published": "2018-02-13T06:21:17Z"
+  }
+]

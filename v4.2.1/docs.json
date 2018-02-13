@@ -1,0 +1,10 @@
+[
+  "README.md",
+  "dev/README.md",
+  "ops/client/server-link.md",
+  "ops/deployment/standalone-server.md",
+  "ops/server/advanced-settings.md",
+  "ops/server/using-a-local-pki.md",
+  "ops/users/profiles.md",
+  "ops/users/software.md"
+]
