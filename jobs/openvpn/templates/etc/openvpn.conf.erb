@@ -1,4 +1,5 @@
 mode server
+tmp-dir /var/vcap/data/tmp/openvpn
 writepid /var/vcap/sys/run/openvpn/openvpn.pid
 client-config-dir /var/vcap/data/openvpn-ccd
 cipher <%= p('cipher') %>
@@ -7,10 +8,11 @@ keysize <%= p('keysize') %>
 tls-cipher <%= v %>
 <% end %>
 tls-version-min <%= p('tls_version_min') %>
+client-connect /var/vcap/jobs/openvpn/bin/client-connect
 proto <%= p('protocol') %>
 port <%= p('port') %>
+<% if p('compress') != 'auto' && p('compress') %>
 compress <%= p('compress') %>
-<% if p('push_compress') && p('compress') %>
 push "compress <%= p('compress') %>"
 <% end %>
 group nogroup

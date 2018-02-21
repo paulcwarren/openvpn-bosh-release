@@ -6,6 +6,7 @@ packages:
 - "openvpn"
 templates:
   bin/write-ccd.erb: "bin/write-ccd"
+  bin/client-connect: "bin/client-connect"
   bin/control: "bin/control"
   etc/openvpn.conf.erb: "etc/openvpn.conf"
 provides:
@@ -70,14 +71,12 @@ properties:
     type: "string[]"
   compress:
     description: "Default compression (or empty to disable)"
-    default: ''
+    default: auto
     enum:
+    - auto
     - lzo
     - lz4
-  push_compress:
-    description: "Push default compression setting to clients"
-    default: true
-    type: "boolean"
+    - lz4-2
   cipher:
     description: "Cipher for encrypting packets"
     default: "AES-256-CBC"
