@@ -12,6 +12,9 @@ mute-replay-warnings
 
 nobind
 resolv-retry infinite
+<% if_p('username') do | v | %>
+auth-user-pass user
+<% end %>
 
 <% server = link('server') %>
 remote-random
