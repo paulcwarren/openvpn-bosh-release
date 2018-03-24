@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <file name="openvpn-4.2.1-on-ubuntu-trusty-stemcell-3421.42.tgz">
+    <hash type="md5">ddfe47462e4277c87ca042b40bc287c3</hash>
+    <hash type="sha-1">f22e8b66e0640c014871947cb206bdae9a1de77a</hash>
+    <hash type="sha-256">12bcb4079b1e008462306568cc969668b5e765b34b45051950446b91bd036218</hash>
+    <hash type="sha-512">117a52565a5e63215dec752b9010139ba0496bf9bb43898799ec4ea1eb8483a3e4d3ee09a318fc8824fd492426d847ca1d8e0d06594ea950a41bd50d18440b51</hash>
+    <size>5729085</size>
+    <url>https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-4.2.1-on-ubuntu-trusty-stemcell-3421.42-compiled-1.20180324204936.0.tgz</url>
+    <version>4.2.1</version>
+  </file>
+  <generator>metalink.dpb587.github.io/0.0.0</generator>
+  <published>2018-03-24T20:51:18Z</published>
+</metalink>
