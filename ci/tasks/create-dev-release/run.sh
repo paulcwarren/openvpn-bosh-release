@@ -10,7 +10,7 @@ s3_prefix="${s3_prefix:-}"
 if [ -f version/number ]; then
   version=$( cat version/number )-dev.$( date -u +%s )
 else
-  version=$( bosh create-release --force --timestamp-version --tty | grep '^Version ' | awk '{ print $2 }' ; rm -fr dev_releases )
+  version=$( cd repo ; bosh create-release --force --timestamp-version --tty | grep '^Version ' | awk '{ print $2 }' ; rm -fr dev_releases )
 fi
 
 versiondate=$( date -u +%Y-%m-%dT%H:%M:%SZ )
