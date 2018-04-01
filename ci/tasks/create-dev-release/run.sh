@@ -7,9 +7,6 @@ s3_bucket=$( bosh interpolate --path /blobstore/options/bucket_name repo/config/
 
 s3_prefix="${s3_prefix:-}"
 
-export AWS_ACCESS_KEY_ID="$s3_access_key"
-export AWS_SECRET_ACCESS_KEY="$s3_secret_key"
-
 if [ -f version/number ]; then
   version=$( cat version/number )-dev.$( date -u +%s )
 else
@@ -39,7 +36,10 @@ meta4 create --metalink="$metalink_path"
 meta4 set-published --metalink="$metalink_path" "$versiondate"
 meta4 import-file --metalink="$metalink_path" --version="$version" "$tarball"
 
-if [ -n "$s3_host" ]; then
+if [ -n "${s3_host:-}" ]; then
+  export AWS_ACCESS_KEY_ID="${s3_access_key:-}"
+  export AWS_SECRET_ACCESS_KEY="${s3_secret_key:-}"
+
   sha1=$( meta4 file-hash --metalink="$metalink_path" sha-1 )
   meta4 file-upload --metalink="$metalink_path" "$tarball" "s3://$s3_host/$s3_bucket/${s3_prefix}$sha1"
 fi

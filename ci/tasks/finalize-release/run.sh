@@ -5,9 +5,6 @@ set -eu
 task_dir=$PWD
 s3_prefix="${s3_prefix:-}"
 
-export AWS_ACCESS_KEY_ID="$s3_access_key"
-export AWS_SECRET_ACCESS_KEY="$s3_secret_key"
-
 release_name=$( bosh interpolate --path /final_name repo/config/final.yml )
 s3_host=$( bosh interpolate --path /blobstore/options/host repo/config/final.yml )
 s3_bucket=$( bosh interpolate --path /blobstore/options/bucket_name repo/config/final.yml )
@@ -63,7 +60,10 @@ meta4 create --metalink="$metalink_path"
 meta4 set-published --metalink="$metalink_path" "$( date -u +%Y-%m-%dT%H:%M:%SZ )"
 meta4 import-file --metalink="$metalink_path" --version="$version" "$tarball"
 
-if [ -n "$s3_host" ]; then
+if [ -n "${s3_host:-}" ]; then
+  export AWS_ACCESS_KEY_ID="${s3_access_key:-}"
+  export AWS_SECRET_ACCESS_KEY="${s3_secret_key:-}"
+
   sha1=$( meta4 file-hash --metalink="$metalink_path" sha-1 )
   meta4 file-upload --metalink="$metalink_path" "$tarball" "s3://$s3_host/$s3_bucket/${s3_prefix}$sha1"
 fi
