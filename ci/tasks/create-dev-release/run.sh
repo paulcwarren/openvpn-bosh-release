@@ -10,15 +10,15 @@ s3_prefix="${s3_prefix:-}"
 export AWS_ACCESS_KEY_ID="$s3_access_key"
 export AWS_SECRET_ACCESS_KEY="$s3_secret_key"
 
+version=$( cat version/number )-dev.$( date -u +%s )
+versiondate=$( date -u +%Y-%m-%dT%H:%M:%SZ )
+
 cd repo
 
 
 #
 # create the dev release tarball
 #
-
-version=$( cat version/number )-dev.$( date -u +%s )
-versiondate=$( date -u +%Y-%m-%dT%H:%M:%SZ )
 
 if [[ "${version_suffix:-}" != "" ]]; then
   version="$version$version_suffix"
