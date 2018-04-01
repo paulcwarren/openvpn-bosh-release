@@ -17,7 +17,7 @@ cd repo
 # create the dev release tarball
 #
 
-version=$( bosh create-release --force --timestamp-version --tty | grep '^Version ' | awk '{ print $2 }' ; rm -fr dev_releases )
+version=$( cat version/number )-dev.$( date -u +%s )
 versiondate=$( date -u +%Y-%m-%dT%H:%M:%SZ )
 
 if [[ "${version_suffix:-}" != "" ]]; then

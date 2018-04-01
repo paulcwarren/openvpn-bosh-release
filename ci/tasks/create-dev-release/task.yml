@@ -7,6 +7,7 @@ image_resource:
     tag: "ci-bosh-develop"
 inputs:
   - name: "repo"
+  - name: "version"
 outputs:
   - name: "dev-release"
 run:

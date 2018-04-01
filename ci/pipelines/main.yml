@@ -18,8 +18,10 @@ jobs:
 - name: create-dev-release
   serial: true
   plan:
-  - get: repo
-    trigger: true
+  - aggregate:
+    - get: repo
+      trigger: true
+    - get: version
   - file: repo/ci/tasks/create-dev-release/task.yml
     task: create-release
     params:
