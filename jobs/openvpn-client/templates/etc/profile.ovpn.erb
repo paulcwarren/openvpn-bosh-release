@@ -12,7 +12,9 @@ mute-replay-warnings
 
 nobind
 resolv-retry infinite
-
+<% if_p('username') do | v | %>
+auth-user-pass /var/vcap/jobs/openvpn-client/etc/user
+<% end %>
 <% server = link('server') %>
 remote-random
 remote-cert-tls server
