@@ -8,7 +8,10 @@ keysize <%= p('keysize') %>
 tls-cipher <%= v %>
 <% end %>
 tls-version-min <%= p('tls_version_min') %>
+<% if p('compress') == 'auto' %>
 client-connect /var/vcap/jobs/openvpn/bin/client-connect
+script-security 2
+<% end %>
 proto <%= p('protocol') %>
 port <%= p('port') %>
 <% if p('compress') != 'auto' && p('compress') %>
