@@ -10,7 +10,12 @@ s3_prefix="${s3_prefix:-}"
 export AWS_ACCESS_KEY_ID="$s3_access_key"
 export AWS_SECRET_ACCESS_KEY="$s3_secret_key"
 
-version=$( cat version/number )-dev.$( date -u +%s )
+if [ -f version/number ]; then
+  version=$( cat version/number )-dev.$( date -u +%s )
+else
+  version=$( bosh create-release --force --timestamp-version --tty | grep '^Version ' | awk '{ print $2 }' ; rm -fr dev_releases )
+fi
+
 versiondate=$( date -u +%Y-%m-%dT%H:%M:%SZ )
 
 cd repo
