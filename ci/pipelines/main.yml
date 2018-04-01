@@ -18,21 +18,32 @@ jobs:
 - name: create-dev-release
   serial: true
   plan:
-  - get: triggering-repo
-    trigger: true
   - get: repo
+    trigger: true
   - file: repo/ci/tasks/create-dev-release/task.yml
     task: create-release
-  - put: dev-release
     params:
-      file: dev-release/*.tgz
+      s3_host: ((artifacts_s3_host))
+      s3_bucket: ((artifacts_s3_bucket))
+      s3_prefix: ((artifacts_s3_prefix))release/
+      s3_access_key: ((artifacts_s3_access_key))
+      s3_secret_key: ((artifacts_s3_secret_key))
+  - put: artifacts-release-alpha
+    params:
+      metalink: /tmp/build/put/dev-release/*.meta4
+      options:
+        author_name: ((maintainer_name))
+        author_email: ((maintainer_email))
+        message: "release/alpha: new build"
+    get_params:
+      skip_download: true
 
 - name: test-develop-integration
   serial: true
   plan:
   - aggregate:
     - get: release
-      resource: dev-release
+      resource: artifacts-release-alpha
       trigger: true
       passed:
       - create-dev-release
@@ -62,7 +73,7 @@ jobs:
   - version
   plan:
   - aggregate:
-    - get: dev-release
+    - get: artifacts-release-alpha
       passed:
       - test-develop-integration
     - get: source-repo
@@ -81,6 +92,11 @@ jobs:
       blobstore_s3_secret_access_key: ((blobstore_secret_key))
       git_user_email: ((maintainer_email))
       git_user_name: ((maintainer_name))
+      s3_host: ((artifacts_s3_host))
+      s3_bucket: ((artifacts_s3_bucket))
+      s3_prefix: ((artifacts_s3_prefix))release/
+      s3_access_key: ((artifacts_s3_access_key))
+      s3_secret_key: ((artifacts_s3_secret_key))
   - do:
     - put: version
       params:
@@ -96,8 +112,17 @@ jobs:
     params:
       repository: source-repo
       only_tag: true
-      tag: /tmp/build/put/github-release/name
-      annotate: /tmp/build/put/github-release/name
+      tag: github-release/name
+      annotate: github-release/name
+  - put: artifacts-release-stable
+    params:
+      metalink: /tmp/build/put/release/*.meta4
+      options:
+        author_name: ((maintainer_name))
+        author_email: ((maintainer_email))
+        message: "release/stable: new build"
+    get_params:
+      skip_download: true
   - put: github-release
     params:
       body: github-release/notes.md
@@ -151,13 +176,19 @@ jobs:
       skip_download: true
 
 resources:
-- name: dev-release
-  type: s3
+- name: artifacts-release-alpha
+  type: metalink-repository
   source:
-    access_key_id: ((blobstore_access_key))
-    bucket: dpb587-bosh-release-openvpn-us-east-1
-    regexp: dev_releases/openvpn/openvpn-(.*).tgz
-    secret_access_key: ((blobstore_secret_key))
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/alpha#artifacts
+    options:
+      private_key: ((git_private_key))
+
+- name: artifacts-release-stable
+  type: metalink-repository
+  source:
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/stable#artifacts
+    options:
+      private_key: ((git_private_key))
 
 - name: github-release
   type: github-release
@@ -171,18 +202,6 @@ resources:
     branch: master
     private_key: ((git_private_key))
     uri: git@github.com:dpb587/openvpn-bosh-release.git
-- name: triggering-repo
-  type: git
-  source:
-    branch: master
-    private_key: ((git_private_key))
-    uri: git@github.com:dpb587/openvpn-bosh-release.git
-    ignore_paths:
-    - .final_builds/**/*
-    - compiled_releases/**/*
-    - docs/*
-    - docs/**/*
-    - releases/**/*
 - name: finalize-repo
   type: git
   source:
@@ -231,3 +250,7 @@ resource_types:
   source:
     repository: dpb587/github-status-resource
     tag: master
+- name: metalink-repository
+  type: docker-image
+  source:
+    repository: dpb587/metalink-repository-resource
