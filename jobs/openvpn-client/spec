@@ -7,7 +7,7 @@ packages:
 templates:
   bin/control: "bin/control"
   etc/profile.ovpn.erb: "etc/profile.ovpn"
-  etc/user.erb: "etc/user"
+  etc/user-pass.erb: "etc/user-pass"
 consumes:
 - name: server
   type: openvpn
@@ -37,9 +37,9 @@ properties:
     type: "string[]"
   username:
     default: ~
-    description: "username for remote authentication"
-    type: "text"
+    description: "Username for remote authentication"
+    type: "string"
   password:
     default: ~
-    description: "password for remote authentication"
-    type: "text"
+    description: "Password for remote authentication"
+    type: "string"

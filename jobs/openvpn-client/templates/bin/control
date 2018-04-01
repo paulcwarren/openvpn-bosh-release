@@ -25,6 +25,7 @@ case $1 in
 
   start)
     chmod 600 /var/vcap/jobs/openvpn-client/etc/profile.ovpn
+    chmod 600 /var/vcap/jobs/openvpn-client/etc/user-pass
 
     if [ ! -e /dev/net/tun ] ; then
       mkdir -p /dev/net
