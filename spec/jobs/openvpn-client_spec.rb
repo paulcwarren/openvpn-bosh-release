@@ -143,7 +143,7 @@ describe 'openvpn-client' do
           before { properties.delete 'tls_client' }
 
           it 'errors' do
-            expect { rendered_template }.to raise_error Bosh::Template::UnknownProperty, "Can't find property '[\"tls_client\"]'"
+            expect { rendered_template }.to raise_error RuntimeError, "Missing properties: tls_client and/or username+password"
           end
         end
 
@@ -186,6 +186,37 @@ describe 'openvpn-client' do
           expect(rendered_template).to match %r{^fake-option1 fake-value1$}
           expect(rendered_template).to match %r{^fake-option2 fake-value2$}
         end
+      end
+
+      describe ['username', 'password'] do
+        before do
+          properties['username'] = 'fake-username'
+          properties['password'] = 'fake-password'
+        end
+
+        it 'is configurable' do
+          expect(rendered_template).to match %r{^auth-user-pass /var/vcap/jobs/openvpn-client/etc/user-pass$}
+        end
+      end
+    end
+  end
+
+  describe 'etc/user-pass' do
+    let(:template) { job.template('etc/user-pass') }
+    let(:rendered_template) { template.render(properties, consumes: consumes) }
+
+    it 'is empty by default' do
+      expect(rendered_template).to eq("\n")
+    end
+
+    describe ['username', 'password'] do
+      before do
+        properties['username'] = 'fake-username'
+        properties['password'] = 'fake-password'
+      end
+
+      it 'is configurable' do
+        expect(rendered_template).to eq("fake-username\nfake-password\n")
       end
     end
   end

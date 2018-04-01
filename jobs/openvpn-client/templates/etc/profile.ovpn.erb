@@ -1,3 +1,4 @@
+<% auth = [] %>
 client
 writepid /var/vcap/sys/run/openvpn-client/openvpn.pid
 group nogroup
@@ -44,6 +45,7 @@ tls-version-min <%= v %>
 </tls-crypt>
 <% end %>
 
+<% if_p('tls_client') do auth.push('tls') %>
 <cert>
 <%= p('tls_client')['certificate'] %>
 </cert>
@@ -51,3 +53,10 @@ tls-version-min <%= v %>
 <key>
 <%= p('tls_client')['private_key'] %>
 </key>
+<% end %>
+
+<% if_p('username', 'password') do auth.push('user-pass') %>
+auth-user-pass /var/vcap/jobs/openvpn-client/etc/user-pass
+<% end %>
+
+<% raise "Missing properties: tls_client and/or username+password" if auth.length == 0 %>
