@@ -3,6 +3,8 @@ groups:
 - jobs:
   - create-dev-release
   - test-develop-integration
+  - promote-to-beta
+  - promote-to-rc
   - shipit
   - bump-major
   - bump-minor
@@ -70,14 +72,45 @@ jobs:
         commit: repo
         state: success
 
+- name: promote-to-beta
+  plan:
+  - get: artifacts-release-alpha
+    trigger: true
+    passed:
+    - test-develop-integration
+  - put: artifacts-release-beta
+    params:
+      metalink: /tmp/build/put/artifacts-release-alpha/.resource/metalink.meta4
+      options:
+        author_name: ((maintainer_name))
+        author_email: ((maintainer_email))
+        message: "release/beta: new build"
+    get_params:
+      skip_download: true
+
+- name: promote-to-rc
+  plan:
+  - get: artifacts-release-beta
+    passed:
+    - promote-to-beta
+  - put: artifacts-release-rc
+    params:
+      metalink: /tmp/build/put/artifacts-release-beta/.resource/metalink.meta4
+      options:
+        author_name: ((maintainer_name))
+        author_email: ((maintainer_email))
+        message: "release/rc: new build"
+    get_params:
+      skip_download: true
+
 - name: shipit
   serial_groups:
   - version
   plan:
   - aggregate:
-    - get: artifacts-release-alpha
+    - get: artifacts-release-rc
       passed:
-      - test-develop-integration
+      - promote-to-rc
     - get: source-repo
       resource: repo
       passed:
@@ -182,6 +215,20 @@ resources:
   type: metalink-repository
   source:
     uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/alpha#artifacts
+    options:
+      private_key: ((git_private_key))
+
+- name: artifacts-release-beta
+  type: metalink-repository
+  source:
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/beta#artifacts
+    options:
+      private_key: ((git_private_key))
+
+- name: artifacts-release-rc
+  type: metalink-repository
+  source:
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/rc#artifacts
     options:
       private_key: ((git_private_key))
 
