@@ -8,7 +8,7 @@ s3_bucket=$( bosh interpolate --path /blobstore/options/bucket_name repo/config/
 s3_prefix="${s3_prefix:-}"
 
 if [ -f version/number ]; then
-  version=$( cat version/number )-dev.$( date -u +%s )
+  version=$( cat version/number )-dev.$( date -u +%Y%m%dT%H%M%SZ )
 else
   version=$( cd repo ; bosh create-release --force --timestamp-version --tty | grep '^Version ' | awk '{ print $2 }' ; rm -fr dev_releases )
 fi
