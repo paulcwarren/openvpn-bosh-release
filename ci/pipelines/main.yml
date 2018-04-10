@@ -108,7 +108,8 @@ jobs:
   - version
   plan:
   - aggregate:
-    - get: artifacts-release-rc
+    - get: dev-release
+      resource: artifacts-release-rc
       passed:
       - promote-to-rc
     - get: source-repo
