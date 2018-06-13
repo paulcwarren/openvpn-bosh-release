@@ -1,0 +1,13 @@
+type: dynamic-metalink
+source:
+  version_check: |
+    curl -s http://www.oberhumer.com/opensource/lzo/download/ \
+      | grep -E 'href="lzo-[^"]+.tar.gz"' \
+      | sed -E 's/^.+href="lzo-([^"]+).tar.gz".+$/\1/'
+  metalink_get: |
+    jq -n '
+      "lzo-\(env.version).tar.gz" | {
+        "files": [
+          { "name": .,
+            "version": env.version,
+            "urls": [ { "url": "https://www.oberhumer.com/opensource/lzo/download/\(.)" } ] } ] }'

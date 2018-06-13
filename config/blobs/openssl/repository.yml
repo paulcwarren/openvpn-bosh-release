@@ -1,3 +1,0 @@
-uri: git+https://github.com/dpb587/upstream-blob-mirror.git//repository/openssl
-skip_signature_verification: true # trust this was verified by upstream-blob-mirror rather than also maintaining keys
-version: ^1
