@@ -6,7 +6,7 @@ openssl/openssl-1.1.0h.tar.gz:
   size: 5422717
   object_id: 2786179d-348b-4fa9-4a1b-8a5651b43035
   sha: 0fc39f6aa91b6e7f4d05018f7c5e991e1d2491fd
-openvpn/openvpn-2.4.5.tar.gz:
-  size: 1430930
-  object_id: 6158602e-f534-4dad-7042-311d4806b6fa
-  sha: 8757adf20ef49c607cdc19ed75faff50ac647ed7
+openvpn/openvpn-2.4.6.tar.gz:
+  size: 1431971
+  object_id: e503294e-1713-40de-5879-631d728aa88f
+  sha: 7cfcf441d6480a367bb68edac289a207b3825ff8
