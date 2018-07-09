@@ -1,53 +1,36 @@
 groups:
-
 - jobs:
   - create-dev-release
   - test-develop-integration
   - promote-to-beta
   - promote-to-rc
   - shipit
+  name: all
+- jobs:
   - bump-major
   - bump-minor
   - bump-patch
-  name: all
-
-- jobs:
-  - ci-bosh-image
-  name: meta
-
+  name: ci-state
 jobs:
-
 - name: create-dev-release
-  serial: true
   plan:
-  - aggregate:
-    - get: repo
-      trigger: true
-    - get: version
-  - file: repo/ci/tasks/create-dev-release/task.yml
-    task: create-release
+  - get: repo
+    trigger: true
+  - task: create-de
+    file: repo/ci/tasks/create-dev-release-tarball.yml
+  - put: alpha-bosh-release-tarball
     params:
-      s3_host: ((artifacts_s3_host))
-      s3_bucket: ((artifacts_s3_bucket))
-      s3_prefix: ((artifacts_s3_prefix))release/
-      s3_access_key: ((artifacts_s3_access_key))
-      s3_secret_key: ((artifacts_s3_secret_key))
-  - put: artifacts-release-alpha
-    params:
-      metalink: /tmp/build/put/dev-release/*.meta4
-      options:
-        author_name: ((maintainer_name))
-        author_email: ((maintainer_email))
-        message: "release/alpha: new build"
+      files:
+      - release/*.tgz
+      version: release/version
     get_params:
       skip_download: true
-
 - name: test-develop-integration
   serial: true
   plan:
   - aggregate:
     - get: release
-      resource: artifacts-release-alpha
+      resource: alpha-bosh-release-tarball
       trigger: true
       passed:
       - create-dev-release
@@ -71,202 +54,135 @@ jobs:
       params:
         commit: repo
         state: success
-
 - name: promote-to-beta
   plan:
-  - get: artifacts-release-alpha
-    trigger: true
-    passed:
-    - test-develop-integration
-  - put: artifacts-release-beta
+  - aggregate:
+    - get: release
+      resource: alpha-bosh-release-tarball
+      trigger: true
+      passed:
+      - test-develop-integration
+    - get: repo
+      passed:
+      - test-develop-integration
+  - put: beta-bosh-release-tarball
     params:
-      metalink: /tmp/build/put/artifacts-release-alpha/.resource/metalink.meta4
-      options:
-        author_name: ((maintainer_name))
-        author_email: ((maintainer_email))
-        message: "release/beta: new build"
+      metalink: release/.resource/metalink.meta4
     get_params:
       skip_download: true
-
 - name: promote-to-rc
   plan:
-  - get: artifacts-release-beta
-    passed:
-    - promote-to-beta
-  - put: artifacts-release-rc
+  - aggregate:
+    - get: release
+      resource: beta-bosh-release-tarball
+      passed:
+      - promote-to-beta
+    - get: repo
+      passed:
+      - promote-to-beta
+  - put: rc-bosh-release-tarball
     params:
-      metalink: /tmp/build/put/artifacts-release-beta/.resource/metalink.meta4
-      options:
-        author_name: ((maintainer_name))
-        author_email: ((maintainer_email))
-        message: "release/rc: new build"
+      metalink: release/.resource/metalink.meta4
     get_params:
       skip_download: true
-
 - name: shipit
   serial_groups:
   - version
   plan:
-  - aggregate:
-    - get: dev-release
-      resource: artifacts-release-rc
-      passed:
-      - promote-to-rc
-    - get: source-repo
-      resource: repo
-      passed:
-      - test-develop-integration
-    - get: repo
-      resource: finalize-repo
-    - get: version
-      params:
-        bump: final
-  - task: finalize-release
-    file: repo/ci/tasks/finalize-release/task.yml
-    params:
-      blobstore_s3_access_key_id: ((blobstore_access_key))
-      blobstore_s3_secret_access_key: ((blobstore_secret_key))
-      git_user_email: ((maintainer_email))
-      git_user_name: ((maintainer_name))
-      s3_host: ((artifacts_s3_host))
-      s3_bucket: ((artifacts_s3_bucket))
-      s3_prefix: ((artifacts_s3_prefix))release/
-      s3_access_key: ((artifacts_s3_access_key))
-      s3_secret_key: ((artifacts_s3_secret_key))
+  - get: repo
+    passed:
+    - promote-to-rc
+  - get: rc-bosh-release-tarball
+    passed:
+    - promote-to-rc
+  - get: version
   - do:
-    - put: version
+    - put: bosh-release
       params:
-        file: version/number
-    - put: version
+        tarball: rc-bosh-release-tarball/*.tgz
+        version: version/version
+    - put: bosh-release-tarball
+      params:
+        files:
+        - bosh-release/*.tgz
+        version: bosh-release/version
+      get_params:
+        skip_download: true
+    - task: build-release-metadata
+      file: repo/ci/tasks/build-release-metadata.yml
+    - put: github-release
+      params:
+        name: release-metadata/name
+        tag: release-metadata/tag
+        body: release-metadata/notes.md
+    ensure:
+      put: version
       params:
         bump: patch
-  - put: finalize-repo
-    params:
-      rebase: true
-      repository: repo
-  - put: repo
-    params:
-      repository: source-repo
-      only_tag: true
-      tag: github-release/name
-      annotate: github-release/name
-  - put: artifacts-release-stable
-    params:
-      metalink: /tmp/build/put/release/*.meta4
-      options:
-        author_name: ((maintainer_name))
-        author_email: ((maintainer_email))
-        message: "release/stable: new build"
-    get_params:
-      skip_download: true
-  - put: github-release
-    params:
-      body: github-release/notes.md
-      commitish: github-release/commit
-      name: github-release/name
-      tag: github-release/name
-
 - name: bump-major
   serial_groups:
   - version
   plan:
-  - get: version
-    params:
-      bump: major
-      pre: dev
   - put: version
     params:
-      file: version/number
+      bump: major
 - name: bump-minor
   serial_groups:
   - version
   plan:
-  - get: version
-    params:
-      bump: minor
-      pre: dev
   - put: version
     params:
-      file: version/number
+      bump: minor
 - name: bump-patch
   serial_groups:
   - version
   plan:
-  - get: version
-    params:
-      bump: patch
-      pre: dev
   - put: version
     params:
-      file: version/number
-
-- name: ci-bosh-image
-  serial: true
-  plan:
-  - get: images-repo
-    trigger: true
-  - put: ci-bosh-image
-    params:
-      build: images-repo/ci/images/bosh
-    get_params:
-      skip_download: true
-
+      bump: patch
 resources:
-- name: artifacts-release-alpha
-  type: metalink-repository
-  source:
-    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/alpha#artifacts
-    options:
-      private_key: ((git_private_key))
-
-- name: artifacts-release-beta
-  type: metalink-repository
-  source:
-    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/beta#artifacts
-    options:
-      private_key: ((git_private_key))
-
-- name: artifacts-release-rc
-  type: metalink-repository
-  source:
-    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/rc#artifacts
-    options:
-      private_key: ((git_private_key))
-
-- name: artifacts-release-stable
-  type: metalink-repository
-  source:
-    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/stable#artifacts
-    options:
-      private_key: ((git_private_key))
-
-- name: github-release
-  type: github-release
-  source:
-    access_token: ((github_access_token))
-    repository: openvpn-bosh-release
-    user: dpb587
 - name: repo
   type: git
-  source:
+  source: &repo
     branch: master
     private_key: ((git_private_key))
     uri: git@github.com:dpb587/openvpn-bosh-release.git
-- name: finalize-repo
-  type: git
-  source:
-    branch: master
-    private_key: ((git_private_key))
-    uri: git@github.com:dpb587/openvpn-bosh-release.git
-
 - name: version
   type: semver
   source:
-    access_key_id: ((blobstore_access_key))
-    bucket: dpb587-bosh-release-openvpn-us-east-1
-    key: version
-    secret_access_key: ((blobstore_secret_key))
-
+    <<: *repo
+    driver: git
+    branch: ci-state
+    file: version/master
+- name: bosh-release
+  type: bosh-release
+  source: *repo
+- name: github-release
+  type: github-release
+  source:
+    owner: dpb587
+    repository: openvpn-bosh-release
+    access_token: ((github_access_token))
+- name: alpha-bosh-release-tarball
+  type: metalink-repository
+  source:
+    << : *release_artifacts
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/alpha#artifacts
+- name: beta-bosh-release-tarball
+  type: metalink-repository
+  source:
+    << : *release_artifacts
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/beta#artifacts
+- name: rc-bosh-release-tarball
+  type: metalink-repository
+  source:
+    << : *release_artifacts
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/rc#artifacts
+- name: bosh-release-tarball
+  type: metalink-repository
+  source:
+    << : *release_artifacts
+    uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/stable#artifacts
 - name: integration-github-status
   type: github-status
   source:
@@ -274,27 +190,11 @@ resources:
     branch: master
     context: ci/integration
     repository: dpb587/openvpn-bosh-release
-
-- name: images-repo
-  type: git
-  source:
-    branch: master
-    paths:
-    - ci/images/*
-    - ci/images/**/*
-    private_key: ((git_private_key))
-    uri: git@github.com:dpb587/openvpn-bosh-release.git
-- name: ci-bosh-image
+resource_types:
+- name: bosh-release
   type: docker-image
   source:
-    email: ((docker_email))
-    password: ((docker_password))
-    repository: dpb587/openvpn-bosh-release
-    tag: ci-bosh-master
-    username: ((docker_username))
-
-resource_types:
-
+    repository: dpb587/bosh-release-resource
 - name: github-status
   type: docker-image
   source:
@@ -304,3 +204,12 @@ resource_types:
   type: docker-image
   source:
     repository: dpb587/metalink-repository-resource
+shared:
+  release_artifacts: &release_artifacts
+    mirror_files:
+    - destination: s3://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/artifacts/release/{{.SHA1}}
+      env:
+        AWS_ACCESS_KEY_ID: ((artifacts_s3_access_key))
+        AWS_SECRET_ACCESS_KEY: ((artifacts_s3_secret_key))
+    options:
+      private_key: ((git_private_key))
