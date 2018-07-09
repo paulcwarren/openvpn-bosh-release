@@ -10,17 +10,24 @@ start-bosh -o $PWD/ci/tasks/integration-test/bosh-ops.yml
 
 source /tmp/local-bosh/director/env
 
-bosh upload-stemcell \
-  --name=bosh-warden-boshlite-ubuntu-trusty-go_agent \
-  --version=3541.2 \
-  --sha1=314b3144192db02f29e086ffbf928792ae3789fa \
-  https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3541.2-warden-boshlite-ubuntu-trusty-go_agent.tgz
+if [ -e stemcell/*.tgz ]; then
+  bosh upload-stemcell stemcell/*.tgz
+  os=$( tar -Oxzf stemcell/*.tgz stemcell.MF | grep '^operating_system: ' | awk '{ print $2 }' )
+else
+  bosh upload-stemcell \
+    --name=bosh-warden-boshlite-ubuntu-trusty-go_agent \
+    --version=3586.25 \
+    --sha1=b9a44806dc1bb99b0d11d7413742f3619139da0b \
+    https://s3.amazonaws.com/bosh-core-stemcells/warden/bosh-stemcell-3586.25-warden-boshlite-ubuntu-trusty-go_agent.tgz
+  os=ubuntu-trusty
+fi
 
 export BOSH_DEPLOYMENT=integration-test
 
 bosh -n deploy \
+  --var os="$os" \
+  --var repo_dir="$PWD" \
   --vars-store=/tmp/deployment-vars.yml \
-  -v repo_dir="$PWD" \
   ci/tasks/integration-test/deployment.yml
 
 

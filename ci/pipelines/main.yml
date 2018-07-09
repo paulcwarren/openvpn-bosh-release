@@ -1,7 +1,8 @@
 groups:
 - jobs:
   - create-dev-release
-  - test-develop-integration
+  - test-integration-ubuntu-trusty
+  - test-integration-ubuntu-xenial
   - promote-to-beta
   - promote-to-rc
   - shipit
@@ -16,7 +17,7 @@ jobs:
   plan:
   - get: repo
     trigger: true
-  - task: create-de
+  - task: create-release
     file: repo/ci/tasks/create-dev-release-tarball.yml
   - put: alpha-bosh-release-tarball
     params:
@@ -25,7 +26,7 @@ jobs:
       version: release/version
     get_params:
       skip_download: true
-- name: test-develop-integration
+- name: test-integration-ubuntu-trusty
   serial: true
   plan:
   - aggregate:
@@ -37,7 +38,9 @@ jobs:
     - get: repo
       passed:
       - create-dev-release
-  - put: integration-github-status
+    - get: stemcell
+      resource: ubuntu-trusty-stemcell
+  - put: ubuntu-trusty-integration-github-status
     params:
       commit: repo
       state: pending
@@ -45,12 +48,43 @@ jobs:
     task: integration-test
     privileged: true
     on_failure:
-      put: integration-github-status
+      put: ubuntu-trusty-integration-github-status
       params:
         commit: repo
         state: failure
     on_success:
-      put: integration-github-status
+      put: ubuntu-trusty-integration-github-status
+      params:
+        commit: repo
+        state: success
+- name: test-integration-ubuntu-xenial
+  serial: true
+  plan:
+  - aggregate:
+    - get: release
+      resource: alpha-bosh-release-tarball
+      trigger: true
+      passed:
+      - create-dev-release
+    - get: repo
+      passed:
+      - create-dev-release
+    - get: stemcell
+      resource: ubuntu-xenial-stemcell
+  - put: ubuntu-xenial-integration-github-status
+    params:
+      commit: repo
+      state: pending
+  - file: repo/ci/tasks/integration-test/task.yml
+    task: integration-test
+    privileged: true
+    on_failure:
+      put: ubuntu-xenial-integration-github-status
+      params:
+        commit: repo
+        state: failure
+    on_success:
+      put: ubuntu-xenial-integration-github-status
       params:
         commit: repo
         state: success
@@ -61,10 +95,12 @@ jobs:
       resource: alpha-bosh-release-tarball
       trigger: true
       passed:
-      - test-develop-integration
+      - test-integration-ubuntu-trusty
+      - test-integration-ubuntu-xenial
     - get: repo
       passed:
-      - test-develop-integration
+      - test-integration-ubuntu-trusty
+      - test-integration-ubuntu-xenial
   - put: beta-bosh-release-tarball
     params:
       metalink: release/.resource/metalink.meta4
@@ -183,13 +219,28 @@ resources:
   source:
     << : *release_artifacts
     uri: git+ssh://git@github.com:dpb587/openvpn-bosh-release.git//release/stable#artifacts
-- name: integration-github-status
+- name: ubuntu-trusty-integration-github-status
   type: github-status
   source:
     access_token: ((github_access_token))
     branch: master
-    context: ci/integration
+    context: ci/integration/ubuntu-trusty
     repository: dpb587/openvpn-bosh-release
+- name: ubuntu-xenial-integration-github-status
+  type: github-status
+  source:
+    access_token: ((github_access_token))
+    branch: master
+    context: ci/integration/ubuntu-xenial
+    repository: dpb587/openvpn-bosh-release
+- name: ubuntu-trusty-stemcell
+  type: bosh-io-stemcell
+  source:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+- name: ubuntu-xenial-stemcell
+  type: bosh-io-stemcell
+  source:
+    name: bosh-warden-boshlite-ubuntu-xenial-go_agent
 resource_types:
 - name: bosh-release
   type: docker-image

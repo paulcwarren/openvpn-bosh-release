@@ -6,6 +6,8 @@ image_resource:
     repository: dpb587/bosh-main-bosh-docker
     tag: light
 inputs:
-  - name: repo
+- name: repo
+- name: stemcell
+  optional: true
 run:
   path: repo/ci/tasks/integration-test/run.sh

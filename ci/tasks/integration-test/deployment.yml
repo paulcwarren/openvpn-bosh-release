@@ -11,7 +11,7 @@ update:
   max_in_flight: 1
 stemcells:
 - alias: default
-  os: ubuntu-trusty
+  os: ((os))
   version: latest
 instance_groups:
 - name: role1
