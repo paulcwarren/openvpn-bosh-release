@@ -1,0 +1,13 @@
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <file name="openvpn-5.1.0.tgz">
+    <hash type="sha-512">5b6abb6af919c3300295079a7b6142edd3bfad7c3bbd18977ce0ba2bc2f69400bb959979daf5bf43f8e1ab1c6f64c1c0be62a384e631582ae09608fb54ccc8c2</hash>
+    <hash type="sha-256">788648d316b58738e292af1126651ad1f091e912bb99a3fcde8aba4c59cca609</hash>
+    <hash type="sha-1">b42eb85e5f074c26b065956cc9b8a6d69208f8a0</hash>
+    <hash type="md5">c9a737f2e817390ed16182faf77e036d</hash>
+    <size>7475369</size>
+    <url>https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/artifacts/release/b42eb85e5f074c26b065956cc9b8a6d69208f8a0</url>
+    <version>5.1.0</version>
+  </file>
+  <generator>metalink-repository-resource/0.0.0</generator>
+  <published>2018-07-09T11:36:22.257628501Z</published>
+</metalink>
