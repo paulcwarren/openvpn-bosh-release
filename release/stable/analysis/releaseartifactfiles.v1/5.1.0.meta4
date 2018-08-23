@@ -1,0 +1,11 @@
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <file name="releaseartifactfiles.v1.jsonl">
+    <hash type="sha-512">4c6b940fa9270dc0f76172b27981f89b3866724d046a03bfb464c898545f850a12f4107639cf0dee424b4713733f2cae4c8ab33082701c32b6db691807ac035d</hash>
+    <hash type="sha-256">5003e028dc4eea5e89c8e619f7e4d692067c65717e0b2ba6f0b7f0b91f6d8954</hash>
+    <hash type="sha-1">c87394d3cdaf78ba2f74b815f7a5851c816367cd</hash>
+    <hash type="md5">c1405c033e011c26bdfc5532aea1efa6</hash>
+    <size>3749</size>
+    <url>https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/analysis/c87394d3cdaf78ba2f74b815f7a5851c816367cd</url>
+  </file>
+  <generator>boshua/dpbreleaseartifacts</generator>
+</metalink>
