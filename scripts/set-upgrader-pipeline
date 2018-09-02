@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+
+exec fly -t "$FLY_TARGET" set-pipeline \
+  -p openvpn-bosh-release:upgrader \
+  -c <( metalink-upgrader-pipeline ci/pipelines/upgrader.yml ) \
+  -l <( terraform output --json | jq 'to_entries | map({key, "value": .value.value}) | from_entries' ) \
+  -l config/private.yml
