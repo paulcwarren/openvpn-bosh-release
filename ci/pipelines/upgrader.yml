@@ -1,4 +1,6 @@
-metalink_upgrader_pipeline:
+bosh_release_blobs_upgrader:
+  track_files:
+  - .resource/metalink.meta4
   before_upload:
     do:
     - task: create-release
@@ -20,7 +22,7 @@ metalink_upgrader_pipeline:
       text: Failed to upgrade ((blob)) to v$TEXT_FILE_CONTENT.
       text_file: blob/.resource/version
       attachments:
-      - author_icon: https://avatars1.githubusercontent.com/u/7809479?v=4
+      - author_icon: https://github.com/concourse.png
         author_name: upgrader pipeline
         author_link: https://github.com/dpb587/openvpn-bosh-release/blob/master/ci/pipelines/upgrader.yml
         title: $BUILD_JOB_NAME/$BUILD_NAME
@@ -32,7 +34,7 @@ metalink_upgrader_pipeline:
       text: Successfully upgraded ((blob)) to v$TEXT_FILE_CONTENT.
       text_file: blob/.resource/version
       attachments:
-      - author_icon: https://avatars1.githubusercontent.com/u/7809479?v=4
+      - author_icon: https://github.com/concourse.png
         author_name: upgrader pipeline
         author_link: https://github.com/dpb587/openvpn-bosh-release/blob/master/ci/pipelines/upgrader.yml
         title: $BUILD_JOB_NAME/$BUILD_NAME
@@ -48,7 +50,7 @@ resources:
 - name: slack-alert
   type: slack-notification
   source:
-    url: ((slack_url))
+    url: ((ci_slack_hook_url))
 - name: ubuntu-xenial-stemcell
   type: bosh-io-stemcell
   source:
