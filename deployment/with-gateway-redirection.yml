@@ -11,9 +11,10 @@
     name: iptables
     release: networking
     properties:
-      nat:
-        POSTROUTING:
-        - -s ((vpn_network))/((vpn_network_mask_bits)) -d 0/0 -j MASQUERADE
+      iptables:
+        nat:
+          POSTROUTING:
+          - -s ((vpn_network))/((vpn_network_mask_bits)) -d 0/0 -j MASQUERADE
 - path: /instance_groups/name=openvpn/jobs/name=openvpn/properties/extra_configs?/-
   type: replace
   value: push "redirect-gateway def1"
