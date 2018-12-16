@@ -1,7 +1,7 @@
 <metalink xmlns="urn:ietf:params:xml:ns:metalink">
-  <file name="openssl-1.1.0i.tar.gz">
-    <hash type="sha-256">ebbfc844a8c8cc0ea5dc10b86c9ce97f401837f3fa08c17b2cdadc118253cf99</hash>
-    <url>https://www.openssl.org/source/openssl-1.1.0i.tar.gz</url>
-    <version>1.1.0i</version>
+  <file name="openssl-1.1.1a.tar.gz">
+    <hash type="sha-256">fc20130f8b7cbd2fb918b2f14e2f429e109c31ddd0fb38fc5d71d9ffed3f9f41</hash>
+    <url>https://www.openssl.org/source/openssl-1.1.1a.tar.gz</url>
+    <version>1.1.1a</version>
   </file>
 </metalink>
