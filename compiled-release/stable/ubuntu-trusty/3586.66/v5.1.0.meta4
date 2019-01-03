@@ -1,0 +1,12 @@
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <file name="openvpn-5.1.0-on-ubuntu-trusty-stemcell-3586.66.tgz">
+    <hash type="sha-512">82ac327e3a36b886d930ad3a11d2f06d00a09e215d114892fccef44056bb03878c0dd856b071afea9a97d2d44c487e0aea2c16d0dcdd050c633f1990d3319c3f</hash>
+    <hash type="sha-256">7d0cd847499515488b5a02af81a9c0505b41865f3ef199259a7823fc00dd984b</hash>
+    <hash type="sha-1">2ade0222d20492625fef110ea9d5206eeaf68608</hash>
+    <hash type="md5">d8e3925ddc3fc0e594cb368130417033</hash>
+    <size>5904061</size>
+    <url>https://s3-external-1.amazonaws.com/dpb587-bosh-release-openvpn-us-east-1/compiled_releases/openvpn/openvpn-5.1.0-on-ubuntu-trusty-stemcell-3586.66.tgz</url>
+    <version>5.1.0</version>
+  </file>
+  <generator>boshua/contextualosmetalinkrepository</generator>
+</metalink>
