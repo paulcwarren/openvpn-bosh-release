@@ -49,12 +49,6 @@ instance_groups:
   - z1
   networks:
   - name: default
-    default:
-    - dns
-    - gateway
-  - name: vip
-    static_ips:
-    - ((wan_ip))
 
 variables:
 - name: ca
